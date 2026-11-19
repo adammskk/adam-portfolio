@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam El Sakka — Electrical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#05070b; --bg-elev:#0f131a; --bg-sunken:#0a0d12;
+  --ink:#eef2f8; --ink-2:#a6aebb; --ink-3:#848c9a;
+  --line:rgba(238,242,248,.12); --line-2:rgba(238,242,248,.22); --hover:rgba(238,242,248,.06);
+  --accent:#3d8bff; --accent-ink:#8cbaff; --glow:61,139,255;
+  --grid:rgba(238,242,248,.05);
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --ease:cubic-bezier(.4,0,.2,1); --ease-out:cubic-bezier(.16,1,.3,1);
+  --edge:clamp(20px,3.4vw,48px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+::selection{background:var(--accent);color:#05070b}
+
+/* ---------- backdrop ---------- */
+.sky{position:absolute;inset:0 0 auto 0;height:min(100%,760px);z-index:-1;overflow:hidden;pointer-events:none}
+.sky::before,.front-sky::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:64px 64px;background-position:50% 0;
+  -webkit-mask-image:radial-gradient(78% 100% at 50% 0%,#000 0,transparent 100%);mask-image:radial-gradient(78% 100% at 50% 0%,#000 0,transparent 100%)}
+.sky::after{content:"";position:absolute;left:50%;top:-52vh;width:max(120%,1100px);height:88vh;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(var(--glow),.2),rgba(var(--glow),.06) 55%,transparent)}
+.front-sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.front-sky::before{-webkit-mask-image:radial-gradient(90% 80% at 50% 30%,#000 0,transparent 100%);mask-image:radial-gradient(90% 80% at 50% 30%,#000 0,transparent 100%)}
+.front-sky::after{content:"";position:absolute;left:50%;bottom:-48vh;width:max(110%,1100px);height:86vh;transform:translateX(-50%);
+  background:radial-gradient(closest-side,rgba(var(--glow),.45),rgba(var(--glow),.12) 52%,transparent);animation:ember 9s ease-in-out infinite alternate}
+@keyframes ember{to{opacity:.7;transform:translateX(-50%) scale(1.06)}}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px;padding:0 var(--edge);border-bottom:1px solid transparent;transition:background-color .4s var(--ease),border-color .4s var(--ease)}
+.bar.is-solid{background:rgba(10,13,18,.78);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom-color:var(--line)}
+.brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.brand span{color:var(--ink-2);font-weight:500}
+.menu{display:flex;align-items:center;gap:28px}
+.menu ul{list-style:none;display:flex;gap:2px}
+.menu ul a{position:relative;display:block;padding:8px 10px;font-size:15px;color:var(--ink-2);transition:color .25s var(--ease)}
+.menu ul a:hover,.menu ul a.is-on{color:var(--ink)}
+.menu ul a::after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:1.5px;background:currentColor;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
+.menu ul a.is-on::after,.menu ul a:hover::after{transform:scaleX(1)}
+.icons{display:flex;gap:16px}
+.icons a{display:grid;place-items:center;transition:opacity .25s var(--ease)}
+.icons a:hover{opacity:.7}
+.icons svg{width:19px;height:19px}
+.burger{display:none;position:relative;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid var(--line-2);background:transparent;cursor:pointer}
+.burger span{position:absolute;left:12px;right:12px;height:1.5px;border-radius:2px;background:var(--ink);transition:transform .45s var(--ease-out)}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:24px}
+.menu-open .burger span:nth-child(1){transform:translateY(4px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
+@media (max-width:1120px){.brand span{display:none}}
+@media (max-width:880px){
+  .burger{display:block}
+  .menu{position:fixed;inset:0;z-index:1;flex-direction:column;justify-content:center;gap:40px;background:rgba(5,7,11,.96);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+  .menu-open .menu{opacity:1;visibility:visible}
+  .menu ul{flex-direction:column;align-items:center;gap:4px}
+  .menu ul a{font-family:var(--display);font-weight:600;font-size:42px;text-transform:uppercase;color:var(--ink);transform:translateY(16px);opacity:0;transition:transform .6s var(--ease-out),opacity .6s}
+  .menu-open .menu ul a{transform:none;opacity:1}
+  .menu ul a::after{display:none}
+}
+
+/* ---------- views ---------- */
+main{flex:1 0 auto;position:relative;display:flex;flex-direction:column}
+.view{display:none;position:relative;flex:1 0 auto;flex-direction:column}
+.view.is-on{display:flex}
+.js [data-load]{animation:rise 1s var(--ease-out) both;animation-delay:calc(100ms + var(--i,0) * 90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+[data-reveal].is-in{opacity:1;transform:none}
+
+/* ---------- front ---------- */
+#home{min-height:calc(100vh - 72px);min-height:calc(100svh - 72px)}
+.front__intro{flex:1 0 auto;display:grid;align-content:center;justify-items:center;text-align:center;padding:14px 24px 10px}
+.front h1{font-family:var(--display);font-weight:600;font-size:clamp(58px,min(8.6vw,15.5vh),172px);line-height:.94;letter-spacing:.012em;text-transform:uppercase}
+.front h1 span{display:inline-block}
+.front__intro p{margin-top:clamp(14px,1.6vw,22px);max-width:40em;font-size:clamp(1rem,1.36vw,1.5rem);line-height:1.5;color:var(--ink-2);text-wrap:balance}
+.catalogue{position:relative;padding-bottom:26px;--w:clamp(214px,min(22vw,36vh),336px);--h:calc(var(--w) * .98);--img:62%}
+.catalogue__stage{position:relative;height:calc(var(--h) + 24px);perspective:1500px;perspective-origin:50% 40%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.is-dragging .catalogue__stage{cursor:grabbing}
+.catalogue__ring{list-style:none;position:absolute;left:50%;top:6px;width:0;height:var(--h);transform-style:preserve-3d;transform:translateZ(calc(var(--r,1000px) * -1)) rotateY(var(--a,0deg));will-change:transform}
+.catalogue__slot{position:absolute;left:calc(var(--w) / -2);top:0;width:var(--w);height:var(--h);transform:rotateY(calc(var(--i,0) * var(--step,20deg))) translateZ(var(--r,1000px));backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.catalogue__slot.is-away{pointer-events:none}
+.card{position:relative;display:flex;flex-direction:column;width:100%;height:100%;border-radius:18px;overflow:hidden;background:var(--bg-elev);box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 24px 48px -28px rgba(0,0,0,.9)}
+.card::before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--line);pointer-events:none}
+.card::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;background:var(--bg);opacity:calc(var(--dim,0) * .74);pointer-events:none}
+.card__img{display:block;flex:none;height:var(--img);background:#141a22;overflow:hidden}
+.card__img svg{display:block;width:100%;height:100%;transition:transform .9s var(--ease-out)}
+.card:hover .card__img svg{transform:scale(1.045)}
+.card__body{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 18px}
+.card__meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.card__meta b{color:var(--accent);font-weight:500}
+.card__title{font-size:clamp(1.02rem,.9rem + .45vw,1.3rem);font-weight:540;letter-spacing:-.02em;line-height:1.2}
+.catalogue__bar{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.catalogue__bar b{color:var(--ink);font-weight:500}
+.catalogue__bar button{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;transition:border-color .25s var(--ease),background-color .25s var(--ease),transform .25s var(--ease)}
+.catalogue__bar button:hover{border-color:var(--line-2);background:var(--hover)}
+.catalogue__bar button:active{transform:scale(.92)}
+.catalogue__bar svg{width:14px;height:14px}
+
+/* ---------- page head ---------- */
+.page{position:relative;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--edge) 120px}
+.page-head{padding:clamp(48px,8vw,104px) 0 clamp(36px,5vw,64px)}
+.page-head h1{font-family:var(--display);font-weight:600;font-size:clamp(64px,9vw,136px);line-height:.92;letter-spacing:.01em;text-transform:uppercase}
+.page-head p{margin-top:18px;max-width:36em;color:var(--ink-2);font-size:clamp(1rem,1.2vw,1.18rem)}
+.mono-k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);color:var(--ink-2);background:var(--bg-sunken)}
+
+/* ---------- projects ---------- */
+.proj{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:start;padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--line)}
+.proj:first-of-type{border-top:0;padding-top:0}
+.fig{position:sticky;top:104px}
+.fig__img{border-radius:18px;overflow:hidden;background:#141a22;box-shadow:inset 0 0 0 1px var(--line);aspect-ratio:3/2}
+.fig__img svg{display:block;width:100%;height:100%;transition:transform 1.2s var(--ease-out)}
+.fig:hover .fig__img svg{transform:scale(1.03)}
+.fig figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.proj h2{font-family:var(--display);font-weight:600;font-size:clamp(40px,4.6vw,68px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;margin:14px 0 22px}
+.proj p{color:var(--ink-2);line-height:1.7;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px 10px;margin:22px 0 28px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.tags span+span::before{content:"/";margin-right:10px;color:var(--line-2)}
+.cta{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;border:1px solid var(--line);background:var(--bg-sunken);transition:border-color .3s var(--ease),background-color .3s var(--ease),transform .45s var(--ease-out)}
+.cta:hover{border-color:var(--line-2);background:var(--hover);transform:translateY(-2px)}
+.cta svg{width:20px;height:20px;flex:none}
+.cta b{display:block;font-weight:540;font-size:15px}
+.cta small{display:block;color:var(--ink-3);font-size:13.5px}
+.arr{margin-left:auto;color:var(--ink-3);transition:transform .45s var(--ease-out),color .3s}
+.cta:hover .arr{transform:translate(3px,-3px);color:var(--ink)}
+@media (max-width:860px){.proj{grid-template-columns:1fr}.fig{position:relative;top:0}}
+
+/* ---------- index list ---------- */
+.pindex{list-style:none;border-top:1px solid var(--line-2)}
+.pindex a,.pindex .row{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto 22px;align-items:center;gap:16px 22px;padding:20px 6px;border-bottom:1px solid var(--line);transition:background-color .3s var(--ease),padding .45s var(--ease-out)}
+.pindex a:hover{background:var(--hover);padding-inline:14px 10px}
+.pindex__n{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.pindex__title{font-size:clamp(1.125rem,1rem + .6vw,1.375rem);font-weight:540;letter-spacing:-.025em;line-height:1.25}
+.pindex__title small{display:block;font-size:14px;font-weight:400;color:var(--ink-3);letter-spacing:0;margin-top:3px}
+.pindex__phase{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);text-align:right;white-space:nowrap}
+.pindex a:hover .arr{transform:translateY(3px);color:var(--ink)}
+@media (max-width:760px){.pindex a,.pindex .row{grid-template-columns:32px minmax(0,1fr) 18px}.pindex .chips,.pindex__phase{display:none}}
+
+/* ---------- guides ---------- */
+.build{padding:clamp(64px,9vw,120px) 0 0;margin-top:clamp(64px,9vw,120px);border-top:1px solid var(--line-2)}
+.build+.build{margin-top:clamp(56px,7vw,96px)}
+.build__head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end}
+.lvl{display:flex;align-items:center;gap:12px}
+.lvl i{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.lvl i s{display:block;width:3px;border-radius:1px;background:var(--line-2)}
+.lvl i s:nth-child(1){height:5px}.lvl i s:nth-child(2){height:8px}.lvl i s:nth-child(3){height:12px}
+.lvl i s.on{background:var(--accent)}
+.build h2{font-family:var(--display);font-weight:600;font-size:clamp(40px,4.6vw,64px);line-height:.98;text-transform:uppercase;margin-top:16px}
+.build__head p{color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.build__body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);margin-top:clamp(36px,5vw,56px);align-items:start}
+.spec h3{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+.spec h3 span{color:var(--ink-3)}
+.spec ul,.spec ol{list-style:none;margin-bottom:38px}
+.spec li{position:relative;padding:12px 0 12px 20px;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:15.5px;line-height:1.55}
+.spec ul li::before{content:"";position:absolute;left:2px;top:22px;width:5px;height:5px;background:var(--ink-3)}
+.spec ol{counter-reset:s}
+.spec ol li{padding-left:34px;counter-increment:s}
+.spec ol li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:13px;font-family:var(--mono);font-size:11.5px;color:var(--accent)}
+.spec code,.build__head code{font-family:var(--mono);font-size:.86em;padding:1px 6px;border-radius:5px;border:1px solid var(--line);background:var(--bg-sunken);color:var(--ink)}
+.code{position:sticky;top:96px;border-radius:16px;border:1px solid var(--line);background:#080b10;overflow:hidden}
+.code__bar{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 18px;border-bottom:1px solid var(--line)}
+.code__bar b{font-family:var(--mono);font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px}
+.code__bar b::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.code__bar button{margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:transparent;font-size:12.5px;cursor:pointer;transition:background-color .25s,border-color .25s}
+.code__bar button:hover{background:var(--hover);border-color:var(--line-2)}
+.code__bar svg{width:14px;height:14px}
+.code pre{position:relative;margin:0;padding:16px 0;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.75;max-height:none;transition:max-height .7s var(--ease-out)}
+.code.is-short pre{max-height:440px;overflow:hidden}
+.code.is-short pre::after{content:"";position:sticky;display:block;bottom:-16px;left:0;right:0;height:90px;margin-top:-90px;background:linear-gradient(transparent,#080b10)}
+.code .ln{display:block;padding:0 18px;white-space:pre}
+.code .ln::before{content:attr(data-n);display:inline-block;width:2.2em;margin-right:14px;text-align:right;color:#3c4452;user-select:none}
+.tk-c{color:#6b7484;font-style:italic}.tk-s{color:var(--accent-ink)}.tk-k{color:var(--accent)}.tk-n{color:#e2b8ff}
+.code__more{display:block;width:100%;padding:13px;border:0;border-top:1px solid var(--line);background:transparent;font-size:13px;color:var(--ink-2);cursor:pointer;transition:background-color .25s,color .25s}
+.code__more:hover{background:var(--hover);color:var(--ink)}
+@media (max-width:900px){.build__head,.build__body{grid-template-columns:1fr}.code{position:relative;top:0}}
+
+/* ---------- handwritten notes ---------- */
+.notes{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);border-radius:22px;border:1px solid var(--line);background:var(--bg-elev);overflow:hidden;margin-bottom:clamp(64px,8vw,104px)}
+.notes__stack{position:relative;display:block;min-height:440px;border:0;border-right:1px solid var(--line);background:radial-gradient(70% 70% at 50% 60%,rgba(var(--glow),.22),transparent 70%),var(--bg-sunken);cursor:pointer;overflow:hidden}
+.notes__stack img{position:absolute;left:50%;top:50%;width:min(56%,270px);aspect-ratio:1240/1755;object-fit:cover;border-radius:6px;box-shadow:0 30px 60px -20px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.3);transition:transform 1s var(--ease-out)}
+.notes__stack img:nth-child(1){transform:translate(-50%,-50%) translate(46px,8px) rotate(9deg);filter:brightness(.55)}
+.notes__stack img:nth-child(2){transform:translate(-50%,-50%) translate(24px,4px) rotate(4.5deg);filter:brightness(.75)}
+.notes__stack img:nth-child(3){transform:translate(-50%,-50%) rotate(-2deg)}
+.notes__stack:hover img:nth-child(1){transform:translate(-50%,-50%) translate(92px,14px) rotate(14deg)}
+.notes__stack:hover img:nth-child(2){transform:translate(-50%,-50%) translate(48px,6px) rotate(7deg)}
+.notes__stack:hover img:nth-child(3){transform:translate(-50%,-50%) translate(-20px,-8px) rotate(-5deg) scale(1.03)}
+.notes__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vw,56px)}
+.notes__body .mono-k b{color:var(--ink);font-weight:500}
+.notes h2{font-family:var(--display);font-weight:600;font-size:clamp(44px,5vw,72px);line-height:.95;text-transform:uppercase;margin:16px 0 14px}
+.notes p{color:var(--ink-2);line-height:1.68;max-width:32em}
+.chapters{list-style:none;margin:24px 0 10px;border-top:1px solid var(--line)}
+.chapters button{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;width:100%;padding:11px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;font-size:15px;color:var(--ink-2);transition:background-color .25s,color .25s,padding .45s var(--ease-out)}
+.chapters button:hover{background:var(--hover);color:var(--ink);padding-inline:12px 8px}
+.chapters b{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--accent)}
+.chapters span:last-child{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em}
+.guides-sub{margin-bottom:14px}
+@media (max-width:860px){.notes{grid-template-columns:1fr}.notes__stack{min-height:360px;border-right:0;border-bottom:1px solid var(--line)}}
+
+/* ---------- reader ---------- */
+.reader{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;background:rgba(4,6,9,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);opacity:0;transition:opacity .45s var(--ease)}
+.reader[hidden]{display:none}
+.reader.on{opacity:1}
+.reader__top{display:flex;align-items:center;gap:20px;padding:14px var(--edge);border-bottom:1px solid var(--line)}
+.reader__title{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.reader__title b{font-family:var(--display);font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.reader__title span{font-size:13.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reader__count{margin-left:auto;white-space:nowrap}
+.reader__count b{color:var(--ink);font-weight:500}
+.reader__x{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);background:transparent;cursor:pointer;transition:background-color .25s,transform .4s var(--ease-out)}
+.reader__x:hover{background:var(--hover);transform:rotate(90deg)}
+.reader__x svg,.reader__nav svg{width:16px;height:16px}
+.reader__stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,40px);padding:18px var(--edge);touch-action:pan-y}
+.reader__page{height:100%;max-width:100%;display:flex;align-items:center;justify-content:center;min-width:0}
+.reader__page img{display:block;max-height:100%;max-width:100%;border-radius:6px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9);background:#e9e9e4;transition:opacity .35s var(--ease),transform .55s var(--ease-out);cursor:zoom-in}
+.reader__page img.out-l{opacity:0;transform:translateX(-36px) rotate(-1deg)}
+.reader__page img.out-r{opacity:0;transform:translateX(36px) rotate(1deg)}
+.reader__page.zoom{overflow:auto;align-items:flex-start;justify-content:flex-start}
+.reader__page.zoom img{max-height:none;max-width:none;width:min(1240px,180%);cursor:zoom-out}
+.reader__nav{flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);background:rgba(15,19,26,.7);cursor:pointer;transition:background-color .25s,border-color .25s,transform .25s}
+.reader__nav:hover{background:var(--hover);border-color:rgba(238,242,248,.4)}
+.reader__nav:active{transform:scale(.92)}
+.reader__nav:disabled{opacity:.25;pointer-events:none}
+.reader__progress{height:2px;background:var(--line)}
+.reader__progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .5s var(--ease-out)}
+.reader__thumbs{display:flex;gap:8px;padding:12px var(--edge) 16px;overflow-x:auto;scrollbar-width:thin;scroll-behavior:smooth}
+.reader__thumbs button{position:relative;flex:none;width:52px;aspect-ratio:1240/1755;padding:0;border:0;border-radius:4px;overflow:hidden;cursor:pointer;opacity:.4;transition:opacity .25s,transform .35s var(--ease-out);background:#222}
+.reader__thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+.reader__thumbs button:hover{opacity:.8;transform:translateY(-3px)}
+.reader__thumbs button.on{opacity:1;box-shadow:0 0 0 2px var(--accent)}
+@media (max-width:700px){.reader__nav{position:absolute;bottom:22px;z-index:2}.reader__nav.r-prev{left:20px}.reader__nav.r-next{right:20px}.reader__title b{font-size:18px}.reader__title{flex:1}.reader__top{gap:12px}.reader__stage{padding-bottom:86px}.reader__thumbs button{width:40px}}
+
+/* ---------- resources ---------- */
+.feature{display:grid;grid-template-columns:1fr 1fr;border-radius:22px;border:1px solid var(--line);overflow:hidden;background:var(--bg-elev)}
+.feature__art{display:grid;place-items:center;padding:40px;background:var(--bg-sunken);border-right:1px solid var(--line);min-height:380px}
+.feature__art svg{width:min(72%,300px);height:auto;transition:transform .9s var(--ease-out);filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.feature:hover .feature__art svg{transform:rotate(-2deg) translateY(-6px) scale(1.02)}
+.feature__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vw,56px)}
+.feature__body .mono-k b{color:var(--ink);font-weight:500}
+.feature h2{font-size:clamp(1.6rem,2.2vw,2.1rem);font-weight:540;letter-spacing:-.03em;margin:14px 0 12px;line-height:1.15}
+.feature p{color:var(--ink-2);line-height:1.65;margin-bottom:18px;max-width:30em}
+.btn{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;height:50px;padding:0 24px;border-radius:999px;background:var(--ink);color:#0a0d12;font-size:14.5px;font-weight:500;border:0;cursor:pointer;margin-top:12px;transition:background-color .3s,transform .25s}
+.btn:hover{background:#fff}
+.btn:active{transform:scale(.97)}
+.btn i{font-style:normal;transition:transform .45s var(--ease-out)}
+.btn:hover i{transform:translateX(4px)}
+.sheet{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--ease-out)}
+.sheet.open{grid-template-rows:1fr}
+.sheet>div{overflow:hidden}
+.sheet__inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 40px;padding:clamp(24px,4vw,48px);border:1px solid var(--line);border-top:0;border-radius:0 0 22px 22px;margin-top:-22px;padding-top:calc(clamp(24px,4vw,48px) + 22px);background:var(--bg-sunken)}
+.sheet h4{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:22px 0 8px}
+.sheet dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:14.5px}
+.sheet dt{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);white-space:nowrap}
+.sheet dd{color:var(--ink-3);align-self:center}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.soon{padding:28px;border-radius:22px;border:1px solid var(--line);transition:border-color .3s,background-color .3s}
+.soon:hover{border-color:var(--line-2);background:var(--hover)}
+.soon .badge{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:6px;background:var(--hover);color:var(--ink-2)}
+.soon h3{font-size:1.3rem;font-weight:540;letter-spacing:-.02em;margin:14px 0 8px}
+.soon p{color:var(--ink-2);font-size:15px;line-height:1.6;max-width:30em}
+.links2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:clamp(64px,8vw,110px)}
+.links2 a{display:flex;align-items:flex-end;justify-content:space-between;padding:28px;border-radius:22px;border:1px solid var(--line);transition:border-color .3s,background-color .3s,transform .45s var(--ease-out)}
+.links2 a:hover{border-color:var(--line-2);background:var(--hover);transform:translateY(-3px)}
+.links2 small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.links2 b{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:540;letter-spacing:-.03em}
+.links2 i{font-style:normal;color:var(--ink-2);transition:transform .45s var(--ease-out)}
+.links2 a:hover i{transform:translateX(6px);color:var(--accent)}
+@media (max-width:860px){.feature{grid-template-columns:1fr}.feature__art{border-right:0;border-bottom:1px solid var(--line);min-height:300px}.duo,.links2{grid-template-columns:1fr}}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:clamp(28px,6vw,96px);align-items:start}
+.portrait{position:sticky;top:104px;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--bg-elev);box-shadow:inset 0 0 0 1px var(--line)}
+.portrait svg{display:block;width:100%;height:100%}
+.prose p{color:var(--ink-2);font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.78;margin-bottom:22px}
+.prose p:first-child{color:var(--ink);font-size:clamp(1.2rem,1.6vw,1.5rem);line-height:1.5;letter-spacing:-.01em}
+.prose p strong{color:var(--ink);font-weight:600}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,22px);margin-top:clamp(64px,8vw,110px)}
+.strip figure{border-radius:16px;overflow:hidden;background:var(--bg-elev);box-shadow:inset 0 0 0 1px var(--line)}
+.strip figure div{aspect-ratio:3/2;overflow:hidden}
+.strip svg{display:block;width:100%;height:100%;transition:transform 1.2s var(--ease-out)}
+.strip figure:hover svg{transform:scale(1.05)}
+.strip figcaption{padding:12px 16px 14px;font-size:13.5px;color:var(--ink-3)}
+.next{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-2);margin-top:clamp(64px,8vw,110px)}
+.next a{display:block;padding:34px 0 10px}
+.next a+a{border-left:1px solid var(--line);padding-left:clamp(20px,3vw,40px)}
+.next small{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.next b{display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:600;font-size:clamp(38px,5vw,72px);text-transform:uppercase;line-height:1;margin-top:10px}
+.next b i{font-style:normal;font-family:var(--sans);font-size:.5em;color:var(--ink-3);transition:transform .5s var(--ease-out),color .3s}
+.next a:hover b i{transform:translateX(8px);color:var(--accent)}
+.creds{margin-top:clamp(64px,8vw,110px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px)}
+.creds h2{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.creds .pindex .row{grid-template-columns:36px minmax(0,1fr) auto}
+@media (max-width:860px){.about{grid-template-columns:1fr}.portrait{position:relative;top:0;max-width:420px}.strip{grid-template-columns:1fr}.next,.creds{grid-template-columns:1fr}.next a+a{border-left:0;border-top:1px solid var(--line);padding-left:0}}
+
+/* ---------- contact ---------- */
+.mail{display:inline-flex;align-items:center;gap:28px;margin-top:clamp(28px,4vw,48px);padding-bottom:14px;position:relative;font-size:clamp(1.6rem,3.4vw,2.8rem);font-weight:450;letter-spacing:-.03em;word-break:break-all}
+.mail::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--line-2)}
+.mail::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease-out);z-index:1}
+.mail:hover::before{transform:scaleX(1)}
+.mail svg{width:.62em;height:.62em;flex:none;transition:transform .5s var(--ease-out)}
+.mail:hover svg{transform:translate(4px,-4px)}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.pill{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;border:1px solid var(--line-2);background:transparent;font-size:14.5px;cursor:pointer;transition:background-color .3s var(--ease),border-color .3s var(--ease),transform .25s var(--ease)}
+.pill:hover{background:var(--hover);border-color:rgba(238,242,248,.34)}
+.pill:active{transform:scale(.97)}
+.pill.solid{background:var(--ink);color:#0a0d12;border-color:var(--ink)}
+.pill.solid:hover{background:#fff}
+.pill svg{width:16px;height:16px}
+
+/* ---------- footer ---------- */
+footer{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px 32px;padding:26px var(--edge) 30px;border-top:1px solid var(--line)}
+footer q{font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.8vw,26px)}
+footer q+small{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-left:10px}
+footer nav{display:flex;gap:26px;font-size:14.5px}
+footer nav a{color:var(--ink-2);transition:color .25s}
+footer nav a:hover{color:var(--ink)}
+footer nav a::after{content:" ↗";font-size:.8em;color:var(--ink-3)}
+.home-mode footer{display:none}
+.toast{position:fixed;left:50%;bottom:28px;z-index:80;transform:translate(-50%,20px);opacity:0;padding:12px 20px;border-radius:999px;background:var(--ink);color:#0a0d12;font-size:14px;transition:all .5s var(--ease-out);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="home-mode">
+
+<header class="bar" id="bar">
+  <a class="brand" href="#home">Adam El Sakka <span>— Electrical Engineering Portfolio</span></a>
+  <div class="menu">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="icons"><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener" aria-label="LinkedIn" data-li></a></div>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<main>
+
+<!-- ===================== HOME ===================== -->
+<section class="view front" id="home" data-view="home">
+  <div class="front-sky"></div>
+  <div class="front__intro">
+    <h1 data-load style="--i:0"><span>Hi, I’m</span> <span>Adam El Sakka</span></h1>
+    <p data-load style="--i:1">I study electrical energy &amp; control engineering, with a pull toward physics and aerospace: rocket science, CAD, MATLAB and teaching.</p>
+  </div>
+  <div class="catalogue" id="catalogue" data-load style="--i:2">
+    <div class="catalogue__stage" id="stage"><ul class="catalogue__ring" id="ring"></ul></div>
+    <div class="catalogue__bar">
+      <button id="prev" aria-label="Previous project"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button>
+      <span>Projects <b id="count">01</b> / <span id="total">05</span></span>
+      <button id="next" aria-label="Next project"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="view" id="projects" data-view="projects">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head"><h1 data-load style="--i:0">Projects</h1><p data-load style="--i:1">What I’ve been building, studying and teaching, from the basics of rocket propulsion to the official-exam prep I ran for high-school students.</p></header>
+    <div id="projList"></div>
+  </div>
+</section>
+
+<!-- ===================== GUIDES ===================== -->
+<section class="view" id="guides" data-view="guides">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head"><h1 data-load style="--i:0">Guides</h1><p data-load style="--i:1">My handwritten calculus notes, plus starter MATLAB builds for engineering students. Work the builds top to bottom: each one adds a new skill, and every guide opens with what you need, the steps and the full code.</p></header>
+    <article class="notes" id="g-calculus" data-load style="--i:2">
+      <button class="notes__stack" data-read="1" aria-label="Open the calculus guide">
+        <img src="calculus/p03.jpg" alt="" loading="lazy"><img src="calculus/p02.jpg" alt="" loading="lazy"><img src="calculus/p01.jpg" alt="First page of Adam's handwritten Math 282 calculus notes">
+      </button>
+      <div class="notes__body">
+        <div class="mono-k"><b>Handwritten</b> &nbsp;/&nbsp; Math 282 &nbsp;/&nbsp; 34 pages</div>
+        <h2>Calculus, by hand</h2>
+        <p>My full handwritten notes for Math 282, from the definition of the derivative to double integrals in polar coordinates. Every rule, table and worked example, written out page by page.</p>
+        <ol class="chapters" id="chapters"></ol>
+        <button class="btn" data-read="1">Read the guide <i>→</i></button>
+      </div>
+    </article>
+    <div class="guides-sub mono-k" data-load style="--i:3">MATLAB builds</div>
+    <ul class="pindex" id="guideIndex" data-load style="--i:3"></ul>
+    <div id="guideList"></div>
+  </div>
+</section>
+
+<!-- ===================== RESOURCES ===================== -->
+<section class="view" id="resources" data-view="resources">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head"><h1 data-load style="--i:0">Resources</h1><p data-load style="--i:1">Notes and references to shorten the learning curve and make the hard parts easier to revisit.</p></header>
+    <div data-load style="--i:2">
+      <article class="feature">
+        <div class="feature__art" id="notebook"></div>
+        <div class="feature__body">
+          <div class="mono-k"><b>Physics</b> &nbsp;/&nbsp; Formula sheet</div>
+          <h2>Bac Physics Formula Sheet</h2>
+          <p>The formulas I kept coming back to while tutoring the Lebanese Baccalaureate, all on one page: mechanics, electricity, induction, waves and modern physics.</p>
+          <div class="chips"><span class="chip">Mechanics</span><span class="chip">RC · RL · LC</span><span class="chip">Induction</span><span class="chip">Waves</span><span class="chip">Nuclear</span></div>
+          <button class="btn" id="openSheet">Open sheet <i>→</i></button>
+        </div>
+      </article>
+      <div class="sheet" id="sheet"><div><div class="sheet__inner">
+        <div>
+          <h4>Mechanics</h4>
+          <dl><dt>p = mv</dt><dd>Linear momentum</dd><dt>ΣF = dp/dt</dt><dd>Newton’s second law</dd><dt>KE = ½mv²</dt><dd>Kinetic energy</dd><dt>ME = KE + PE</dt><dd>Mechanical energy</dd><dt>T₀ = 2π√(m/k)</dt><dd>Spring–mass oscillator</dd><dt>T₀ = 2π√(ℓ/g)</dt><dd>Simple pendulum (small angles)</dd></dl>
+          <h4>Waves &amp; optics</h4>
+          <dl><dt>λ = vT = v/f</dt><dd>Wavelength</dd><dt>i = λD/a</dt><dd>Interference fringe spacing</dd><dt>θ = λ/a</dt><dd>Diffraction half-angle</dd></dl>
+        </div>
+        <div>
+          <h4>Electricity</h4>
+          <dl><dt>τ = RC</dt><dd>RC time constant</dd><dt>u<sub>C</sub> = E(1 − e<sup>−t/τ</sup>)</dt><dd>Capacitor charging</dd><dt>τ = L/R</dt><dd>RL time constant</dd><dt>i = (E/R)(1 − e<sup>−t/τ</sup>)</dt><dd>Current rise in RL</dd><dt>T₀ = 2π√(LC)</dt><dd>LC proper period</dd><dt>U = Uₘ/√2</dt><dd>Effective (RMS) value</dd><dt>P = UI cos φ</dt><dd>Average AC power</dd></dl>
+        </div>
+        <div>
+          <h4>Induction</h4>
+          <dl><dt>Φ = BS cos θ</dt><dd>Magnetic flux</dd><dt>e = −dΦ/dt</dt><dd>Faraday–Lenz law</dd></dl>
+          <h4>Modern physics</h4>
+          <dl><dt>E = hν</dt><dd>Photon energy</dd><dt>Eₙ = −13.6/n² eV</dt><dd>Hydrogen energy levels</dd><dt>E = Δm c²</dt><dd>Mass–energy equivalence</dd><dt>N = N₀e<sup>−λt</sup></dt><dd>Radioactive decay</dd><dt>T½ = ln 2/λ</dt><dd>Half-life</dd></dl>
+        </div>
+      </div></div></div>
+      <div class="duo">
+        <div class="soon" data-reveal><span class="badge">Coming soon</span><h3>Writings</h3><p>Thoughts, lessons and deeper breakdowns from what I study and build: the parts that don’t fit in a LinkedIn post.</p></div>
+        <div class="soon" data-reveal><span class="badge">Coming soon</span><h3>Personal goals</h3><p>What I’m working toward: the short-term targets and the bigger picture I’m chasing in engineering and aerospace.</p></div>
+      </div>
+      <div class="links2" data-reveal>
+        <a href="#guides"><span><small>Learn by building</small><b>Beginner MATLAB guides</b></span><i>→</i></a>
+        <a href="#projects"><span><small>What I’m working on</small><b>Current projects</b></span><i>→</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="view" id="about" data-view="about">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head"><h1 data-load style="--i:0">About</h1></header>
+    <div class="about" data-load style="--i:1">
+      <div class="portrait" id="portrait"></div>
+      <div class="prose">
+        <p>Hi, I’m Adam. I’m an Electrical Energy &amp; Control Engineering student at Université Grenoble Alpes, and I’m drawn to the places where engineering meets physics and space.</p>
+        <p>Before Grenoble, I spent a year as a private physics and maths tutor, teaching high-school students in Lebanon and abroad, online and in person, for the GS, LS and SE sections of the Lebanese Baccalaureate. Explaining an idea until it clicks for someone else turned out to be the best way to really understand it myself.</p>
+        <p>In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program lines up with the engineer I want to become.</p>
+        <p>Outside class I keep stacking skills: the University of Michigan’s Rocket Science 101 specialization, MathWorks’ MATLAB Onramp and Dassault Systèmes’ SOLIDWORKS 3D CAD. I share what I learn on the Guides and Resources pages, so the next student can get there faster.</p>
+        <p>I speak Arabic, English and French, and I’m always looking for the next problem where power, control and aerospace meet.</p>
+        <p><strong>I hope this page helps. And if you’re working on something in energy, control or space, I’d love to hear about it.</strong></p>
+      </div>
+    </div>
+    <div class="strip" data-reveal>
+      <figure><div data-art="orbit"></div><figcaption>Rocket Science 101, University of Michigan</figcaption></figure>
+      <figure><div data-art="cad"></div><figcaption>3D modelling in SOLIDWORKS</figcaption></figure>
+      <figure><div data-art="physics"></div><figcaption>A year of tutoring physics</figcaption></figure>
+    </div>
+    <div class="creds" data-reveal>
+      <div><h2>Licenses &amp; certifications</h2><ul class="pindex">
+        <li><div class="row"><span class="pindex__n">01</span><span class="pindex__title">SOLIDWORKS 3D CAD for Education<small>Dassault Systèmes</small></span><span class="pindex__phase">Aug 2026</span></div></li>
+        <li><div class="row"><span class="pindex__n">02</span><span class="pindex__title">MATLAB Onramp<small>MathWorks</small></span><span class="pindex__phase">Jul 2026</span></div></li>
+        <li><div class="row"><span class="pindex__n">03</span><span class="pindex__title">Rocket Science 101 Specialization<small>University of Michigan</small></span><span class="pindex__phase">Jul 2026</span></div></li>
+        <li><div class="row"><span class="pindex__n">04</span><span class="pindex__title">SAT<small>College Board</small></span><span class="pindex__phase">Dec 2024</span></div></li>
+        <li><div class="row"><span class="pindex__n">05</span><span class="pindex__title">DELF B2<small>Institut français du Liban</small></span><span class="pindex__phase">Dec 2024</span></div></li>
+      </ul></div>
+      <div><h2>Languages</h2><ul class="pindex">
+        <li><div class="row"><span class="pindex__n">AR</span><span class="pindex__title">Arabic</span><span class="pindex__phase">Native</span></div></li>
+        <li><div class="row"><span class="pindex__n">EN</span><span class="pindex__title">English</span><span class="pindex__phase">Full professional</span></div></li>
+        <li><div class="row"><span class="pindex__n">FR</span><span class="pindex__title">French</span><span class="pindex__phase">Full professional</span></div></li>
+      </ul></div>
+    </div>
+    <div class="next" data-reveal>
+      <a href="#projects"><small>What I build</small><b>Projects <i>→</i></b></a>
+      <a href="#contact"><small>Say hello</small><b>Get in touch <i>→</i></b></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="view" id="contact" data-view="contact">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head">
+      <h1 data-load style="--i:0">Contact</h1>
+      <p data-load style="--i:1">The best way to reach me:</p>
+      <div data-load style="--i:2">
+        <a class="mail" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+        <div class="pills">
+          <button class="pill solid" id="copy"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="5" width="8.5" height="8.5" rx="1.8"/><path d="M10.5 5V3.8A1.8 1.8 0 0 0 8.7 2H3.8A1.8 1.8 0 0 0 2 3.8v4.9a1.8 1.8 0 0 0 1.8 1.8H5"/></svg>Copy link</button>
+          <a class="pill" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener"><span data-li style="display:grid"></span>@adammskk</a>
+        </div>
+      </div>
+    </header>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div><q>Per aspera ad astra.</q><small>— Through hardships to the stars</small></div>
+  <nav><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">LinkedIn</a></nav>
+</footer>
+<div class="toast" id="toast">Copied</div>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Calculus guide reader" hidden>
+  <div class="reader__top">
+    <div class="reader__title"><b>Calculus, by hand</b><span id="rChap">Chapter 1 · Differentiation</span></div>
+    <div class="reader__count mono-k"><b id="rNum">01</b> / 34</div>
+    <button class="reader__x" id="rClose" aria-label="Close reader"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+  </div>
+  <div class="reader__stage" id="rStage">
+    <button class="reader__nav r-prev" id="rPrev" aria-label="Previous page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button>
+    <div class="reader__page" id="rPage"><img id="rImg" alt=""></div>
+    <button class="reader__nav r-next" id="rNext" aria-label="Next page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+  </div>
+  <div class="reader__progress"><i id="rBar"></i></div>
+  <div class="reader__thumbs" id="rThumbs"></div>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+(() => {
+"use strict";
+const ACC = '#3d8bff', ACC2 = '#8cbaff', GLOW = '61,139,255';
+const LI = 'https://www.linkedin.com/in/adammskk';
+const LI_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" width="19" height="19"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>';
+document.querySelectorAll('[data-li]').forEach(el => el.innerHTML = LI_SVG);
+const pad = n => String(n).padStart(2, '0');
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* ====================== ARTWORK (inline SVG 720×480) ====================== */
+const svg = inner => `<svg viewBox="0 0 720 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+const gridPat = (id, s, c) => `<pattern id="${id}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M${s} 0H0V${s}" fill="none" stroke="${c}" stroke-width="1"/></pattern>`;
+const ART = {
+  orbit(){
+    let stars=''; for(let i=0;i<70;i++){ const x=(i*137.5)%720, y=(i*71.3+i*i*.7)%480; stars+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${((i%5)/4+.4).toFixed(2)}" fill="#fff" opacity="${(.25+(i%4)*.15).toFixed(2)}"/>`; }
+    return svg(`<defs><radialGradient id="pl" cx=".35" cy=".3"><stop offset="0" stop-color="#cfe2ff"/><stop offset=".45" stop-color="${ACC}"/><stop offset="1" stop-color="#050d1f"/></radialGradient>
+      <radialGradient id="gl"><stop offset="0" stop-color="rgba(${GLOW},.45)"/><stop offset="1" stop-color="rgba(${GLOW},0)"/></radialGradient></defs>
+      <rect width="720" height="480" fill="#06080c"/>${stars}<circle cx="300" cy="260" r="210" fill="url(#gl)"/>
+      <ellipse cx="300" cy="260" rx="300" ry="96" fill="none" stroke="rgba(238,242,248,.25)" transform="rotate(-16 300 260)"/>
+      <ellipse cx="300" cy="260" rx="215" ry="70" fill="none" stroke="rgba(238,242,248,.18)" stroke-dasharray="4 7" transform="rotate(-16 300 260)"/>
+      <circle cx="300" cy="260" r="88" fill="url(#pl)"/>
+      <path d="M410 330 C 520 300 600 210 640 110" fill="none" stroke="${ACC2}" stroke-width="2" stroke-dasharray="2 6"/>
+      <g transform="translate(640 104) rotate(32)"><path d="M0 -20 L7 6 L0 2 L-7 6Z" fill="#eef2f8"/><path d="M-3 6 L0 18 L3 6Z" fill="${ACC}"/></g>
+      <text x="40" y="440" fill="#848c9a" font-family="monospace" font-size="13">Δv · HOHMANN TRANSFER · ORBITAL MECHANICS</text>`);
+  },
+  cad(){
+    const iso=(x,y,z)=>[360+(x-y)*Math.cos(Math.PI/6)*1.15, 270+(x+y)*Math.sin(Math.PI/6)*1.15-z*1.15];
+    const P=a=>a.map(p=>iso(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+    const top=[[-120,-80,60],[120,-80,60],[120,80,60],[-120,80,60]];
+    const circ=(r,z)=>{let d='';for(let i=0;i<=40;i++){const a=i/40*Math.PI*2;d+=(i?' L':'M')+iso(Math.cos(a)*r,Math.sin(a)*r,z).map(v=>v.toFixed(1)).join(' ');}return d;};
+    const [ax,ay]=iso(-120,-80,0),[bx,by]=iso(120,-80,0);
+    return svg(`<defs>${gridPat('g2',24,'rgba(140,186,255,.07)')}</defs><rect width="720" height="480" fill="#090c12"/><rect width="720" height="480" fill="url(#g2)"/>
+      <polygon points="${P(top)}" fill="rgba(${GLOW},.12)" stroke="${ACC2}" stroke-width="1.6"/>
+      <polygon points="${P([[120,-80,0],[120,80,0],[120,80,60],[120,-80,60]])}" fill="rgba(${GLOW},.06)" stroke="${ACC2}" stroke-width="1.6"/>
+      <polygon points="${P([[-120,80,0],[120,80,0],[120,80,60],[-120,80,60]])}" fill="rgba(${GLOW},.03)" stroke="${ACC2}" stroke-width="1.6"/>
+      <path d="${circ(40,60)}" fill="#090c12" stroke="${ACC2}" stroke-width="1.4"/><path d="${circ(40,110)}" fill="rgba(238,242,248,.06)" stroke="#eef2f8" stroke-width="1.4"/>
+      ${[0,90,180,270].map(d=>{const a=d*Math.PI/180;const p=iso(Math.cos(a)*40,Math.sin(a)*40,60),q=iso(Math.cos(a)*40,Math.sin(a)*40,110);return `<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="#eef2f8" opacity=".6"/>`}).join('')}
+      <line x1="${ax}" y1="${ay-40}" x2="${bx}" y2="${by-40}" stroke="#848c9a"/><text x="${(ax+bx)/2-30}" y="${(ay+by)/2-50}" fill="#a6aebb" font-family="monospace" font-size="14">240.00</text>
+      <text x="40" y="440" fill="#848c9a" font-family="monospace" font-size="13">PART_01.SLDPRT · EXTRUDE · CUT</text>`);
+  },
+  matlab(){
+    let d1='',d2='',d3=''; for(let x=0;x<=560;x+=4){ const t=x/560*10; const X=100+x; d1+=(x?' L':'M')+X+' '+(250-Math.exp(-t*.28)*Math.cos(t*2.2)*120).toFixed(1); d2+=(x?' L':'M')+X+' '+(250-Math.sin(t*.9)*70).toFixed(1); d3+=(x?' L':'M')+X+' '+(250-Math.exp(-t*.28)*120).toFixed(1); }
+    return svg(`<defs>${gridPat('g3',56,'rgba(255,255,255,.07)')}</defs><rect width="720" height="480" fill="#0b0e13"/>
+      <rect x="100" y="90" width="560" height="320" fill="url(#g3)"/><rect x="100" y="90" width="560" height="320" fill="none" stroke="rgba(238,242,248,.25)"/>
+      <path d="${d3}" fill="none" stroke="rgba(238,242,248,.3)" stroke-dasharray="4 5"/><path d="${d2}" fill="none" stroke="#a6aebb" stroke-width="1.6"/><path d="${d1}" fill="none" stroke="${ACC}" stroke-width="2.6"/>
+      <text x="40" y="58" fill="${ACC2}" font-family="monospace" font-size="16">&gt;&gt; plot(t, x, 'LineWidth', 2)</text>
+      <text x="40" y="450" fill="#848c9a" font-family="monospace" font-size="13">MATLAB ONRAMP · ARRAYS · VISUALISATION</text>`);
+  },
+  physics(){
+    let par=''; for(let x=0;x<=360;x+=6){ par+=(x?' L':'M')+(180+x)+' '+(380-(x*1.1-x*x/330)).toFixed(1); }
+    return svg(`<defs><radialGradient id="ch" cx=".5" cy=".4"><stop offset="0" stop-color="#1b2a40"/><stop offset="1" stop-color="#080d16"/></radialGradient></defs>
+      <rect width="720" height="480" fill="url(#ch)"/>
+      <g font-family="'Instrument Serif',Georgia,serif" font-style="italic" fill="rgba(238,242,248,.85)">
+        <text x="60" y="110" font-size="46">F = ma</text><text x="420" y="96" font-size="38">E = hν</text>
+        <text x="420" y="160" font-size="30">v² = v₀² + 2aΔx</text><text x="60" y="180" font-size="30">λ = c / f</text></g>
+      <line x1="150" y1="380" x2="620" y2="380" stroke="rgba(238,242,248,.6)" stroke-width="2"/>
+      <path d="${par}" fill="none" stroke="${ACC2}" stroke-width="2.4" stroke-dasharray="7 6"/>
+      <circle cx="180" cy="380" r="9" fill="#eef2f8"/><path d="M180 380 l60 -60" stroke="#eef2f8" stroke-width="2"/><path d="M240 320 l-14 2 l12 10z" fill="#eef2f8"/>
+      <text x="40" y="450" fill="rgba(238,242,248,.45)" font-family="monospace" font-size="13">GS · LS · SE — LEBANESE BACCALAUREATE</text>`);
+  },
+  maths(){
+    let c=''; for(let x=-200;x<=200;x+=5){ const y=-(x*x*x)/26000+x*.55; c+=(x===-200?'M':' L')+(360+x)+' '+(300-y).toFixed(1); }
+    return svg(`<defs><radialGradient id="ch2" cx=".5" cy=".4"><stop offset="0" stop-color="#1b2a40"/><stop offset="1" stop-color="#080d16"/></radialGradient></defs>
+      <rect width="720" height="480" fill="url(#ch2)"/>
+      <g stroke="rgba(238,242,248,.55)" stroke-width="1.6"><line x1="140" y1="300" x2="580" y2="300"/><line x1="360" y1="150" x2="360" y2="430"/></g>
+      <path d="${c}" fill="none" stroke="${ACC2}" stroke-width="2.6"/>
+      <g font-family="'Instrument Serif',Georgia,serif" font-style="italic" fill="rgba(238,242,248,.85)">
+        <text x="56" y="100" font-size="42">∫₀¹ x² dx = ⅓</text><text x="450" y="100" font-size="36">f′(x) = 0</text><text x="470" y="200" font-size="28">lim (1 + 1/n)ⁿ = e</text></g>
+      <text x="40" y="450" fill="rgba(238,242,248,.45)" font-family="monospace" font-size="13">ANALYSIS · FUNCTIONS · EXAM PREP</text>`);
+  }
+};
+let uid = 0;
+for (const k of Object.keys(ART)) { const f = ART[k]; ART[k] = () => { const u = '_' + (++uid); return f().replace(/id="([\w-]+)"/g, 'id="$1' + u + '"').replace(/url\(#([\w-]+)\)/g, 'url(#$1' + u + ')'); }; }
+document.querySelectorAll('[data-art]').forEach(el => el.innerHTML = ART[el.dataset.art]());
+
+document.getElementById('portrait').innerHTML = `<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><defs>${gridPat('pg',32,'rgba(238,242,248,.06)')}
+  <radialGradient id="pgl" cx=".5" cy="1"><stop offset="0" stop-color="rgba(${GLOW},.6)"/><stop offset=".6" stop-color="rgba(${GLOW},.08)"/><stop offset="1" stop-color="rgba(${GLOW},0)"/></radialGradient></defs>
+  <rect width="400" height="500" fill="#0b0e14"/><rect width="400" height="500" fill="url(#pg)"/><rect width="400" height="500" fill="url(#pgl)"/>
+  <text x="200" y="300" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="600" font-size="190" fill="#eef2f8" letter-spacing="4">AES</text>
+  <text x="28" y="466" font-family="monospace" font-size="12" fill="#848c9a" letter-spacing="2">45.19° N · 5.72° E</text>
+  <text x="372" y="466" text-anchor="end" font-family="monospace" font-size="12" fill="#848c9a" letter-spacing="2">GRENOBLE</text></svg>`;
+
+document.getElementById('notebook').innerHTML = `<svg viewBox="0 0 300 380"><g transform="rotate(-6 150 190)">
+  <rect x="44" y="26" width="226" height="320" rx="10" fill="#d9dee8"/><rect x="36" y="20" width="226" height="320" rx="10" fill="#1f3b66"/>
+  <rect x="36" y="20" width="22" height="320" rx="6" fill="${ACC}"/>
+  <rect x="80" y="70" width="160" height="78" rx="6" fill="#eef2f8"/>
+  <text x="160" y="104" text-anchor="middle" font-family="'Instrument Serif',Georgia,serif" font-style="italic" font-size="22" fill="#0b1626">Bac Physics</text>
+  <text x="160" y="130" text-anchor="middle" font-family="monospace" font-size="11" fill="#3a4a63" letter-spacing="1">FORMULA SHEET</text>
+  <g stroke="rgba(238,242,248,.35)" stroke-width="2"><line x1="190" y1="280" x2="236" y2="280"/><line x1="190" y1="292" x2="236" y2="292"/><line x1="200" y1="304" x2="236" y2="304"/></g>
+  <text x="84" y="230" font-family="'Instrument Serif',Georgia,serif" font-style="italic" font-size="26" fill="rgba(238,242,248,.75)">τ = RC</text></g></svg>`;
+
+/* ====================== PROJECTS ====================== */
+const PROJECTS = [
+  { slug:'rocket-science', cat:'Aerospace', title:'Rocket Science 101', art:'orbit', fig:'University of Michigan', date:'Jul 2026',
+    body:['A specialization from the University of Michigan covering the engineering and physics behind modern space missions.','It took me through orbital mechanics, rocket propulsion, satellite systems and spacecraft design, plus the history of space exploration. It’s the aerospace side of what I want to do with electrical engineering.'],
+    tags:['Orbital mechanics','Propulsion','Spacecraft design'], cta:['View the credential','Listed under certifications on LinkedIn.'] },
+  { slug:'solidworks', cat:'CAD', title:'SOLIDWORKS 3D CAD', art:'cad', fig:'Dassault Systèmes', date:'Aug 2026',
+    body:['Dassault Systèmes’ SOLIDWORKS 3D CAD for Education specialization: sketching, extruding, cutting and assembling real engineering parts in 3D.','Being able to model a part properly closes the loop between an idea on paper and something that can actually be built.'],
+    tags:['3D modelling','SOLIDWORKS','Mechanical design'], cta:['View the credential','Listed under certifications on LinkedIn.'] },
+  { slug:'matlab', cat:'Computing', title:'MATLAB Onramp', art:'matlab', fig:'MathWorks', date:'Jul 2026',
+    body:['MathWorks’ introductory MATLAB course: arrays, indexing, plotting and scripting.','It’s the tool I plan to lean on for electrical engineering, scientific computing and data analysis. The beginner builds on my Guides page start right where Onramp ends.'],
+    tags:['MATLAB','Data analysis','Scientific computing'], cta:['View the credential','Listed under certifications on LinkedIn.'] },
+  { slug:'physics-tutor', cat:'Teaching', title:'Private Physics Tutor', art:'physics', fig:'Aug 2025 — Jul 2026', date:'Part-time',
+    body:['I taught physics to high-school students in Lebanon and abroad through hybrid lessons, online and in person, for the GS, LS and SE sections of the Lebanese Baccalaureate.','The goal was always the same: build real problem-solving skills, make complex physics feel simple, and walk into the official exams prepared.'],
+    tags:['Physics','Lesson planning','Tutoring'], cta:['See my experience','Full details on LinkedIn.'] },
+  { slug:'math-tutor', cat:'Teaching', title:'Private Math Tutor', art:'maths', fig:'Nov 2025 — Jul 2026', date:'Self-employed',
+    body:['Mathematics tutoring for GS and LS students of the Lebanese Baccalaureate, in Lebanon and abroad, both online and in person.','Structured lessons, lots of problem-solving practice and personalised guidance, with a focus on analytical thinking and exam readiness.'],
+    tags:['Mathematics','Tutoring','Exam preparation'], cta:['See my experience','Full details on LinkedIn.'] }
+];
+document.getElementById('projList').innerHTML = PROJECTS.map((p,i)=>`
+  <article class="proj" id="p-${p.slug}">
+    <figure class="fig" data-reveal><div class="fig__img">${ART[p.art]()}</div><figcaption><span>Fig. ${pad(i+1)}</span><span>${p.fig}</span></figcaption></figure>
+    <div data-reveal>
+      <div class="mono-k">Project ${pad(i+1)} · ${p.date}</div>
+      <h2>${p.title}</h2>
+      ${p.body.map(t=>`<p>${t}</p>`).join('')}
+      <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+      <a class="cta" href="${LI}" target="_blank" rel="noopener">${LI_SVG}<span><b>${p.cta[0]}</b><small>${p.cta[1]}</small></span><span class="arr">↗</span></a>
+    </div>
+  </article>`).join('');
+
+/* ====================== GUIDES ====================== */
+const GUIDES = [
+  { slug:'sine-wave', title:'Plot a Mains Sine Wave', level:1, file:'sine_wave.m', chips:['linspace','plot','hold on'],
+    lede:'Draw the 50 Hz voltage coming out of a wall socket, then add a third harmonic and watch the waveform distort. It’s the “hello world” of electrical engineering in MATLAB.',
+    need:['MATLAB, or the free MATLAB Online','No toolboxes needed','10 minutes'],
+    steps:['Build a time vector with <code>linspace</code> covering two periods','Compute the peak voltage: 230 V RMS × √2 ≈ 325 V','Plot the fundamental, then overlay the distorted signal with <code>hold on</code>','Label everything: axes, title, legend'],
+    code:String.raw`% Plot a 50 Hz mains voltage and add a 3rd harmonic
+f  = 50;                          % frequency (Hz)
+Vm = 230*sqrt(2);                 % peak voltage (V)
+t  = linspace(0, 2/f, 1000);      % two full periods
+
+v1 = Vm*sin(2*pi*f*t);            % fundamental
+v3 = 0.2*Vm*sin(2*pi*3*f*t);      % 3rd harmonic, 20 % amplitude
+
+plot(t*1e3, v1, 'LineWidth', 2); hold on
+plot(t*1e3, v1 + v3, '--', 'LineWidth', 1.5); hold off
+grid on
+xlabel('Time (ms)'); ylabel('Voltage (V)')
+title('Mains voltage with a 3rd harmonic')
+legend('Fundamental', 'Fundamental + 3rd harmonic')` },
+  { slug:'rc-charging', title:'RC Circuit Charging', level:1, file:'rc_charging.m', chips:['exp','vectors','yline'],
+    lede:'Charge a capacitor through a resistor and see the time constant τ = RC with your own eyes. One equation, one plot, and the 63 % rule finally makes sense.',
+    need:['MATLAB R2018b or newer (for <code>yline</code>)','The RC formula from the Resources sheet'],
+    steps:['Pick component values: R, C and supply voltage','Compute τ and a time vector out to 5τ','Apply V<sub>C</sub> = V<sub>s</sub>(1 − e<sup>−t/τ</sup>) to the whole vector at once','Mark the 63.2 % level and print τ'],
+    code:String.raw`% Charging an RC circuit: Vc(t) = Vs*(1 - exp(-t/tau))
+Vs  = 5;           % supply voltage (V)
+R   = 10e3;        % resistance (ohm)
+C   = 100e-6;      % capacitance (F)
+tau = R*C;         % time constant (s)
+
+t  = linspace(0, 5*tau, 500);
+Vc = Vs*(1 - exp(-t/tau));        % element-wise, no loop needed
+
+plot(t, Vc, 'LineWidth', 2); grid on
+xlabel('Time (s)'); ylabel('V_C (V)')
+title(sprintf('RC charging, tau = %.2f s', tau))
+yline(0.632*Vs, '--', '63.2 % after one tau');
+
+fprintf('Time constant: %.2f s\n', tau);
+fprintf('Fully charged (99 %%) after about %.1f s\n', 5*tau);` },
+  { slug:'projectile', title:'Projectile Range Explorer', level:2, file:'projectile.m', chips:['for loop','deg2rad','max'],
+    lede:'Launch the same ball at five different angles, plot every trajectory, then use one vectorised line to find the angle with the longest range.',
+    need:['MATLAB','Guides 01–02 done','Basic kinematics'],
+    steps:['Loop over launch angles and compute time of flight for each','Plot each trajectory with its own legend label','Compute range for 181 angles in a single vector expression','Find the maximum with <code>max</code> and print it'],
+    code:String.raw`% Projectile motion: trajectories and range vs launch angle
+g  = 9.81;              % gravity (m/s^2)
+v0 = 20;                % launch speed (m/s)
+
+figure; hold on; grid on
+for a = 15:15:75
+    th = deg2rad(a);
+    tf = 2*v0*sin(th)/g;              % time of flight
+    t  = linspace(0, tf, 200);
+    x  = v0*cos(th)*t;
+    y  = v0*sin(th)*t - 0.5*g*t.^2;
+    plot(x, y, 'LineWidth', 1.5, 'DisplayName', sprintf('%d deg', a))
+end
+hold off
+xlabel('x (m)'); ylabel('y (m)'); legend show
+title('Same speed, different launch angles')
+
+% Vectorised: range for every angle at once
+th = deg2rad(0:0.5:90);
+R  = v0^2*sin(2*th)/g;
+[Rmax, k] = max(R);
+fprintf('Max range %.1f m at %.1f deg\n', Rmax, rad2deg(th(k)));` },
+  { slug:'three-phase', title:'Three-Phase Power', level:2, file:'three_phase.m', chips:['matrices','phase shift','abs'],
+    lede:'Generate three balanced phases 120° apart and prove numerically that they add up to zero. That cancellation is why the power grid runs on three phases.',
+    need:['MATLAB','Guide 01 done'],
+    steps:['Create v<sub>a</sub>, v<sub>b</sub> and v<sub>c</sub>, each shifted by 2π/3','Stack them in one matrix and plot all three with a single call','Plot their sum on top','Check the largest value of the sum: it should be essentially zero'],
+    code:String.raw`% Three balanced phases, 120 degrees apart, and their sum
+Vm = 325;  f = 50;                % peak voltage (V), frequency (Hz)
+t  = linspace(0, 2/f, 1000);
+
+va = Vm*sin(2*pi*f*t);
+vb = Vm*sin(2*pi*f*t - 2*pi/3);
+vc = Vm*sin(2*pi*f*t + 2*pi/3);
+
+plot(t*1e3, [va; vb; vc], 'LineWidth', 1.6); hold on
+plot(t*1e3, va + vb + vc, 'k--', 'LineWidth', 1.2); hold off
+grid on; xlabel('Time (ms)'); ylabel('Voltage (V)')
+legend('v_a', 'v_b', 'v_c', 'v_a + v_b + v_c')
+title('Balanced three-phase system')
+
+fprintf('Largest |va + vb + vc| = %.2e V\n', max(abs(va + vb + vc)));` },
+  { slug:'pi-control', title:'P vs PI Controller', level:3, file:'pi_control.m', chips:['Euler method','feedback','integral'],
+    lede:'Simulate a first-order system under proportional control, then add an integral term and watch the steady-state error disappear. Your first taste of control engineering.',
+    need:['MATLAB, no Control Toolbox required','Guides 01–04 done','Comfort with loops'],
+    steps:['Model the plant: dy/dt = (−y + K·u)/T','Step it forward in time with the Euler method','Run a P controller and a PI controller side by side','Compare the outputs and print the P-only steady-state error'],
+    code:String.raw`% First-order plant dy/dt = (-y + K*u)/T under P and PI control
+K  = 2;  T = 5;                   % plant gain and time constant (s)
+dt = 0.01;  t = 0:dt:30;          % simulation time (s)
+r  = ones(size(t));               % unit step setpoint
+Kp = 2;  Ki = 0.8;                % controller gains
+
+y_p  = zeros(size(t));            % output with P control
+y_pi = zeros(size(t));            % output with PI control
+integ = 0;
+
+for k = 1:numel(t)-1
+    % P controller
+    u = Kp*(r(k) - y_p(k));
+    y_p(k+1) = y_p(k) + dt*(-y_p(k) + K*u)/T;
+
+    % PI controller
+    e = r(k) - y_pi(k);
+    integ = integ + e*dt;
+    u = Kp*e + Ki*integ;
+    y_pi(k+1) = y_pi(k) + dt*(-y_pi(k) + K*u)/T;
+end
+
+plot(t, r, 'k:', t, y_p, t, y_pi, 'LineWidth', 1.6); grid on
+xlabel('Time (s)'); ylabel('Output')
+legend('Setpoint', 'P only', 'P + I', 'Location', 'southeast')
+title('The integral term removes steady-state error')
+
+fprintf('P-only steady-state error: %.3f\n', r(end) - y_p(end));
+fprintf('PI steady-state error:     %.3f\n', r(end) - y_pi(end));` }
+];
+const KW = new Set(['for','end','if','else','elseif','while','function','return','break','hold','on','off','grid','figure','legend','show']);
+function hlLine(line){
+  let out='', i=0, inStr=false, buf='';
+  const flush=()=>{ if(!buf) return; out+=esc(buf).replace(/\b([A-Za-z_]\w*)\b|(\b\d+(?:\.\d+)?(?:e-?\d+)?\b)/g,(m,w,n)=> w? (KW.has(w)?`<span class="tk-k">${w}</span>`:w) : `<span class="tk-n">${n}</span>`); buf=''; };
+  while(i<line.length){
+    const ch=line[i];
+    if(!inStr && ch==='%'){ flush(); out+=`<span class="tk-c">${esc(line.slice(i))}</span>`; return out; }
+    if(ch==="'"){ const prev=line.slice(0,i).trimEnd().slice(-1);
+      if(!inStr && /[\w)\].']/.test(prev)){ buf+=ch; i++; continue; }
+      if(!inStr){ flush(); inStr=true; buf="'"; } else { buf+="'"; out+=`<span class="tk-s">${esc(buf)}</span>`; buf=''; inStr=false; } i++; continue; }
+    buf+=ch; i++;
+  }
+  if(inStr){ out+=`<span class="tk-s">${esc(buf)}</span>`; buf=''; } else flush();
+  return out;
+}
+const lvlBars = n => `<i>${[1,2,3].map(k=>`<s class="${k<=n?'on':''}"></s>`).join('')}</i>`;
+document.getElementById('guideIndex').innerHTML = GUIDES.map((g,i)=>`
+  <li><a href="#guides" data-goto="g-${g.slug}"><span class="pindex__n">${pad(i+1)}</span><span class="pindex__title">${g.title}</span>
+  <span class="chips">${g.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</span><span class="pindex__phase">Level ${g.level}</span><span class="arr">↓</span></a></li>`).join('');
+document.getElementById('guideList').innerHTML = GUIDES.map((g,i)=>{
+  const lines=g.code.split('\n'); const long=lines.length>18;
+  return `<article class="build" id="g-${g.slug}">
+    <div class="build__head" data-reveal>
+      <div><div class="mono-k lvl">Build ${pad(i+1)} ${lvlBars(g.level)} Level ${g.level} of 3</div><h2>${g.title}</h2></div>
+      <div><p>${g.lede}</p><div class="chips">${g.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div></div>
+    </div>
+    <div class="build__body" data-reveal>
+      <div class="spec">
+        <h3>What you need <span>${g.need.length} items</span></h3><ul>${g.need.map(n=>`<li>${n}</li>`).join('')}</ul>
+        <h3>Steps <span>${g.steps.length} steps</span></h3><ol>${g.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      </div>
+      <div class="code${long?' is-short':''}" data-code="${i}">
+        <div class="code__bar"><b>${g.file}</b><button data-copy="${i}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="5" width="8.5" height="8.5" rx="1.8"/><path d="M10.5 5V3.8A1.8 1.8 0 0 0 8.7 2H3.8A1.8 1.8 0 0 0 2 3.8v4.9a1.8 1.8 0 0 0 1.8 1.8H5"/></svg>Copy</button></div>
+        <pre>${lines.map((l,n)=>`<span class="ln" data-n="${n+1}">${hlLine(l)||' '}</span>`).join('')}</pre>
+        ${long?`<button class="code__more" data-more>Show all ${lines.length} lines</button>`:''}
+      </div>
+    </div>
+  </article>`; }).join('');
+document.getElementById('guideList').addEventListener('click', e => {
+  const m = e.target.closest('[data-more]'); if (m){ const c = m.closest('.code'); const short = c.classList.toggle('is-short'); m.textContent = short ? `Show all ${c.querySelectorAll('.ln').length} lines` : 'Show less'; return; }
+  const c = e.target.closest('[data-copy]'); if (c) copyText(GUIDES[+c.dataset.copy].code, 'Code copied');
+});
+
+/* ====================== RING ====================== */
+const ring = document.getElementById('ring');
+ring.innerHTML = PROJECTS.map((p,i)=>`<li class="catalogue__slot"><a class="card" href="#projects" data-goto="p-${p.slug}" draggable="false">
+  <span class="card__img">${ART[p.art]()}</span><span class="card__body"><span class="card__meta"><b>${pad(i+1)}</b><span>${p.cat}</span></span><span class="card__title">${p.title}</span></span></a></li>`).join('');
+document.getElementById('total').textContent = pad(PROJECTS.length);
+const stage = document.getElementById('stage'), cat = document.getElementById('catalogue'), homeV = document.getElementById('home');
+const originals = [...ring.children], total = originals.length;
+const copies = Math.max(1, Math.round(20 / total));
+for (let c = 1; c < copies; c++) originals.forEach(s => { const k = s.cloneNode(true); k.setAttribute('aria-hidden','true'); k.querySelector('a').tabIndex = -1; ring.append(k); });
+const slots = [...ring.children], N = slots.length, STEP = 360 / N;
+slots.forEach((s,i)=>s.style.setProperty('--i', i));
+ring.style.setProperty('--step', STEP + 'deg');
+let radius = 1000;
+function measure(){ const w = slots[0].offsetWidth; if(!w) return; radius = (w + 30) / (2 * Math.sin(STEP/2 * Math.PI/180)); ring.style.setProperty('--r', radius.toFixed(1) + 'px'); }
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let angle = 0, target = null, velocity = 0, spin = 0, holdUntil = 0, hovering = false, dragging = false, lastFront = -1;
+const wrapDeg = d => ((((d % 360) + 540) % 360) - 180);
+const hold = ms => holdUntil = performance.now() + ms;
+const countEl = document.getElementById('count');
+function paint(){
+  ring.style.setProperty('--a', angle.toFixed(3) + 'deg');
+  let best = 0, bestOff = 1e9;
+  for (let i = 0; i < N; i++){
+    const off = Math.abs(wrapDeg(i * STEP + angle)), s = slots[i];
+    s.style.setProperty('--dim', Math.min(1, off / 62).toFixed(3));
+    const op = Math.max(0, Math.min(1, (74 - off) / 50));
+    s.style.opacity = op.toFixed(3); s.classList.toggle('is-away', op < .05);
+    if (off < bestOff){ bestOff = off; best = i; }
+  }
+  const f = best % total; if (f !== lastFront){ lastFront = f; countEl.textContent = pad(f + 1); }
+}
+let last = performance.now();
+function tick(now){
+  const dt = Math.min(64, now - last); last = now;
+  if (homeV.classList.contains('is-on')){
+    if (!dragging){
+      if (target !== null){ const d = target - angle; angle += d * Math.min(1, dt * .009); if (Math.abs(d) < .02){ angle = target; target = null; } }
+      else if (Math.abs(velocity) > .0005){ angle += velocity * dt; velocity *= Math.pow(.94, dt / 16); }
+      else { velocity = 0; const want = (!reduce && !hovering && now > holdUntil) ? -0.0052 : 0; spin += (want - spin) * Math.min(1, dt * .0025); angle += spin * dt; }
+    }
+    paint();
+  }
+  requestAnimationFrame(tick);
+}
+function stepTo(dir){ hold(6000); velocity = 0; spin = 0; const base = target !== null ? target : angle; target = Math.round(base / STEP) * STEP - dir * STEP; }
+document.getElementById('next').addEventListener('click', () => stepTo(1));
+document.getElementById('prev').addEventListener('click', () => stepTo(-1));
+addEventListener('keydown', e => { if (!homeV.classList.contains('is-on')) return; if (e.key === 'ArrowRight') stepTo(1); if (e.key === 'ArrowLeft') stepTo(-1); });
+stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
+stage.addEventListener('pointerleave', () => hovering = false);
+let px = 0, pt = 0, moved = 0, pid = null;
+stage.addEventListener('pointerdown', e => { if (e.button !== 0) return; pid = e.pointerId; px = e.clientX; pt = performance.now(); moved = 0; target = null; velocity = 0; spin = 0; });
+addEventListener('pointermove', e => {
+  if (pid !== e.pointerId) return;
+  const dx = e.clientX - px; moved += Math.abs(dx);
+  if (!dragging && moved > 6){ dragging = true; cat.classList.add('is-dragging'); try{ stage.setPointerCapture(pid); }catch(_){} }
+  if (!dragging) return;
+  const now = performance.now(), d = dx * (180 / Math.PI / radius) * 1.1; angle += d;
+  velocity = velocity * .6 + d / Math.max(1, now - pt) * .4; px = e.clientX; pt = now;
+});
+function release(e){ if (pid !== e.pointerId) return; pid = null;
+  if (dragging){ dragging = false; cat.classList.remove('is-dragging'); hold(4000); if (performance.now() - pt > 90) velocity = 0; velocity = Math.max(-.6, Math.min(.6, velocity)); } }
+addEventListener('pointerup', release); addEventListener('pointercancel', release);
+stage.addEventListener('click', e => { if (moved > 6){ e.preventDefault(); e.stopPropagation(); } }, true);
+stage.addEventListener('dragstart', e => e.preventDefault());
+
+/* ====================== ROUTER ====================== */
+const views = [...document.querySelectorAll('.view')];
+const links = [...document.querySelectorAll('.menu ul a')];
+const bar = document.getElementById('bar');
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .1, rootMargin: '0px 0px -6% 0px' });
+let current = null;
+function scrollToId(id){ const t = document.getElementById(id); if (!t) return; setTimeout(() => scrollTo({ top: t.getBoundingClientRect().top + scrollY - 96, behavior: 'smooth' }), 60); }
+function show(name, anchor){
+  if (!views.some(v => v.dataset.view === name)) name = 'home';
+  current = name;
+  views.forEach(v => {
+    const on = v.dataset.view === name; v.classList.toggle('is-on', on);
+    if (on){ v.querySelectorAll('[data-load]').forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+      v.querySelectorAll('[data-reveal]').forEach(el => { el.classList.remove('is-in'); io.observe(el); }); }
+  });
+  links.forEach(a => a.classList.toggle('is-on', a.getAttribute('href') === '#' + name));
+  document.body.classList.toggle('home-mode', name === 'home');
+  document.body.classList.remove('menu-open');
+  document.title = name === 'home' ? 'Adam El Sakka — Electrical Engineering Portfolio' : name[0].toUpperCase() + name.slice(1) + ' — Adam El Sakka';
+  if (name === 'home') requestAnimationFrame(measure);
+  scrollTo(0, 0); if (anchor) scrollToId(anchor);
+}
+let pendingAnchor = null;
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-goto]'); if (!c) return;
+  const view = c.getAttribute('href').slice(1);
+  if (view === current){ e.preventDefault(); scrollToId(c.dataset.goto); } else pendingAnchor = c.dataset.goto;
+});
+function route(){ const a = pendingAnchor; pendingAnchor = null; show((location.hash || '#home').slice(1), a); }
+addEventListener('hashchange', route);
+document.getElementById('burger').addEventListener('click', () => document.body.classList.toggle('menu-open'));
+addEventListener('scroll', () => bar.classList.toggle('is-solid', scrollY > 8), { passive: true });
+
+/* ====================== MISC ====================== */
+const toast = document.getElementById('toast');
+async function copyText(text, msg){ let ok = false; try { await navigator.clipboard.writeText(text); ok = true; } catch(_){} toast.textContent = ok ? msg : 'Copy not allowed here'; toast.classList.add('on'); clearTimeout(copyText.t); copyText.t = setTimeout(() => toast.classList.remove('on'), 1800); }
+document.getElementById('copy').addEventListener('click', () => copyText(LI, 'Link copied'));
+const sheet = document.getElementById('sheet'), sbtn = document.getElementById('openSheet');
+sbtn.addEventListener('click', () => { const o = sheet.classList.toggle('open'); sbtn.innerHTML = o ? 'Close sheet <i>↑</i>' : 'Open sheet <i>→</i>'; });
+
+/* ====================== CALCULUS READER ====================== */
+const PAGES = 34;
+const CHAPTERS = [
+  { n:1, title:'Differentiation', page:1 },
+  { n:2, title:'Hyperbolic functions', page:10 },
+  { n:3, title:'Partial derivatives', page:14 },
+  { n:4, title:'Taylor & Maclaurin expansions', page:18 },
+  { n:5, title:'Integrals', page:20 },
+  { n:6, title:'Double integrals', page:30 }
+];
+const src = (p, t) => `calculus/${t ? 't' : 'p'}${pad(p)}.jpg`;
+document.getElementById('chapters').innerHTML = CHAPTERS.map(c => `<li><button data-read="${c.page}"><b>${pad(c.n)}</b><span>${c.title}</span><span>p. ${c.page}</span></button></li>`).join('');
+const reader = document.getElementById('reader'), rImg = document.getElementById('rImg'), rPage = document.getElementById('rPage');
+const rNum = document.getElementById('rNum'), rChap = document.getElementById('rChap'), rBar = document.getElementById('rBar');
+const rPrev = document.getElementById('rPrev'), rNext = document.getElementById('rNext'), rThumbs = document.getElementById('rThumbs');
+rThumbs.innerHTML = Array.from({ length: PAGES }, (_, i) => `<button data-p="${i + 1}" aria-label="Page ${i + 1}"><img src="${src(i + 1, 1)}" alt="" loading="lazy"></button>`).join('');
+const thumbBtns = [...rThumbs.children];
+let page = 1, lastFocus = null;
+const preload = p => { if (p >= 1 && p <= PAGES) { const im = new Image(); im.src = src(p); } };
+function setPage(p, dir){
+  p = Math.max(1, Math.min(PAGES, p));
+  const swap = () => {
+    page = p; rImg.src = src(p); rImg.alt = `Calculus notes, page ${p} of ${PAGES}`;
+    const ch = [...CHAPTERS].reverse().find(c => p >= c.page);
+    rChap.textContent = `Chapter ${ch.n} · ${ch.title}`; rNum.textContent = pad(p);
+    rBar.style.width = (p / PAGES * 100) + '%';
+    rPrev.disabled = p === 1; rNext.disabled = p === PAGES;
+    thumbBtns.forEach((b, i) => b.classList.toggle('on', i + 1 === p));
+    const tb = thumbBtns[p - 1]; rThumbs.scrollLeft = tb.offsetLeft - rThumbs.clientWidth / 2 + tb.offsetWidth / 2;
+    rPage.classList.remove('zoom'); rPage.scrollTop = 0;
+    preload(p + 1); preload(p - 1);
+  };
+  if (!dir || reduce){ swap(); rImg.className = ''; return; }
+  rImg.className = dir > 0 ? 'out-l' : 'out-r';
+  setTimeout(() => { swap(); rImg.className = dir > 0 ? 'out-r' : 'out-l'; rImg.offsetWidth; const done = () => { rImg.className = ''; }; if (rImg.complete) requestAnimationFrame(done); else rImg.onload = done; }, 220);
+}
+function openReader(p){
+  lastFocus = document.activeElement; reader.hidden = false; document.body.style.overflow = 'hidden';
+  setPage(p); requestAnimationFrame(() => reader.classList.add('on')); document.getElementById('rClose').focus();
+}
+function closeReader(){
+  reader.classList.remove('on'); document.body.style.overflow = '';
+  setTimeout(() => { reader.hidden = true; }, 450); if (lastFocus) lastFocus.focus();
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read); });
+document.getElementById('rClose').addEventListener('click', closeReader);
+rPrev.addEventListener('click', () => setPage(page - 1, -1));
+rNext.addEventListener('click', () => setPage(page + 1, 1));
+rThumbs.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b){ const p = +b.dataset.p; setPage(p, p > page ? 1 : -1); } });
+let swiped = false;
+rImg.addEventListener('click', () => { if (swiped){ swiped = false; return; } rPage.classList.toggle('zoom'); });
+addEventListener('keydown', e => {
+  if (reader.hidden) return;
+  if (e.key === 'Escape') closeReader();
+  if (e.key === 'ArrowRight' && page < PAGES){ e.stopImmediatePropagation(); setPage(page + 1, 1); }
+  if (e.key === 'ArrowLeft' && page > 1){ e.stopImmediatePropagation(); setPage(page - 1, -1); }
+}, true);
+let sx = null;
+document.getElementById('rStage').addEventListener('pointerdown', e => { if (!rPage.classList.contains('zoom')) sx = e.clientX; });
+document.getElementById('rStage').addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50){ swiped = true; setTimeout(() => swiped = false, 300); } if (Math.abs(dx) > 50) setPage(page + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); });
+
+addEventListener('resize', () => { clearTimeout(measure.t); measure.t = setTimeout(measure, 120); });
+route(); measure(); paint(); requestAnimationFrame(tick);
+document.fonts && document.fonts.ready.then(measure);
+})();
+</script>
+</body>
+</html>
