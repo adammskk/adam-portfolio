@@ -60,8 +60,8 @@ button{font:inherit;color:inherit}
 .burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:24px}
 .menu-open .burger span:nth-child(1){transform:translateY(4px) rotate(45deg)}
 .menu-open .burger span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
-@media (max-width:1120px){.brand span{display:none}}
-@media (max-width:880px){
+@media (max-width:1240px){.brand span{display:none}}
+@media (max-width:980px){
   .burger{display:block}
   .menu{position:fixed;inset:0;z-index:1;flex-direction:column;justify-content:center;gap:40px;background:rgba(5,7,11,.96);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
   .menu-open .menu{opacity:1;visibility:visible}
@@ -244,6 +244,69 @@ main{flex:1 0 auto;position:relative;display:flex;flex-direction:column}
 .reader__thumbs button.on{opacity:1;box-shadow:0 0 0 2px var(--accent)}
 @media (max-width:700px){.reader__nav{position:absolute;bottom:22px;z-index:2}.reader__nav.r-prev{left:20px}.reader__nav.r-next{right:20px}.reader__title b{font-size:18px}.reader__title{flex:1}.reader__top{gap:12px}.reader__stage{padding-bottom:86px}.reader__thumbs button{width:40px}}
 
+
+/* ---------- education ---------- */
+.edu-sec{margin-top:clamp(72px,9vw,128px)}
+.edu-sec:first-of-type{margin-top:0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line-2);margin-bottom:8px}
+.sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(34px,3.6vw,52px);text-transform:uppercase;line-height:1}
+.path{position:relative;list-style:none}
+.path::before{content:"";position:absolute;left:clamp(150px,17vw,220px);top:0;bottom:0;width:1px;background:var(--line)}
+.path::after{content:"";position:absolute;left:clamp(150px,17vw,220px);top:0;width:1px;height:var(--fill,0%);background:linear-gradient(var(--accent),rgba(var(--glow),.2));transition:height 1.6s var(--ease-out)}
+.stop{position:relative;display:grid;grid-template-columns:clamp(150px,17vw,220px) minmax(0,1fr);padding:clamp(34px,4vw,52px) 0}
+.stop+.stop{border-top:1px solid var(--line)}
+.stop__when{padding-right:28px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);line-height:1.7}
+.stop__when b{display:block;color:var(--ink);font-weight:500;font-size:13px}
+.stop__dot{position:absolute;left:clamp(150px,17vw,220px);top:calc(clamp(34px,4vw,52px) + 4px);width:13px;height:13px;margin-left:-6px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line-2);transition:all .8s var(--ease-out)}
+.stop.is-in .stop__dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 6px rgba(var(--glow),.14),0 0 22px rgba(var(--glow),.7)}
+.stop__body{padding-left:clamp(28px,4vw,56px)}
+.badge2{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.badge2.live{border-color:rgba(var(--glow),.5);color:var(--accent-ink)}
+.badge2.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.stop h3{font-family:var(--display);font-weight:600;font-size:clamp(32px,3.6vw,52px);line-height:.98;text-transform:uppercase;margin:16px 0 6px}
+.stop__deg{font-size:clamp(1.02rem,1.2vw,1.15rem);color:var(--ink);font-weight:500;letter-spacing:-.01em}
+.stop__deg small{display:block;font-weight:400;color:var(--ink-3);font-size:14px;margin-top:2px}
+.stop p{color:var(--ink-2);line-height:1.7;margin:16px 0 0;max-width:46em}
+.stop .mono-k{margin:24px 0 10px}
+.stop .chips{gap:7px}
+.stop .chip{font-size:12px;padding:5px 10px;transition:border-color .25s,color .25s,background-color .25s}
+.stop .chip:hover{border-color:rgba(var(--glow),.5);color:var(--ink);background:rgba(var(--glow),.08)}
+.stop.mini h3{font-size:clamp(24px,2.4vw,34px)}
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:16px;margin-top:24px}
+.cert{position:relative;display:flex;flex-direction:column;padding:26px 26px 22px;border-radius:20px;border:1px solid var(--line);background:var(--bg-elev);overflow:hidden;transition:border-color .35s,transform .5s var(--ease-out)}
+.cert::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(var(--glow),.13),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.cert:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.cert:hover::before{opacity:1}
+.cert__top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cert__n{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.cert h3{font-size:clamp(1.2rem,1.05rem + .5vw,1.45rem);font-weight:560;letter-spacing:-.025em;line-height:1.2;margin:18px 0 4px}
+.cert__by{color:var(--ink-3);font-size:14.5px}
+.cert__id{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:14px;letter-spacing:.04em}
+.cert__id b{color:var(--ink-2);font-weight:500}
+.cert .chips{margin-top:16px}
+.cert__link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:22px;font-size:14px;color:var(--ink-2);transition:color .25s}
+.cert__link:hover{color:var(--ink)}
+.cert__link i{font-style:normal;transition:transform .45s var(--ease-out)}
+.cert__link:hover i{transform:translate(3px,-3px)}
+.langs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.lang{padding:26px;border-radius:20px;border:1px solid var(--line);background:var(--bg-elev)}
+.lang__code{font-family:var(--display);font-weight:600;font-size:64px;line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(238,242,248,.35)}
+.lang h3{font-size:1.3rem;font-weight:560;margin-top:18px;letter-spacing:-.02em}
+.lang p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.meter{height:3px;border-radius:3px;background:var(--line);margin-top:18px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-ink));transition:width 1.6s var(--ease-out)}
+.is-in .meter i{width:var(--w)}
+.skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 40px;margin-top:10px}
+.skillgrid div{padding-top:22px}
+.skillgrid .chips{gap:7px}
+@media (max-width:760px){
+  .path::before,.path::after,.stop__dot{left:7px}
+  .stop{grid-template-columns:1fr;padding-left:34px}
+  .stop__body{padding-left:0}.stop__when{padding:0 0 4px}
+  .langs{grid-template-columns:1fr}
+}
+
 /* ---------- resources ---------- */
 .feature{display:grid;grid-template-columns:1fr 1fr;border-radius:22px;border:1px solid var(--line);overflow:hidden;background:var(--bg-elev)}
 .feature__art{display:grid;place-items:center;padding:40px;background:var(--bg-sunken);border-right:1px solid var(--line);min-height:380px}
@@ -349,6 +412,7 @@ footer nav a::after{content:" ↗";font-size:.8em;color:var(--ink-3)}
       <li><a href="#home">Home</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#guides">Guides</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#resources">Resources</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -409,6 +473,88 @@ footer nav a::after{content:" ↗";font-size:.8em;color:var(--ink-3)}
   </div>
 </section>
 
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="view" id="education" data-view="education">
+  <div class="sky"></div>
+  <div class="page">
+    <header class="page-head"><h1 data-load style="--i:0">Education</h1><p data-load style="--i:1">My study path so far, plus the certifications, languages and skills I’ve picked up along the way.</p></header>
+
+    <div class="edu-sec" data-load style="--i:2">
+      <div class="sec-head"><h2>Study path</h2><span class="mono-k">2024 — Present</span></div>
+      <ol class="path" id="path">
+        <li class="stop" data-reveal>
+          <div class="stop__when"><b>Aug 2026 —</b>Present<br>Grenoble, France</div><span class="stop__dot"></span>
+          <div class="stop__body">
+            <span class="badge2 live">Current</span>
+            <h3>Université Grenoble Alpes</h3>
+            <div class="stop__deg">Bachelor of Engineering, Electrical Energy and Control Engineering<small>Énergie Électrique, Automatique</small></div>
+            <p>Building strong analytical, design and problem-solving skills through laboratory work and engineering projects, across the full range of electrical energy, electronics and control.</p>
+            <div class="mono-k">Coursework</div>
+            <div class="chips"><span class="chip">Mathematics</span><span class="chip">Electrical engineering</span><span class="chip">Electronics</span><span class="chip">Embedded systems</span><span class="chip">Automatic control</span><span class="chip">Power electronics</span><span class="chip">Electrical energy conversion</span><span class="chip">Programming</span><span class="chip">Object-oriented programming</span><span class="chip">Wireless communications</span><span class="chip">Robotics</span><span class="chip">Project management</span></div>
+          </div>
+        </li>
+        <li class="stop mini" data-reveal>
+          <div class="stop__when"><b>2026</b>Admissions</div><span class="stop__dot"></span>
+          <div class="stop__body">
+            <span class="badge2">Milestone</span>
+            <h3>Three acceptances, one choice</h3>
+            <p>Accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program fits my academic interests and long-term engineering goals.</p>
+          </div>
+        </li>
+        <li class="stop" data-reveal>
+          <div class="stop__when"><b>Sep 2025 —</b>Jun 2026<br>Beirut, Lebanon</div><span class="stop__dot"></span>
+          <div class="stop__body">
+            <span class="badge2">First year completed</span>
+            <h3>Beirut Arab University</h3>
+            <div class="stop__deg">Bachelor of Engineering (BE), Electrical Power and Machines Engineering</div>
+            <p>Completed the first year, building a strong foundation in engineering, physics and mathematics, along with analytical, critical-thinking and problem-solving skills through rigorous coursework, lab work and technical communication. My handwritten <a href="#guides" data-goto="g-calculus" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">calculus notes</a> come from this year.</p>
+            <div class="mono-k">Coursework</div>
+            <div class="chips"><span class="chip">Introduction to Engineering</span><span class="chip">Electric Circuits I</span><span class="chip">Classical Physics</span><span class="chip">Electricity and Magnetism</span><span class="chip">Dynamics</span><span class="chip">Calculus</span><span class="chip">Linear Algebra</span><span class="chip">Differential Equations</span><span class="chip">Probability and Statistics</span><span class="chip">Principles of Chemistry</span><span class="chip">Chemistry Laboratory</span><span class="chip">General English</span><span class="chip">Advanced Writing</span></div>
+          </div>
+        </li>
+        <li class="stop mini" data-reveal>
+          <div class="stop__when"><b>Dec 2024</b>Lebanon</div><span class="stop__dot"></span>
+          <div class="stop__body">
+            <span class="badge2">Exams</span>
+            <h3>SAT &amp; DELF B2</h3>
+            <p>Sat the College Board SAT and earned the DELF B2 French diploma at the Institut français du Liban, ahead of applying to universities in France.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="edu-sec" data-reveal>
+      <div class="sec-head"><h2>Licenses &amp; certifications</h2><span class="mono-k">5 credentials</span></div>
+      <div class="certs" id="certs"></div>
+    </div>
+
+    <div class="edu-sec" data-reveal>
+      <div class="sec-head"><h2>Languages</h2><span class="mono-k">3 languages</span></div>
+      <div class="langs">
+        <div class="lang"><div class="lang__code">AR</div><h3>Arabic</h3><p>Native or bilingual</p><div class="meter"><i style="--w:100%"></i></div></div>
+        <div class="lang"><div class="lang__code">EN</div><h3>English</h3><p>Full professional</p><div class="meter"><i style="--w:88%"></i></div></div>
+        <div class="lang"><div class="lang__code">FR</div><h3>French</h3><p>Full professional · DELF B2</p><div class="meter"><i style="--w:88%"></i></div></div>
+      </div>
+    </div>
+
+    <div class="edu-sec" data-reveal>
+      <div class="sec-head"><h2>Skills</h2><span class="mono-k">From my certifications</span></div>
+      <div class="skillgrid">
+        <div><div class="mono-k">CAD &amp; design</div><div class="chips"><span class="chip">SOLIDWORKS</span><span class="chip">Computer-Aided Design (CAD)</span><span class="chip">3D Modeling</span><span class="chip">3D Modeling Software</span></div></div>
+        <div><div class="mono-k">Computing</div><div class="chips"><span class="chip">MATLAB</span><span class="chip">Arrays and Matrices</span><span class="chip">Mathematical Computations</span><span class="chip">Data Visualization</span><span class="chip">Data Analysis</span></div></div>
+        <div><div class="mono-k">Aerospace</div><div class="chips"><span class="chip">Aerospace Engineering</span><span class="chip">Orbital Mechanics</span><span class="chip">Propulsion</span><span class="chip">Mechanics</span><span class="chip">Applied Mathematics</span></div></div>
+        <div><div class="mono-k">Maths &amp; teaching</div><div class="chips"><span class="chip">Advanced Mathematics</span><span class="chip">Algebra</span><span class="chip">Geometry</span><span class="chip">Trigonometry</span><span class="chip">Differential Equations</span><span class="chip">Linear Algebra</span><span class="chip">Tutoring</span><span class="chip">Lesson Planning</span></div></div>
+      </div>
+    </div>
+
+    <div class="links2" data-reveal>
+      <a href="#projects"><span><small>Put to work</small><b>Projects</b></span><i>→</i></a>
+      <a href="#guides"><span><small>Learn with me</small><b>Guides</b></span><i>→</i></a>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== RESOURCES ===================== -->
 <section class="view" id="resources" data-view="resources">
   <div class="sky"></div>
@@ -464,8 +610,8 @@ footer nav a::after{content:" ↗";font-size:.8em;color:var(--ink-3)}
       <div class="portrait" id="portrait"></div>
       <div class="prose">
         <p>Hi, I’m Adam. I’m an Electrical Energy &amp; Control Engineering student at Université Grenoble Alpes, and I’m drawn to the places where engineering meets physics and space.</p>
-        <p>Before Grenoble, I spent a year as a private physics and maths tutor, teaching high-school students in Lebanon and abroad, online and in person, for the GS, LS and SE sections of the Lebanese Baccalaureate. Explaining an idea until it clicks for someone else turned out to be the best way to really understand it myself.</p>
-        <p>In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program lines up with the engineer I want to become.</p>
+        <p>I started engineering at Beirut Arab University, where I completed my first year in Electrical Power and Machines Engineering. At the same time I spent a year as a private physics and maths tutor, teaching high-school students in Lebanon and abroad, online and in person, for the GS, LS and SE sections of the Lebanese Baccalaureate. Explaining an idea until it clicks for someone else turned out to be the best way to really understand it myself.</p>
+        <p>In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program lines up with the engineer I want to become. You’ll find my full study path on the <a href="#education" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">Education</a> page.</p>
         <p>Outside class I keep stacking skills: the University of Michigan’s Rocket Science 101 specialization, MathWorks’ MATLAB Onramp and Dassault Systèmes’ SOLIDWORKS 3D CAD. I share what I learn on the Guides and Resources pages, so the next student can get there faster.</p>
         <p>I speak Arabic, English and French, and I’m always looking for the next problem where power, control and aerospace meet.</p>
         <p><strong>I hope this page helps. And if you’re working on something in energy, control or space, I’d love to hear about it.</strong></p>
@@ -475,20 +621,6 @@ footer nav a::after{content:" ↗";font-size:.8em;color:var(--ink-3)}
       <figure><div data-art="orbit"></div><figcaption>Rocket Science 101, University of Michigan</figcaption></figure>
       <figure><div data-art="cad"></div><figcaption>3D modelling in SOLIDWORKS</figcaption></figure>
       <figure><div data-art="physics"></div><figcaption>A year of tutoring physics</figcaption></figure>
-    </div>
-    <div class="creds" data-reveal>
-      <div><h2>Licenses &amp; certifications</h2><ul class="pindex">
-        <li><div class="row"><span class="pindex__n">01</span><span class="pindex__title">SOLIDWORKS 3D CAD for Education<small>Dassault Systèmes</small></span><span class="pindex__phase">Aug 2026</span></div></li>
-        <li><div class="row"><span class="pindex__n">02</span><span class="pindex__title">MATLAB Onramp<small>MathWorks</small></span><span class="pindex__phase">Jul 2026</span></div></li>
-        <li><div class="row"><span class="pindex__n">03</span><span class="pindex__title">Rocket Science 101 Specialization<small>University of Michigan</small></span><span class="pindex__phase">Jul 2026</span></div></li>
-        <li><div class="row"><span class="pindex__n">04</span><span class="pindex__title">SAT<small>College Board</small></span><span class="pindex__phase">Dec 2024</span></div></li>
-        <li><div class="row"><span class="pindex__n">05</span><span class="pindex__title">DELF B2<small>Institut français du Liban</small></span><span class="pindex__phase">Dec 2024</span></div></li>
-      </ul></div>
-      <div><h2>Languages</h2><ul class="pindex">
-        <li><div class="row"><span class="pindex__n">AR</span><span class="pindex__title">Arabic</span><span class="pindex__phase">Native</span></div></li>
-        <li><div class="row"><span class="pindex__n">EN</span><span class="pindex__title">English</span><span class="pindex__phase">Full professional</span></div></li>
-        <li><div class="row"><span class="pindex__n">FR</span><span class="pindex__title">French</span><span class="pindex__phase">Full professional</span></div></li>
-      </ul></div>
     </div>
     <div class="next" data-reveal>
       <a href="#projects"><small>What I build</small><b>Projects <i>→</i></b></a>
@@ -928,6 +1060,28 @@ async function copyText(text, msg){ let ok = false; try { await navigator.clipbo
 document.getElementById('copy').addEventListener('click', () => copyText(LI, 'Link copied'));
 const sheet = document.getElementById('sheet'), sbtn = document.getElementById('openSheet');
 sbtn.addEventListener('click', () => { const o = sheet.classList.toggle('open'); sbtn.innerHTML = o ? 'Close sheet <i>↑</i>' : 'Open sheet <i>→</i>'; });
+
+
+/* ====================== EDUCATION ====================== */
+const CERTS = [
+  { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F', skills:['3D Modeling','SOLIDWORKS','CAD'] },
+  { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:null, skills:['MATLAB','Data Analysis','Data Visualization'] },
+  { name:'Rocket Science 101 Specialization', by:'University of Michigan · Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', skills:['Orbital Mechanics','Propulsion','Aerospace Engineering'] },
+  { name:'SAT', by:'College Board', date:'Dec 2024', id:null, skills:['Advanced Mathematics','Data Analysis','Expression of Ideas'] },
+  { name:'DELF B2', by:'Institut français du Liban', date:'Dec 2024', id:null, skills:['French','Written Communication','Reading Comprehension'] }
+];
+document.getElementById('certs').innerHTML = CERTS.map((c,i)=>`
+  <article class="cert">
+    <div class="cert__top"><span class="cert__n">${pad(i+1)}</span><span class="badge2">Issued ${c.date}</span></div>
+    <h3>${c.name}</h3><div class="cert__by">${c.by}</div>
+    ${c.id?`<div class="cert__id">Credential ID <b>${c.id}</b></div>`:''}
+    <div class="chips">${c.skills.map(k=>`<span class="chip">${k}</span>`).join('')}</div>
+    <a class="cert__link" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">Show credential <i>↗</i></a>
+  </article>`).join('');
+document.getElementById('certs').addEventListener('pointermove', e => { const c = e.target.closest('.cert'); if (!c) return; const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+const pathEl = document.getElementById('path');
+function fillPath(){ if (!document.getElementById('education').classList.contains('is-on')) return; const r = pathEl.getBoundingClientRect(); const p = Math.max(0, Math.min(1, (innerHeight * .7 - r.top) / r.height)); pathEl.style.setProperty('--fill', (p * 100).toFixed(1) + '%'); }
+addEventListener('scroll', fillPath, { passive: true }); addEventListener('hashchange', () => setTimeout(fillPath, 300)); setTimeout(fillPath, 400);
 
 /* ====================== CALCULUS READER ====================== */
 const PAGES = 34;
