@@ -1222,8 +1222,7 @@ const HL = [
   { cat:'Certification', t:'Rocket Science 101', href:'#cert-rocket', img:'certs/rocket.jpg' },
   { cat:'Certification', t:'SOLIDWORKS 3D CAD', href:'#cert-solidworks', img:'certs/solidworks.jpg' },
   { cat:'Project', t:'A book on classical physics', href:'#projects', art:'book' },
-  { cat:'Guide', t:'Calculus, handwritten and digitised', href:'#guides', img:'calculus/p01.jpg', top:1 },
-  { cat:'About', t:'About me', href:'#about', img:'img/adam.jpg', top:1 }
+  { cat:'Guide', t:'Calculus, handwritten and digitised', href:'#guides', img:'calculus/p01.jpg', top:1 }
 ];
 const arc = $('arc'), arcTrack = $('arcTrack'), NH = HL.length;
 arcTrack.innerHTML = HL.map((h, i) => `<li class="ac" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${NH}"><a href="${h.href}" draggable="false"><span class="ac-img">${h.img ? `<img src="${h.img}" alt=""${h.top ? ' class="top"' : ''} draggable="false">` : uniq(ART2[h.art]()).replace('xMidYMid slice', 'xMidYMid meet')}</span><span class="ac-tx"><span class="ac-meta"><b>${pad2(i + 1)}</b><span>${h.cat}</span></span><span class="ac-t">${h.t}</span></span></a></li>`).join('');
