@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adam El Sakka, electrical engineering student</title>
 <meta name="description" content="Adam El Sakka, electrical energy and control engineering student at Université Grenoble Alpes.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/archivo-var.woff" as="font" type="font/woff" crossorigin>
 <style>
+/* Self-hosted fonts (SIL Open Font License, see fonts/OFL-*.txt). No requests to Google. */
+@font-face{font-family:"Archivo";src:url("fonts/archivo-var.woff") format("woff");font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:"Archivo";src:url("fonts/archivo-var-italic.woff") format("woff");font-weight:100 900;font-stretch:62% 125%;font-style:italic;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
 :root{
   --paper:#ffffff; --panel:#f4f7fb; --grid:#e3eaf4; --rule:#d3dceb;
   --ink:#0b1b33; --slate:#4b5b73; --mute:#73829a;
@@ -640,7 +643,7 @@ footer a{font-weight:600;color:var(--ink)}
 
 </main>
 
-<footer><div class="wrap"><span>Adam El Sakka, Grenoble, France</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
+<footer><div class="wrap"><span>Adam El Sakka, Grenoble, France. This site sets no cookies and uses no analytics or tracking.</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
 <div class="toast" id="toast" role="status"></div>
 <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Calculus notes" hidden>
   <div class="r-top">

@@ -13,3 +13,6 @@ A static site with no build step: open `index.html` in a browser, or host it as-
 - **Guides**: handwritten calculus notes (34 pages) in an in-page reader
 
 `calculus/` holds the note pages (`pNN.jpg`) and thumbnails (`tNN.jpg`).
+
+## Privacy
+The site makes no requests to third-party servers: fonts (Archivo and IBM Plex Mono, SIL Open Font License, see `fonts/`) are self-hosted. It sets no cookies and uses no analytics, tracking or session replay.
