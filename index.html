@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adam El Sakka, electrical engineering student</title>
-<meta name="description" content="Portfolio of Adam El Sakka, electrical energy and control engineering student at Université Grenoble Alpes.">
+<meta name="description" content="Adam El Sakka, electrical energy and control engineering student at Université Grenoble Alpes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,296 +15,279 @@
   --signal:#ffb000; --signal-soft:#fff4d6;
   --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --ease:cubic-bezier(.2,.7,.2,1);
-  --edge:clamp(20px,4vw,56px);
-  --max:1240px;
+  --ease:cubic-bezier(.2,.7,.2,1); --spring:cubic-bezier(.34,1.4,.5,1);
+  --edge:clamp(20px,4vw,56px); --max:1240px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;font-variation-settings:"wdth" 100;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 button{font:inherit;color:inherit}
-img{display:block;max-width:100%}
 ::selection{background:var(--signal);color:var(--ink)}
 :focus-visible{outline:2.5px solid var(--ink);outline-offset:3px;border-radius:2px}
 .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--edge)}
-.wide{font-variation-settings:"wdth" 125}
-.mono{font-family:var(--mono)}
+.gridbg{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px}
 
 /* ---------- header ---------- */
-.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-.top .wrap{display:flex;align-items:center;gap:28px;height:68px}
-.mark{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;font-size:17px;font-variation-settings:"wdth" 112;letter-spacing:-.005em;margin-right:auto}
-.mark svg{width:26px;height:26px;flex:none}
-.nav{display:flex;gap:6px}
-.nav a{position:relative;padding:8px 12px;text-decoration:none;font-size:15.5px;font-weight:500;color:var(--slate);transition:color .2s}
-.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:6px;background:var(--signal);z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
-.nav a:hover{color:var(--ink)}
-.nav a.on{color:var(--ink)}
-.nav a.on::after,.nav a:hover::after{transform:scaleX(1)}
-.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:6px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;text-decoration:none;font-size:15px;font-weight:600;cursor:pointer;transition:background-color .2s,color .2s,transform .15s}
-.btn:hover{background:#1b3359}
-.btn:active{transform:translateY(1px)}
-.btn svg{width:17px;height:17px;flex:none}
-.btn.sig{background:var(--signal);border-color:var(--signal);color:var(--ink)}
-.btn.sig:hover{background:#ffc233}
-.btn.line{background:transparent;color:var(--ink)}
-.btn.line:hover{background:var(--panel)}
+.top{position:fixed;top:0;left:0;right:0;z-index:40;transition:background-color .3s,border-color .3s;border-bottom:1px solid transparent}
+.top.solid{background:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.prog{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--signal);transform-origin:0 50%;transform:scaleX(0)}
+.mark{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:700;font-size:17px;font-variation-settings:"wdth" 112;margin-right:auto}
+.mark svg{width:24px;height:24px}
+.nav{display:flex;gap:2px}
+.nav a{position:relative;padding:8px 12px;text-decoration:none;font-size:15px;font-weight:500;color:var(--slate);transition:color .2s}
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:6px;background:var(--signal);z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav a:hover,.nav a.on{color:var(--ink)}
+.nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:7px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;text-decoration:none;font-size:15px;font-weight:600;cursor:pointer;transition:background-color .2s,color .2s,box-shadow .25s,transform .2s var(--ease);will-change:transform}
+.btn:hover{box-shadow:4px 4px 0 var(--signal)}
+.btn.sig{background:var(--signal);border-color:var(--ink);color:var(--ink)}
+.btn.sig:hover{box-shadow:4px 4px 0 var(--ink)}
+.btn.line{background:#fff;color:var(--ink)}
 .btn.sm{height:40px;padding:0 16px;font-size:14.5px}
-.burger{display:none;width:44px;height:44px;border:1.5px solid var(--ink);border-radius:6px;background:#fff;cursor:pointer;position:relative}
-.burger i{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .3s var(--ease)}
-.burger i:nth-child(1){top:15px}.burger i:nth-child(2){top:25px}
-.open .burger i:nth-child(1){transform:translateY(5px) rotate(45deg)}
-.open .burger i:nth-child(2){transform:translateY(-5px) rotate(-45deg)}
-@media (max-width:760px){
-  .top .btn{display:none}
-  .burger{display:block}
-  .nav{position:fixed;left:0;right:0;top:68px;flex-direction:column;gap:0;padding:8px var(--edge) 20px;background:#fff;border-bottom:1px solid var(--rule);transform:translateY(-8px);opacity:0;visibility:hidden;transition:all .25s var(--ease)}
-  .open .nav{transform:none;opacity:1;visibility:visible}
-  .nav a{font-size:20px;padding:14px 0;border-bottom:1px solid var(--grid)}
-  .nav a::after{display:none}
-  .nav a.on{text-decoration:underline;text-decoration-color:var(--signal);text-decoration-thickness:4px;text-underline-offset:6px}
-}
+.btn svg{width:17px;height:17px}
+@media (max-width:820px){.nav{display:none}}
 
-/* ---------- views ---------- */
-main{flex:1 0 auto}
-.view{display:none}
-.view.on{display:block;animation:in .45s var(--ease)}
-@keyframes in{from{opacity:0}}
+/* ---------- hero ---------- */
+.hero{position:relative;padding-top:112px;padding-bottom:clamp(48px,6vw,88px);border-bottom:1px solid var(--rule)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(600px circle at var(--hx,50%) var(--hy,30%),rgba(255,176,0,.10),transparent 60%)}
+.kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font-size:15.5px;color:var(--slate)}
+.live{display:inline-flex;align-items:center;gap:8px;padding:4px 11px 4px 9px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;font-size:13.5px;font-weight:600;color:var(--ink)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 0 rgba(255,176,0,.7);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(255,176,0,0)}100%{box-shadow:0 0 0 0 rgba(255,176,0,0)}}
+.name-wrap{overflow:hidden;padding-bottom:.06em}
+.name{margin:18px 0 6px;font-weight:850;font-variation-settings:"wdth" 118;letter-spacing:-.035em;line-height:.88;white-space:nowrap}
+.name .ln{display:inline-block;white-space:nowrap}
+.name .ch{display:inline-block;transform:translateY(105%);opacity:0;animation:rise .9s var(--spring) forwards;animation-delay:calc(.15s + var(--i) * 45ms)}
+.name .gap{display:inline-block;width:.24em}
+@keyframes rise{to{transform:none;opacity:1}}
+.hero-row{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:clamp(20px,3vw,36px)}
+.intro p{font-size:clamp(1.05rem,1.4vw,1.22rem);line-height:1.6;color:var(--slate);max-width:28em}
+.intro p strong{color:var(--ink);font-weight:600}
+.intro .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:36px;border:1.5px solid var(--ink);background:#fff}
+.stats div{padding:14px 16px;border-left:1px solid var(--rule)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font-size:30px;font-weight:800;font-variation-settings:"wdth" 120;line-height:1}
+.stats span{font-size:13.5px;color:var(--slate)}
+.fade-up{opacity:0;transform:translateY(16px);animation:fu .8s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes fu{to{opacity:1;transform:none}}
+@media (max-width:1080px){.hero-row{grid-template-columns:1fr}.intro p{max-width:40em}}
 
-/* sheet head: every page opens like a drawing sheet */
-.sheet{position:relative;border-bottom:1px solid var(--rule);background-color:var(--paper);
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px}
-.sheet .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;padding-top:clamp(48px,7vw,88px);padding-bottom:clamp(32px,4vw,48px)}
-.sheet h1{font-size:clamp(44px,7vw,92px);line-height:.95;font-weight:800;font-variation-settings:"wdth" 125;letter-spacing:-.02em}
-.sheet p{margin-top:18px;max-width:38em;color:var(--slate);font-size:clamp(1rem,1.25vw,1.15rem)}
-.tblock{display:grid;grid-template-columns:auto auto;border:1.5px solid var(--ink);background:#fff;font-size:13px;min-width:250px}
-.tblock div{padding:7px 12px;border-top:1px solid var(--rule)}
-.tblock div:nth-child(-n+2){border-top:0}
-.tblock div:nth-child(odd){color:var(--mute);border-right:1px solid var(--rule)}
-.tblock div:nth-child(even){font-weight:600}
-@media (max-width:760px){.sheet .wrap{grid-template-columns:1fr}.tblock{justify-self:start}}
-
-section.block{padding:clamp(56px,8vw,104px) 0}
-section.block+section.block{border-top:1px solid var(--rule)}
-.h2{font-size:clamp(28px,3.4vw,42px);line-height:1.08;font-weight:750;font-variation-settings:"wdth" 118;letter-spacing:-.015em}
-.lead{color:var(--slate);max-width:40em;margin-top:12px;font-size:1.06rem}
-.head-row{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 32px;margin-bottom:clamp(28px,4vw,44px)}
-.textlink{font-weight:600;text-decoration:underline;text-decoration-color:var(--signal);text-decoration-thickness:3px;text-underline-offset:5px;transition:text-decoration-thickness .2s}
-.textlink:hover{text-decoration-thickness:6px}
-
-/* ---------- home ---------- */
-.hero{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px;border-bottom:1px solid var(--rule)}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center;padding-top:clamp(40px,7vw,96px);padding-bottom:clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(52px,8.4vw,118px);line-height:.9;font-weight:850;font-variation-settings:"wdth" 125;letter-spacing:-.03em}
-.hero h1 span{display:block}
-.hero p{margin-top:26px;font-size:clamp(1.08rem,1.5vw,1.3rem);line-height:1.55;color:var(--slate);max-width:30em}
-.hero p strong{color:var(--ink);font-weight:600}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.drawing{position:relative;background:#fff;border:1.5px solid var(--ink)}
-.drawing svg{display:block;width:100%;height:auto}
-.drawing .cap{display:grid;grid-template-columns:1fr auto;border-top:1.5px solid var(--ink);font-size:13px}
-.drawing .cap div{padding:8px 12px}
-.drawing .cap div+div{border-left:1px solid var(--rule);color:var(--mute)}
-.wire{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.comp{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.lbl{font-family:var(--mono);font-size:15px;fill:var(--ink)}
-.lbl.m{fill:var(--mute);font-size:13px}
-.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
-.go .draw{animation:draw 1.3s var(--ease) forwards;animation-delay:var(--d,0s)}
+/* lab */
+.lab{border:1.5px solid var(--ink);background:#fff;box-shadow:8px 8px 0 var(--ink)}
+.lab-head{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1.5px solid var(--ink);font-size:14px}
+.lab-head b{font-weight:650}
+.lab-head .dots{display:flex;gap:6px;margin-right:4px}
+.lab-head .dots i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink)}
+.lab-head .dots i:first-child{background:var(--signal)}
+.lab-head span:last-child{margin-left:auto;color:var(--mute);font-size:13px}
+.lab-body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.circuit{border-right:1px solid var(--rule);background:#fff;display:flex;align-items:center}
+.circuit svg{display:block;width:100%;height:auto;padding:6px 4px}
+.wire{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.1s var(--ease) forwards;animation-delay:var(--d,0s)}
 @keyframes draw{to{stroke-dashoffset:0}}
-.fadein{opacity:0}
-.go .fadein{animation:fade .6s ease forwards;animation-delay:var(--d,0s)}
-@keyframes fade{to{opacity:1}}
+.pop{opacity:0;animation:pop .5s ease forwards;animation-delay:var(--d,0s)}
+@keyframes pop{to{opacity:1}}
+.lbl{font-family:var(--mono);font-size:17px;font-weight:500;fill:var(--ink)}
+.lbl.m{fill:var(--mute);font-size:14px;font-weight:400}
+.hot{cursor:pointer;outline:none}
+.hot:hover .wire,.hot:focus-visible .wire{stroke:#2a4a7a;stroke-width:3.4}
+.sidepanel{display:flex;flex-direction:column}
+.scope{position:relative;background:#0b1b33;margin:12px;border-radius:6px;overflow:hidden}
+.scope canvas{display:block;width:100%;height:190px}
+.scope .leg{position:absolute;left:10px;top:8px;display:flex;gap:12px;font-family:var(--mono);font-size:11.5px;color:#c9d4e6}
+.scope .leg i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px;background:var(--signal)}
+.scope .leg i.c{background:#7fb0ff}
+.ctrl{padding:4px 14px 14px;display:grid;gap:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);border-radius:7px;overflow:hidden}
+.seg button{height:42px;border:0;background:#fff;font-weight:600;font-size:14.5px;cursor:pointer;transition:background-color .2s}
+.seg button+button{border-left:1.5px solid var(--ink)}
+.seg button.on{background:var(--signal)}
+.seg button:hover:not(.on){background:var(--panel)}
+.sl{display:grid;grid-template-columns:20px 1fr 76px;align-items:center;gap:10px;font-size:14px}
+.sl b{font-family:var(--mono);font-weight:500}
+.sl output{font-family:var(--mono);font-size:13.5px;text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--grid);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--signal);border:2px solid var(--ink);transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--signal);border:2px solid var(--ink)}
+.reads{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:auto}
+.reads div{padding:10px 14px;border-left:1px solid var(--rule)}
+.reads div:first-child{border-left:0}
+.reads small{display:block;font-size:12.5px;color:var(--mute)}
+.reads b{font-family:var(--mono);font-weight:500;font-size:15px}
+.lab-foot{padding:9px 14px;border-top:1.5px solid var(--ink);font-size:13.5px;color:var(--slate)}
+@media (max-width:640px){.lab-body{grid-template-columns:1fr}.circuit{border-right:0;border-bottom:1px solid var(--rule)}.lab{box-shadow:5px 5px 0 var(--ink)}.lab-head span:last-child{display:none}}
 
-.facts{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink);background:#fff}
-.facts div{padding:16px 18px;border-left:1px solid var(--rule)}
-.facts div:first-child{border-left:0}
-.facts small{display:block;font-size:13px;color:var(--mute)}
-.facts b{display:block;font-weight:600;font-size:15.5px;line-height:1.35;margin-top:4px}
-@media (max-width:860px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--rule)}}
+/* ---------- sections ---------- */
+.sec{padding:clamp(72px,10vw,136px) 0;border-bottom:1px solid var(--rule);position:relative}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 48px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head h2{font-size:clamp(40px,6vw,80px);line-height:.92;font-weight:850;font-variation-settings:"wdth" 120;letter-spacing:-.03em}
+.sec-head p{color:var(--slate);max-width:32em;font-size:1.06rem}
+.num{display:block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--mute);letter-spacing:0;margin-bottom:12px}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr}}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.split .w>span{display:inline-block;transform:translateY(105%);transition:transform .9s var(--spring);transition-delay:calc(var(--i) * 70ms)}
+.split.in .w>span{transform:none}
+.tag{display:inline-block;font-size:13.5px;padding:4px 10px;border-radius:5px;background:var(--panel);border:1px solid var(--grid);color:var(--slate);transition:background-color .2s,border-color .2s,color .2s,transform .2s}
+.tag:hover{background:var(--signal-soft);border-color:var(--signal);color:var(--ink);transform:translateY(-2px)}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
 
-.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px)}
-.about .body p{color:var(--slate);margin-bottom:18px;max-width:38em}
-.about .body p:first-child{color:var(--ink);font-size:1.22rem;line-height:1.5}
-.index{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--ink)}
-.index a{display:flex;flex-direction:column;gap:10px;min-height:250px;padding:26px 24px 22px;text-decoration:none;border-left:1px solid var(--rule);transition:background-color .2s}
-.index a:first-child{border-left:0}
-.index a:hover{background:var(--signal-soft)}
-.index .sh{font-size:13px;color:var(--mute)}
-.index h3{font-size:26px;font-weight:750;font-variation-settings:"wdth" 120;letter-spacing:-.01em;line-height:1.1}
-.index p{color:var(--slate);font-size:15.5px}
-.index .go-l{margin-top:auto;font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
-.index .go-l svg{width:16px;height:16px;transition:transform .25s var(--ease)}
-.index a:hover .go-l svg{transform:translateX(4px)}
-.talk{background:var(--signal)}
-.talk .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;padding-top:clamp(48px,6vw,80px);padding-bottom:clamp(48px,6vw,80px)}
-.talk h2{font-size:clamp(30px,4vw,52px);line-height:1.02;font-weight:800;font-variation-settings:"wdth" 122;letter-spacing:-.02em;max-width:16em}
-.talk p{margin-top:12px;max-width:34em}
-.talk .ctas{display:flex;flex-wrap:wrap;gap:10px}
-.talk .btn.line:hover{background:rgba(255,255,255,.35)}
-@media (max-width:860px){.hero .wrap,.about{grid-template-columns:1fr}.index{grid-template-columns:1fr}.index a{border-left:0;border-top:1px solid var(--rule);min-height:0}.index a:first-child{border-top:0}.talk .wrap{grid-template-columns:1fr}}
+/* experience */
+.gantt{border:1.5px solid var(--ink);background:#fff;margin-bottom:28px}
+.g-axis,.g-row{display:grid;grid-template-columns:180px minmax(0,1fr)}
+.g-axis{border-bottom:1px solid var(--rule)}
+.g-axis>div:first-child,.g-row .g-l{padding:12px 16px;border-right:1px solid var(--rule)}
+.g-axis>div:first-child{font-size:13px;color:var(--mute)}
+.months{display:grid;grid-template-columns:repeat(12,1fr)}
+.months span{font-size:12.5px;color:var(--mute);padding:12px 0 12px 8px;border-left:1px solid var(--grid)}
+.months span:first-child{border-left:0}
+.months span.y{color:var(--ink);font-weight:600}
+.g-row{border-top:1px solid var(--grid);cursor:pointer;transition:background-color .2s}
+.g-row:hover,.g-row.hl{background:var(--signal-soft)}
+.g-l{font-weight:600;font-size:15px}
+.g-l small{display:block;font-weight:400;color:var(--mute);font-size:13px}
+.g-track{position:relative;background-image:linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:calc(100% / 12) 100%}
+.g-bar{position:absolute;top:50%;height:26px;margin-top:-13px;left:calc(var(--s) / 12 * 100%);width:0;background:var(--signal);border:1.5px solid var(--ink);border-radius:4px;transition:width 1.4s var(--ease);transition-delay:var(--d,0s);overflow:hidden}
+.gantt.in .g-bar{width:calc(var(--n) / 12 * 100%)}
+.g-bar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 8px,rgba(11,27,51,.12) 8px 10px);background-size:28px 28px;animation:slide 1.2s linear infinite}
+@keyframes slide{to{background-position:28px 0}}
+.g-bar span{position:relative;z-index:1;display:block;padding:0 10px;line-height:23px;font-size:13px;font-weight:600;white-space:nowrap}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.role{position:relative;padding:28px 26px 24px;border:1.5px solid var(--ink);background:#fff;overflow:hidden}
+.role.rv.in{transition:opacity .9s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
+.role::before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),rgba(255,176,0,.16),transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none}
+.role.in:hover,.role.in.hl{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+.role:hover::before{opacity:1}
+.role .when{font-size:14px;color:var(--mute)}
+.role h3{font-size:clamp(24px,2.6vw,32px);font-weight:780;font-variation-settings:"wdth" 116;letter-spacing:-.015em;line-height:1.08;margin:6px 0 4px}
+.role .org{font-weight:550;font-size:15px}
+.role p{color:var(--slate);margin:14px 0 18px;font-size:15.5px}
+@media (max-width:820px){.roles{grid-template-columns:1fr}.g-axis,.g-row{grid-template-columns:110px minmax(0,1fr)}.months span{font-size:0;padding:10px 0}.months span.y{font-size:11px;padding-left:4px}}
 
-/* ---------- projects ---------- */
-.proj{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(24px,5vw,72px);align-items:start;padding:clamp(40px,6vw,72px) 0;border-top:1px solid var(--rule)}
-.proj:first-child{border-top:0;padding-top:0}
-.fig{border:1.5px solid var(--ink);background:#fff}
-.fig svg{display:block;width:100%;height:auto;aspect-ratio:3/2}
-.fig figcaption{padding:8px 12px;border-top:1px solid var(--rule);font-size:13px;color:var(--mute);display:flex;justify-content:space-between;gap:12px}
-.proj .when{font-size:14.5px;color:var(--mute)}
-.proj h2{font-size:clamp(28px,3vw,40px);font-weight:750;font-variation-settings:"wdth" 118;line-height:1.08;letter-spacing:-.015em;margin:6px 0 16px}
-.proj p{color:var(--slate);margin-bottom:14px;max-width:36em}
-.proj .tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
-.tag{font-size:13.5px;padding:4px 10px;border-radius:4px;background:var(--panel);border:1px solid var(--grid);color:var(--slate)}
-@media (max-width:860px){.proj{grid-template-columns:1fr}}
-
-/* ---------- guides ---------- */
-.notes{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center}
-.stack{position:relative;display:block;width:100%;aspect-ratio:1/1;border:0;background:var(--panel);cursor:pointer;overflow:hidden;
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
-.stack img{position:absolute;left:50%;top:50%;width:52%;aspect-ratio:1240/1755;object-fit:cover;border:1px solid var(--rule);box-shadow:0 18px 30px -18px rgba(11,27,51,.45);transition:transform .5s var(--ease)}
-.stack img:nth-child(1){transform:translate(-50%,-50%) translate(40px,6px) rotate(7deg)}
-.stack img:nth-child(2){transform:translate(-50%,-50%) translate(20px,3px) rotate(3.5deg)}
-.stack img:nth-child(3){transform:translate(-50%,-50%) rotate(-2deg)}
-.stack:hover img:nth-child(1){transform:translate(-50%,-50%) translate(78px,10px) rotate(11deg)}
-.stack:hover img:nth-child(2){transform:translate(-50%,-50%) translate(40px,5px) rotate(6deg)}
-.stack:hover img:nth-child(3){transform:translate(-50%,-50%) translate(-14px,-4px) rotate(-4deg)}
-.chap{width:100%;border-collapse:collapse;margin:22px 0 26px;font-size:15.5px}
-.chap td{padding:10px 0;border-top:1px solid var(--rule)}
-.chap tr:last-child td{border-bottom:1px solid var(--rule)}
-.chap td:first-child{width:36px;color:var(--mute);font-family:var(--mono);font-size:13.5px}
-.chap td:last-child{text-align:right;color:var(--mute);font-size:14px}
-.chap button{border:0;background:none;padding:0;cursor:pointer;font-weight:500;text-align:left;text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:3px;text-underline-offset:4px;transition:text-decoration-color .2s}
-.chap button:hover{text-decoration-color:var(--signal)}
-@media (max-width:860px){.notes{grid-template-columns:1fr}.stack{aspect-ratio:4/3}}
-
-.acc{border-top:1.5px solid var(--ink)}
-.acc>li{list-style:none;border-bottom:1px solid var(--rule)}
-.acc-h{display:grid;grid-template-columns:44px minmax(0,1fr) auto 28px;align-items:center;gap:16px;width:100%;padding:22px 4px;border:0;background:none;text-align:left;cursor:pointer;transition:background-color .2s}
-.acc-h:hover{background:var(--panel)}
-.acc-h .n{font-family:var(--mono);font-size:14px;color:var(--mute)}
-.acc-h .t{font-size:clamp(1.15rem,1.6vw,1.4rem);font-weight:650;font-variation-settings:"wdth" 110;letter-spacing:-.01em}
-.acc-h .t small{display:block;font-size:14.5px;font-weight:400;color:var(--slate);font-variation-settings:"wdth" 100;letter-spacing:0;margin-top:2px}
-.lvl{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--slate);white-space:nowrap}
-.lvl i{display:inline-flex;gap:3px}
-.lvl s{display:block;width:14px;height:6px;border:1.5px solid var(--ink);border-radius:1px}
-.lvl s.f{background:var(--signal)}
-.chev{width:28px;height:28px;display:grid;place-items:center;border:1.5px solid var(--ink);border-radius:50%;transition:transform .3s var(--ease),background-color .2s}
-.chev svg{width:12px;height:12px}
-li.open .chev{transform:rotate(180deg);background:var(--signal)}
-.acc-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
-li.open .acc-b{grid-template-rows:1fr}
-.acc-b>div{overflow:hidden}
-.acc-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);padding:6px 4px 36px 64px}
-.acc-in p{color:var(--slate);margin-bottom:18px}
-.acc-in h4{font-size:14px;font-weight:650;margin:20px 0 6px}
-.acc-in ul,.acc-in ol{padding-left:20px;color:var(--slate);font-size:15.5px}
-.acc-in li{margin:5px 0}
-.acc-in ol li::marker{font-family:var(--mono);font-size:13px;color:var(--mute)}
-.acc-in code{font-family:var(--mono);font-size:.88em;background:var(--panel);border:1px solid var(--grid);padding:0 5px;border-radius:3px}
-.code{border:1.5px solid var(--ink);background:#fbfcfe;min-width:0}
-.code-h{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:13px}
-.code-h button{margin-left:auto}
-.code pre{margin:0;padding:14px 0;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.7;max-height:460px}
-.code .ln{display:block;padding:0 16px;white-space:pre}
-.code .ln::before{content:attr(data-n);display:inline-block;width:2em;margin-right:14px;text-align:right;color:#a9b5c7;user-select:none}
-.tk-c{color:#6f8a5b}.tk-s{color:#a0522d}.tk-k{color:#1f5fd1;font-weight:500}.tk-n{color:#8a3fb8}
-@media (max-width:860px){.acc-in{grid-template-columns:1fr;padding-left:4px}.acc-h{grid-template-columns:32px minmax(0,1fr) 28px}.acc-h .lvl{display:none}}
-
-.formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));border:1.5px solid var(--ink)}
-.formula>div{padding:22px 24px;border-left:1px solid var(--rule);border-top:1px solid var(--rule);margin:-1px 0 0 -1px}
-.formula h3{font-size:16px;font-weight:700;margin-bottom:10px;font-variation-settings:"wdth" 112}
-.formula dl{display:grid;grid-template-columns:auto 1fr;gap:9px 18px;align-items:baseline}
-.formula dt{font-family:var(--mono);font-size:14.5px;white-space:nowrap}
-.formula dd{font-size:14.5px;color:var(--slate)}
-
-/* ---------- education ---------- */
-.path{list-style:none;position:relative}
-.path::before{content:"";position:absolute;left:clamp(130px,16vw,190px);top:10px;bottom:10px;width:2px;background:var(--ink)}
-.stop{display:grid;grid-template-columns:clamp(130px,16vw,190px) minmax(0,1fr);position:relative;padding-bottom:clamp(36px,5vw,56px)}
+/* education */
+.path{position:relative;list-style:none;--x:clamp(140px,17vw,200px)}
+.path .rail,.path .fill{position:absolute;left:var(--x);top:0;width:3px;margin-left:-1.5px}
+.path .rail{bottom:0;background:var(--rule)}
+.path .fill{height:0;background:var(--ink)}
+.path .spark{position:absolute;left:var(--x);top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--signal);border:2px solid var(--ink);box-shadow:0 0 0 6px rgba(255,176,0,.25),0 0 24px rgba(255,176,0,.9);opacity:0;transition:opacity .3s;z-index:2}
+.stop{position:relative;display:grid;grid-template-columns:var(--x) minmax(0,1fr);padding-bottom:clamp(48px,6vw,80px)}
 .stop:last-child{padding-bottom:0}
-.stop .d{padding-right:28px;font-size:14.5px;color:var(--slate);line-height:1.45}
-.stop .d b{display:block;color:var(--ink);font-weight:650}
-.stop .dot{position:absolute;left:clamp(130px,16vw,190px);top:4px;width:16px;height:16px;margin-left:-7px;border:2px solid var(--ink);background:#fff;border-radius:50%}
-.stop.now .dot{background:var(--signal)}
-.stop .b{padding-left:clamp(24px,4vw,48px)}
-.stop .st{display:inline-block;font-size:13px;font-weight:600;padding:2px 9px;border-radius:4px;border:1.5px solid var(--ink)}
-.stop.now .st{background:var(--signal);border-color:var(--signal)}
-.stop h3{font-size:clamp(24px,2.8vw,34px);font-weight:750;font-variation-settings:"wdth" 118;line-height:1.1;letter-spacing:-.01em;margin:10px 0 4px}
-.stop .deg{font-weight:550}
+.stop .d{padding-right:30px;text-align:right;font-size:14.5px;color:var(--mute);line-height:1.45;transition:color .4s}
+.stop .d b{display:block;font-size:clamp(18px,1.8vw,22px);font-weight:750;color:var(--mute);font-variation-settings:"wdth" 115;transition:color .4s}
+.stop.on .d,.stop.on .d b{color:var(--ink)}
+.stop .dot{position:absolute;left:var(--x);top:6px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#fff;border:2px solid var(--rule);transition:all .5s var(--spring);z-index:1}
+.stop.on .dot{border-color:var(--ink);background:var(--ink);transform:scale(1.1)}
+.stop.now.on .dot{background:var(--signal);box-shadow:0 0 0 7px rgba(255,176,0,.25)}
+.stop .b{padding-left:clamp(28px,4vw,56px);opacity:.3;transform:translateX(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.stop.on .b{opacity:1;transform:none}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:3px 10px;border-radius:5px;border:1.5px solid var(--ink);background:#fff}
+.badge.y{background:var(--signal)}
+.badge.y::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+.stop h3{font-size:clamp(28px,3.4vw,46px);font-weight:820;font-variation-settings:"wdth" 118;line-height:1;letter-spacing:-.02em;margin:12px 0 8px}
+.stop.mini h3{font-size:clamp(22px,2.4vw,30px)}
+.stop .deg{font-weight:550;font-size:16.5px}
 .stop .deg small{display:block;font-weight:400;color:var(--mute);font-size:14.5px}
-.stop p{color:var(--slate);margin-top:12px;max-width:42em}
-.stop .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.stop.small h3{font-size:clamp(20px,2vw,24px)}
-@media (max-width:700px){.path::before,.stop .dot{left:7px}.stop{grid-template-columns:1fr;padding-left:32px}.stop .b{padding-left:0}.stop .d{padding:0 0 6px}}
+.stop p{color:var(--slate);margin:14px 0 14px;max-width:44em}
+.stop summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:15px;list-style:none;padding:6px 0;text-decoration:underline;text-decoration-color:var(--signal);text-decoration-thickness:3px;text-underline-offset:5px}
+.stop summary::-webkit-details-marker{display:none}
+.stop summary svg{width:12px;height:12px;transition:transform .3s var(--ease)}
+.stop details[open] summary svg{transform:rotate(180deg)}
+.stop details .tags{margin-top:12px}
+.stop details[open] .tag{animation:tagin .45s var(--spring) both;animation-delay:calc(var(--i) * 30ms)}
+@keyframes tagin{from{opacity:0;transform:translateY(8px) scale(.95)}}
+@media (max-width:700px){.path{--x:10px}.stop{grid-template-columns:1fr;padding-left:34px}.stop .d{text-align:left;padding:0 0 8px}.stop .b{padding-left:0}}
 
-.table{width:100%;border-collapse:collapse;border:1.5px solid var(--ink);font-size:15.5px}
-.table th{text-align:left;font-weight:600;font-size:13.5px;color:var(--slate);background:var(--panel);padding:10px 14px;border-bottom:1.5px solid var(--ink)}
-.table td{padding:16px 14px;border-top:1px solid var(--rule);vertical-align:top}
-.table td:first-child b{display:block;font-weight:650}
-.table td:first-child span{font-size:14px;color:var(--mute)}
-.table .id{font-family:var(--mono);font-size:13.5px}
-.table a{font-weight:600;font-size:14.5px;white-space:nowrap}
-@media (max-width:760px){
-  .table thead{display:none}
-  .table,.table tbody,.table tr,.table td{display:block;width:100%}
-  .table tr{border-top:1px solid var(--rule);padding:14px}
-  .table tr:first-child{border-top:0}
-  .table td{border:0;padding:2px 0}
-  .table td[data-l]::before{content:attr(data-l) ": ";color:var(--mute)}
-}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(32px,6vw,96px)}
-.langs{border-top:1.5px solid var(--ink)}
-.langs div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule)}
-.langs b{font-size:1.25rem;font-weight:650;font-variation-settings:"wdth" 112}
-.langs span{color:var(--slate);font-size:15px;text-align:right}
-.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 36px;border-top:1.5px solid var(--ink);padding-top:20px}
-.skills h3{font-size:15px;font-weight:650;margin-bottom:8px}
-.skills .tags{display:flex;flex-wrap:wrap;gap:6px}
-@media (max-width:860px){.two{grid-template-columns:1fr}.skills{grid-template-columns:1fr}}
+/* certifications ring */
+.ring-sec{overflow:hidden}
+.cat{--w:clamp(230px,24vw,300px);--h:calc(var(--w) * 1.12)}
+.stage{position:relative;height:calc(var(--h) + 30px);perspective:1400px;perspective-origin:50% 40%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.dragging .stage{cursor:grabbing}
+.ring{list-style:none;position:absolute;left:50%;top:10px;width:0;height:var(--h);transform-style:preserve-3d;transform:translateZ(calc(var(--r,900px) * -1)) rotateY(var(--a,0deg));will-change:transform}
+.slot{position:absolute;left:calc(var(--w) / -2);top:0;width:var(--w);height:var(--h);transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--r,900px));backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.slot.away{pointer-events:none}
+.card{position:relative;display:flex;flex-direction:column;width:100%;height:100%;border:1.5px solid var(--ink);background:#fff;overflow:hidden;cursor:pointer;text-align:left;padding:0;transition:box-shadow .3s}
+.card::after{content:"";position:absolute;inset:0;background:#fff;opacity:calc(var(--dim,0) * .7);pointer-events:none}
+.card .art{display:block;height:56%;border-bottom:1.5px solid var(--ink);overflow:hidden}
+.card .art svg{display:block;width:100%;height:100%}
+.card .cb{flex:1;display:flex;flex-direction:column;padding:14px 16px 16px}
+.card .by{font-size:13px;color:var(--mute)}
+.card h3{font-size:clamp(17px,1.5vw,20px);font-weight:720;font-variation-settings:"wdth" 108;line-height:1.18;letter-spacing:-.01em;margin-top:4px}
+.card .dt{margin-top:auto;font-family:var(--mono);font-size:12.5px;color:var(--slate)}
+.slot.front .card{box-shadow:7px 7px 0 var(--signal)}
+.ring-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px;font-size:14px;color:var(--slate)}
+.ring-bar b{font-family:var(--mono);color:var(--ink);font-weight:500}
+.rbtn{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1.5px solid var(--ink);background:#fff;cursor:pointer;transition:background-color .2s,transform .2s}
+.rbtn:hover{background:var(--signal)}
+.rbtn:active{transform:scale(.92)}
+.rbtn svg{width:16px;height:16px}
+.detail{max-width:760px;margin:34px auto 0;border:1.5px solid var(--ink);background:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center;padding:20px 24px}
+.detail .k{font-size:13px;color:var(--mute)}
+.detail h4{font-size:20px;font-weight:720;font-variation-settings:"wdth" 108;line-height:1.2;margin:2px 0 8px}
+.detail .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--slate);margin-bottom:12px}
+.detail .meta b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.swap{transition:opacity .25s,transform .25s}
+.swap.out{opacity:0;transform:translateY(6px)}
+@media (max-width:640px){.detail{grid-template-columns:1fr}}
 
-/* ---------- footer ---------- */
-footer{border-top:1.5px solid var(--ink);background:var(--panel)}
-footer .wrap{display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:16px 32px;padding-top:24px;padding-bottom:26px;font-size:14.5px}
-footer small{display:block;color:var(--mute);font-size:13px}
-footer a{font-weight:600}
-@media (max-width:760px){footer .wrap{grid-template-columns:1fr 1fr}}
+/* projects */
+.book-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.book-stage{position:relative;display:grid;place-items:center;aspect-ratio:1/1;max-height:560px;border:1.5px solid var(--ink);perspective:1400px;cursor:pointer;background-color:#fff}
+.book{position:relative;width:min(52%,270px);aspect-ratio:3/4;transform-style:preserve-3d;transform:rotateX(var(--rx,8deg)) rotateY(var(--ry,-24deg));transition:transform .5s var(--ease)}
+.book>div{position:absolute;inset:0}
+.thick{transform:translateZ(-22px);background:#fff;border:1.5px solid var(--ink)}
+.pages{background-color:#fff;border:1.5px solid var(--ink);transform:translateZ(-1px);padding:22px 20px;overflow:hidden;background-image:linear-gradient(transparent 27px,var(--grid) 27px);background-size:100% 28px}
+.pages .wr{font-style:italic;font-size:clamp(14px,1.4vw,17px);color:var(--ink);line-height:28px;white-space:pre-wrap}
+.caret{display:inline-block;width:2px;height:17px;background:var(--ink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+.spine{left:-22px!important;width:22px;right:auto!important;background:var(--signal);border:1.5px solid var(--ink);transform-origin:right center;transform:rotateY(-90deg)}
+.cover{transform-origin:left center;transform:translateZ(1px) rotateY(var(--open,0deg));transition:transform .9s var(--ease);background:var(--ink);color:#fff;border:1.5px solid var(--ink);display:flex;flex-direction:column;padding:20px 18px;overflow:hidden}
+.cover::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:16px 16px}
+.cover>*{position:relative}
+.cover .cv-top{font-size:12px;color:#b9c6da;display:flex;justify-content:space-between}
+.cover h3{margin-top:auto;font-size:clamp(26px,3vw,38px);line-height:.92;font-weight:850;font-variation-settings:"wdth" 120;letter-spacing:-.02em}
+.cover h3 span{display:block;color:var(--signal)}
+.cover .au{margin-top:12px;font-size:13px;color:#d6dfec}
+.cover svg{position:absolute;right:-34px;top:34px;width:180px;height:180px}
+.book-stage:hover .book,.book.open{--open:-42deg}
+.book-stage .hint{position:absolute;left:14px;top:12px;font-size:13px;color:var(--mute)}
+.wip h3{font-size:clamp(30px,3.6vw,48px);font-weight:820;font-variation-settings:"wdth" 118;line-height:1;letter-spacing:-.02em;margin:14px 0 14px}
+.wip p{color:var(--slate);margin-bottom:16px;max-width:32em}
+.progress{margin:26px 0 8px;border:1.5px solid var(--ink);height:16px;position:relative;overflow:hidden;background:#fff}
+.progress i{position:absolute;top:0;bottom:0;width:38%;background:repeating-linear-gradient(-45deg,var(--signal) 0 10px,#ffc94d 10px 20px);border-right:1.5px solid var(--ink);border-left:1.5px solid var(--ink);animation:indet 2.4s var(--ease) infinite}
+@keyframes indet{0%{left:-38%}100%{left:100%}}
+.progress-l{display:flex;justify-content:space-between;font-size:13.5px;color:var(--slate);margin-bottom:26px}
+.next-slot{margin-top:24px;padding:18px 20px;border:1.5px dashed var(--mute);color:var(--slate);font-size:15px;display:flex;align-items:center;gap:12px}
+.next-slot svg{width:20px;height:20px;flex:none;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){.book-row{grid-template-columns:1fr}.book-stage{aspect-ratio:4/3}}
 
-/* ---------- reader ---------- */
-.reader{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;background:rgba(11,27,51,.94);color:#fff;opacity:0;transition:opacity .3s var(--ease)}
-.reader[hidden]{display:none}
-.reader.on{opacity:1}
-.r-top{display:flex;align-items:center;gap:16px;padding:12px var(--edge);border-bottom:1px solid rgba(255,255,255,.15)}
-.r-title{min-width:0;flex:1}
-.r-title b{display:block;font-weight:700;font-variation-settings:"wdth" 115;font-size:17px}
-.r-title span{font-size:14px;color:#b6c3d8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-.r-count{font-family:var(--mono);font-size:14px;white-space:nowrap}
-.r-btn{flex:none;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;cursor:pointer;transition:background-color .2s,border-color .2s}
-.r-btn:hover{background:rgba(255,255,255,.12);border-color:#fff}
-.r-btn:disabled{opacity:.25;pointer-events:none}
-.r-btn svg{width:16px;height:16px}
-.r-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,36px);padding:16px var(--edge);touch-action:pan-y}
-.r-page{height:100%;max-width:100%;min-width:0;display:flex;align-items:center;justify-content:center}
-.r-page img{max-height:100%;max-width:100%;background:#fff;box-shadow:0 30px 60px -30px rgba(0,0,0,.8);cursor:zoom-in;transition:opacity .2s}
-.r-page img.fade{opacity:0}
-.r-page.zoom{overflow:auto;align-items:flex-start;justify-content:flex-start}
-.r-page.zoom img{max-width:none;max-height:none;width:min(1240px,180%);cursor:zoom-out}
-.r-bar{height:3px;background:rgba(255,255,255,.15)}
-.r-bar i{display:block;height:100%;width:0;background:var(--signal);transition:width .3s var(--ease)}
-.r-thumbs{display:flex;gap:8px;padding:12px var(--edge) 16px;overflow-x:auto}
-.r-thumbs button{flex:none;width:48px;aspect-ratio:1240/1755;padding:0;border:0;overflow:hidden;cursor:pointer;opacity:.45;background:#223;transition:opacity .2s}
-.r-thumbs button img{width:100%;height:100%;object-fit:cover}
-.r-thumbs button:hover{opacity:.85}
-.r-thumbs button.on{opacity:1;outline:2.5px solid var(--signal);outline-offset:1px}
-@media (max-width:700px){.r-stage>.r-btn{position:absolute;bottom:20px;z-index:2}.r-stage>.r-prev{left:20px}.r-stage>.r-next{right:20px}.r-stage{padding-bottom:84px}}
+/* contact */
+.talk{background:var(--signal);border-bottom:1.5px solid var(--ink);overflow:hidden;position:relative}
+.talk .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(64px,8vw,110px)}
+.talk h2{font-size:clamp(36px,5.2vw,72px);line-height:.95;font-weight:850;font-variation-settings:"wdth" 120;letter-spacing:-.03em;max-width:13em}
+.talk p{margin-top:14px;font-size:1.08rem;max-width:30em}
+.talk .ctas{display:flex;flex-wrap:wrap;gap:10px}
+.talk .btn.line{background:transparent}
+.talk .btn.line:hover{background:#fff}
+.talk svg.wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:120px;opacity:.3;pointer-events:none}
+@media (max-width:860px){.talk .wrap{grid-template-columns:1fr}}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-top:22px;padding-bottom:24px;font-size:14px;color:var(--slate)}
+footer a{font-weight:600;color:var(--ink)}
 
-.toast{position:fixed;left:50%;bottom:24px;z-index:95;transform:translate(-50%,16px);opacity:0;padding:11px 18px;border-radius:6px;background:var(--ink);color:#fff;font-size:14.5px;transition:all .3s var(--ease);pointer-events:none}
+.toast{position:fixed;left:50%;bottom:24px;z-index:95;transform:translate(-50%,16px);opacity:0;padding:11px 18px;border-radius:7px;background:var(--ink);color:#fff;font-size:14.5px;transition:all .3s var(--ease);pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
-  .draw{stroke-dashoffset:0}.fadein{opacity:1}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .rv,.stop .b{opacity:1;transform:none}.name .ch{transform:none;opacity:1}.split .w>span{transform:none}.draw{stroke-dashoffset:0}.pop,.fade-up{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -312,635 +295,532 @@ footer a{font-weight:600}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="mark" href="#home" aria-label="Adam El Sakka, home">
-      <svg viewBox="0 0 26 26" fill="none" stroke="#0b1b33" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M13 2v9"/><path d="M4 11h18"/><path d="M7.5 16h11"/><path d="M11 21h4"/></svg>
+    <a class="mark" href="#home" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0b1b33" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v8"/><path d="M3 10h18"/><path d="M6.5 15h11"/><path d="M10 20h4"/></svg>
       Adam El Sakka
     </a>
-    <nav class="nav" aria-label="Main">
-      <a href="#projects">Projects</a>
-      <a href="#guides">Guides</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#experience">Experience</a>
       <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#projects">Projects</a>
     </nav>
-    <a class="btn sm" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener" data-li-btn>LinkedIn</a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+    <a class="btn sm" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">LinkedIn</a>
   </div>
+  <div class="prog" id="prog"></div>
 </header>
 
 <main>
 
-<!-- ============================ HOME ============================ -->
-<div class="view" id="home" data-view="home">
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <h1><span>Adam</span><span>El Sakka</span></h1>
-        <p>I study <strong>electrical energy and control engineering</strong> at Université Grenoble Alpes. I like physics, space, and explaining hard things simply.</p>
-        <div class="ctas">
-          <a class="btn sig" href="#projects">See my projects</a>
-          <a class="btn line" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">Connect on LinkedIn</a>
+<!-- ============================ HERO ============================ -->
+<section class="hero gridbg" id="home">
+  <div class="wrap">
+    <div class="kick fade-up" style="--d:.05s"><span class="live"><i></i>Studying in Grenoble</span>Electrical energy and control engineering, Université Grenoble Alpes</div>
+    <div class="name-wrap"><h1 class="name" id="name" aria-label="Adam El Sakka"></h1></div>
+
+    <div class="hero-row">
+      <div class="intro">
+        <p class="fade-up" style="--d:.7s">I’m drawn to where <strong>physics, electronics and space technology</strong> meet. I’ve taught physics and maths, I’m writing a book on classical physics, and I like to build things to understand them.</p>
+        <div class="ctas fade-up" style="--d:.85s">
+          <a class="btn sig mag" href="#experience">See my journey</a>
+          <a class="btn line mag" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+        <div class="stats fade-up" style="--d:1s">
+          <div><b data-count="2">0</b><span>universities</span></div>
+          <div><b data-count="5">0</b><span>certifications</span></div>
+          <div><b data-count="3">0</b><span>languages</span></div>
         </div>
       </div>
-      <figure class="drawing" id="drawing" aria-label="Animated drawing of an RC circuit charging">
-        <svg viewBox="0 0 560 520" role="img" aria-hidden="true">
-          <!-- circuit -->
-          <path class="wire draw" style="--d:.1s" d="M90 230 V90 H200"/>
-          <path class="comp draw" style="--d:.5s" d="M200 90 l10 -16 l20 32 l20 -32 l20 32 l20 -32 l10 16"/>
-          <path class="wire draw" style="--d:.8s" d="M300 90 H440 V200"/>
-          <path class="comp draw" style="--d:1.1s" d="M412 200 H468 M412 216 H468"/>
-          <path class="wire draw" style="--d:1.2s" d="M440 216 V330 H90 V246"/>
-          <path class="comp draw" style="--d:1.5s" d="M62 246 H118 M74 230 H106"/>
-          <path class="comp draw" style="--d:1.6s" d="M265 330 V354 M243 354 H287 M251 362 H279 M259 370 H271"/>
-          <circle class="fadein" style="--d:1.7s" cx="440" cy="90" r="4.5" fill="#0b1b33"/>
-          <circle class="fadein" style="--d:1.7s" cx="90" cy="90" r="4.5" fill="#0b1b33"/>
-          <circle class="fadein" style="--d:1.7s" cx="265" cy="330" r="4.5" fill="#0b1b33"/>
-          <text class="lbl fadein" style="--d:1.2s" x="250" y="56" text-anchor="middle">R = 10 kΩ</text>
-          <text class="lbl fadein" style="--d:1.4s" x="398" y="213" text-anchor="end">C = 100 µF</text>
-          <text class="lbl fadein" style="--d:1.7s" x="20" y="243">5 V</text>
-          <text class="lbl m fadein" style="--d:1.7s" x="122" y="226">+</text>
-          <!-- scope -->
-          <g class="fadein" style="--d:1.9s">
-            <path d="M60 400 V500 H520" fill="none" stroke="#0b1b33" stroke-width="1.5"/>
-            <path d="M60 410 H520" stroke="#d3dceb" stroke-dasharray="4 5"/>
-            <path d="M60 441.6 H520" stroke="#d3dceb" stroke-dasharray="4 5"/>
-            <text class="lbl m" x="66" y="396">v_C (V)</text>
-            <text class="lbl m" x="520" y="516" text-anchor="end">t (s)</text>
-            <text class="lbl m" x="524" y="446">63 %</text>
-          </g>
-          <path id="curve" class="draw" style="--d:2.1s;stroke:#ffb000;stroke-width:4;fill:none;stroke-linecap:round" d=""/>
-          <text class="lbl fadein" style="--d:3.1s" x="150" y="470">τ = RC = 1 s</text>
-        </svg>
-        <figcaption class="cap"><div>A capacitor charging through a resistor</div><div>Sheet 1 of 4</div></figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <section class="block" style="padding:clamp(28px,4vw,48px) 0">
-    <div class="wrap">
-      <div class="facts">
-        <div><small>Studying</small><b>Bachelor of Engineering, Electrical Energy and Control</b></div>
-        <div><small>At</small><b>Université Grenoble Alpes, since Aug 2026</b></div>
-        <div><small>Before that</small><b>First year at Beirut Arab University</b></div>
-        <div><small>Speaks</small><b>Arabic, English and French</b></div>
+      <div class="lab fade-up" style="--d:.5s" id="lab">
+        <div class="lab-head"><span class="dots"><i></i><i></i></span><b>RC circuit</b><span>Flip the switch or move the sliders</span></div>
+        <div class="lab-body">
+          <div class="circuit">
+            <svg viewBox="0 18 540 352" id="csvg" aria-label="Interactive RC circuit diagram">
+              <defs><linearGradient id="capg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb000"/><stop offset="1" stop-color="#ffd166"/></linearGradient></defs>
+              <path class="wire draw" style="--d:.6s" d="M70 186 V60 H122"/>
+              <path class="wire draw" style="--d:.7s" d="M70 206 V320"/>
+              <path class="wire draw" style="--d:.9s" d="M44 186 H96"/>
+              <path class="wire draw" style="--d:.95s;stroke-width:4" d="M56 206 H84"/>
+              <text class="lbl pop" style="--d:1.4s" x="22" y="202" text-anchor="middle">5 V</text>
+              <text class="lbl m pop" style="--d:1.4s" x="102" y="180">+</text>
+              <path class="wire draw" style="--d:.75s" d="M130 124 V320"/>
+              <circle class="pop" style="--d:1.1s" cx="128" cy="60" r="5" fill="#fff" stroke="#0b1b33" stroke-width="2.4"/>
+              <circle class="pop" style="--d:1.1s" cx="130" cy="119" r="5" fill="#fff" stroke="#0b1b33" stroke-width="2.4"/>
+              <g class="hot pop" style="--d:1.2s" id="sw" tabindex="0" role="button" aria-label="Flip the switch between charge and discharge">
+                <rect x="104" y="36" width="100" height="104" fill="transparent"/>
+                <line id="blade" class="wire" x1="182" y1="90" x2="133" y2="62"/>
+                <circle cx="182" cy="90" r="5.5" fill="#0b1b33"/>
+              </g>
+              <text class="lbl m pop" style="--d:1.4s" x="128" y="38" text-anchor="middle">charge</text>
+              <text class="lbl m pop" style="--d:1.4s" x="142" y="150">discharge</text>
+              <path class="wire draw" style="--d:.8s" d="M182 90 H220"/>
+              <path class="wire draw" style="--d:1s" d="M220 90 l9 -15 l18 30 l18 -30 l18 30 l18 -30 l9 15"/>
+              <path class="wire draw" style="--d:1.1s" d="M310 90 H460 V172"/>
+              <text class="lbl pop" style="--d:1.4s" x="265" y="58" text-anchor="middle" id="rLbl">R = 10 kΩ</text>
+              <rect id="capFill" x="433" y="176" width="54" height="12" fill="url(#capg)" opacity="0"/>
+              <path class="wire draw" style="--d:1.2s;stroke-width:3.4" d="M430 174 H490 M430 190 H490"/>
+              <path class="wire draw" style="--d:1.25s" d="M460 192 V320 H70"/>
+              <text class="lbl pop" style="--d:1.4s" x="420" y="188" text-anchor="end" id="cLbl">C = 100 µF</text>
+              <g id="plus" opacity="0"><text class="lbl" x="497" y="168" style="font-size:13px">+ +</text><text class="lbl" x="497" y="206" style="font-size:13px">− −</text></g>
+              <path class="wire draw" style="--d:1.35s" d="M265 320 V344 M245 344 H285 M252 352 H278 M259 360 H271"/>
+              <circle class="pop" style="--d:1.4s" cx="265" cy="320" r="4.5" fill="#0b1b33"/>
+              <circle class="pop" style="--d:1.4s" cx="130" cy="320" r="4.5" fill="#0b1b33"/>
+              <path id="pCharge" d="M70 186 V60 H128 L182 90 H460 V174 M460 190 V320 H70 V206" fill="none" stroke="none"/>
+              <path id="pDis" d="M460 174 V90 H182 L130 119 V320 H460 V190" fill="none" stroke="none"/>
+              <g id="dots"></g>
+            </svg>
+          </div>
+          <div class="sidepanel">
+            <div class="scope"><canvas id="scope"></canvas><div class="leg"><span><i></i>v_C</span><span><i class="c"></i>i</span></div></div>
+            <div class="ctrl">
+              <div class="seg" role="group" aria-label="Switch position"><button id="bCharge">Charge</button><button id="bDis">Discharge</button></div>
+              <label class="sl"><b>R</b><input type="range" id="rIn" min="2" max="20" step="1" value="10" aria-label="Resistance"><output id="rOut">10 kΩ</output></label>
+              <label class="sl"><b>C</b><input type="range" id="cIn" min="0" max="5" step="1" value="2" aria-label="Capacitance"><output id="cOut">100 µF</output></label>
+            </div>
+            <div class="reads">
+              <div><small>v_C</small><b id="vRead">0.00 V</b></div>
+              <div><small>i</small><b id="iRead">0.00 mA</b></div>
+              <div><small>τ = RC</small><b id="tRead">1.00 s</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="lab-foot" id="labFoot">After one τ the capacitor reaches 63 % of the supply voltage.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="block" id="about-me">
-    <div class="wrap about">
-      <h2 class="h2">About me</h2>
-      <div class="body">
-        <p>I’m drawn to the places where physics, electronics and space technology meet.</p>
-        <p>I started engineering at Beirut Arab University, where I completed my first year in Electrical Power and Machines Engineering. In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale, and chose Grenoble for its Electrical Energy and Control Engineering program.</p>
-        <p>Alongside my studies I tutored high-school students in Lebanon and abroad in physics and maths for the Lebanese Baccalaureate. It taught me to break problems down and explain them clearly, which is also why I share my notes and guides here.</p>
-        <p>Outside class I’ve completed the University of Michigan’s Rocket Science 101, MathWorks’ MATLAB Onramp and Dassault Systèmes’ SOLIDWORKS 3D CAD specialization.</p>
-      </div>
+<!-- ============================ EXPERIENCE ============================ -->
+<section class="sec" id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="num">01</span><h2 class="split">Experience</h2></div>
+      <p class="rv">A year of private tutoring in physics and maths for the Lebanese Baccalaureate, online and in person, with students in Lebanon and abroad.</p>
     </div>
-  </section>
 
-  <section class="block">
-    <div class="wrap">
-      <div class="head-row"><h2 class="h2">What you’ll find here</h2></div>
-      <div class="index">
-        <a href="#projects"><span class="sh">Sheet 2</span><h3>Projects</h3><p>Rocket science, 3D CAD, MATLAB, and a year of tutoring physics and maths.</p><span class="go-l">Open projects <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
-        <a href="#guides"><span class="sh">Sheet 3</span><h3>Guides</h3><p>My handwritten calculus notes, beginner MATLAB builds and a physics formula sheet.</p><span class="go-l">Open guides <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
-        <a href="#education"><span class="sh">Sheet 4</span><h3>Education</h3><p>My study path, five certifications, languages and skills.</p><span class="go-l">Open education <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
-      </div>
+    <div class="gantt rv" id="gantt">
+      <div class="g-axis"><div>Tutoring, 1 year</div><div class="months">
+        <span class="y">Aug 25</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span class="y">Jan 26</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+      </div></div>
+      <div class="g-row" data-role="0"><div class="g-l">Physics<small>Part-time</small></div><div class="g-track"><div class="g-bar" style="--s:0;--n:12;--d:.3s"><span>12 months</span></div></div></div>
+      <div class="g-row" data-role="1"><div class="g-l">Maths<small>Self-employed</small></div><div class="g-track"><div class="g-bar" style="--s:3;--n:9;--d:.6s"><span>9 months</span></div></div></div>
     </div>
-  </section>
 
-  <section class="talk" id="contact">
-    <div class="wrap">
-      <div>
-        <h2>Working on something in energy, control or space?</h2>
-        <p>I’d love to hear about it. LinkedIn is the best way to reach me.</p>
-      </div>
-      <div class="ctas">
-        <a class="btn" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>Message me on LinkedIn</a>
-        <button class="btn line" id="copy">Copy profile link</button>
-      </div>
+    <div class="roles">
+      <article class="role rv" data-role="0">
+        <div class="when">Aug 2025 to Jul 2026, part-time, hybrid</div>
+        <h3>Private Physics Tutor</h3>
+        <div class="org">GS, LS and SE sections, Lebanese Baccalaureate</div>
+        <p>I taught physics to high-school students in Lebanon and abroad, online and in person. I focused on building real problem-solving skills, making complex physics simple, and preparing students for their official exams with structured lessons and personal support.</p>
+        <div class="tags"><span class="tag">Physics</span><span class="tag">Tutoring</span><span class="tag">Lesson planning</span></div>
+      </article>
+      <article class="role rv" style="--d:.12s" data-role="1">
+        <div class="when">Nov 2025 to Jul 2026, self-employed, hybrid</div>
+        <h3>Private Math Tutor</h3>
+        <div class="org">GS and LS sections, Lebanese Baccalaureate</div>
+        <p>I taught mathematics to high-school students in Lebanon and abroad. Through structured lessons, problem-solving practice and personal guidance, I helped them sharpen their analytical thinking, master the concepts and prepare for official exams.</p>
+        <div class="tags"><span class="tag">Mathematics</span><span class="tag">Tutoring</span><span class="tag">Exam preparation</span></div>
+      </article>
     </div>
-  </section>
-</div>
-
-<!-- ============================ PROJECTS ============================ -->
-<div class="view" id="projects" data-view="projects">
-  <header class="sheet"><div class="wrap">
-    <div><h1>Projects</h1><p>What I’ve been building, studying and teaching.</p></div>
-    <div class="tblock"><div>Sheet</div><div>2 of 4</div><div>Contents</div><div>5 projects</div><div>Updated</div><div>Nov 2026</div></div>
-  </div></header>
-  <section class="block"><div class="wrap" id="projList"></div></section>
-</div>
-
-<!-- ============================ GUIDES ============================ -->
-<div class="view" id="guides" data-view="guides">
-  <header class="sheet"><div class="wrap">
-    <div><h1>Guides</h1><p>Notes and starter builds I wish I’d had when I started. Free to read and use.</p></div>
-    <div class="tblock"><div>Sheet</div><div>3 of 4</div><div>Contents</div><div>Notes, 5 builds, formulas</div><div>Updated</div><div>Nov 2026</div></div>
-  </div></header>
-
-  <section class="block" id="calculus">
-    <div class="wrap notes">
-      <button class="stack" data-read="1" aria-label="Open my calculus notes">
-        <img src="calculus/p03.jpg" alt="" loading="lazy"><img src="calculus/p02.jpg" alt="" loading="lazy"><img src="calculus/p01.jpg" alt="First page of my handwritten Math 282 calculus notes">
-      </button>
-      <div>
-        <h2 class="h2">Calculus, by hand</h2>
-        <p class="lead">My handwritten notes for Math 282, written during my first year at Beirut Arab University. 34 pages, from the definition of the derivative to double integrals in polar coordinates.</p>
-        <table class="chap" id="chapters"></table>
-        <button class="btn sig" data-read="1">Read the notes</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="matlab">
-    <div class="wrap">
-      <div class="head-row"><div><h2 class="h2">MATLAB starter builds</h2><p class="lead">Five small builds for engineering students, in order. Each one adds a new skill and comes with the full code.</p></div></div>
-      <ul class="acc" id="acc"></ul>
-    </div>
-  </section>
-
-  <section class="block" id="formulas">
-    <div class="wrap">
-      <div class="head-row"><div><h2 class="h2">Physics formula sheet</h2><p class="lead">The formulas I kept coming back to while tutoring the Lebanese Baccalaureate, on one page.</p></div></div>
-      <div class="formula">
-        <div><h3>Mechanics</h3><dl><dt>p = mv</dt><dd>Linear momentum</dd><dt>ΣF = dp/dt</dt><dd>Newton’s second law</dd><dt>KE = ½mv²</dt><dd>Kinetic energy</dd><dt>ME = KE + PE</dt><dd>Mechanical energy</dd><dt>T₀ = 2π√(m/k)</dt><dd>Spring–mass oscillator</dd><dt>T₀ = 2π√(ℓ/g)</dt><dd>Simple pendulum</dd></dl></div>
-        <div><h3>Electricity</h3><dl><dt>τ = RC</dt><dd>RC time constant</dd><dt>u = E(1 − e^(−t/τ))</dt><dd>Capacitor charging</dd><dt>τ = L/R</dt><dd>RL time constant</dd><dt>T₀ = 2π√(LC)</dt><dd>LC proper period</dd><dt>U = Uₘ/√2</dt><dd>Effective (RMS) value</dd><dt>P = UI cos φ</dt><dd>Average AC power</dd></dl></div>
-        <div><h3>Induction</h3><dl><dt>Φ = BS cos θ</dt><dd>Magnetic flux</dd><dt>e = −dΦ/dt</dt><dd>Faraday–Lenz law</dd></dl></div>
-        <div><h3>Waves and optics</h3><dl><dt>λ = vT</dt><dd>Wavelength</dd><dt>i = λD/a</dt><dd>Fringe spacing</dd><dt>θ = λ/a</dt><dd>Diffraction half-angle</dd></dl></div>
-        <div><h3>Modern physics</h3><dl><dt>E = hν</dt><dd>Photon energy</dd><dt>Eₙ = −13.6/n² eV</dt><dd>Hydrogen levels</dd><dt>E = Δm c²</dt><dd>Mass–energy</dd><dt>N = N₀e^(−λt)</dt><dd>Radioactive decay</dd><dt>T½ = ln 2/λ</dt><dd>Half-life</dd></dl></div>
-      </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <!-- ============================ EDUCATION ============================ -->
-<div class="view" id="education" data-view="education">
-  <header class="sheet"><div class="wrap">
-    <div><h1>Education</h1><p>Where I’ve studied, what I’ve certified, and the languages and skills I work with.</p></div>
-    <div class="tblock"><div>Sheet</div><div>4 of 4</div><div>Contents</div><div>Study path, 5 certificates</div><div>Updated</div><div>Nov 2026</div></div>
-  </div></header>
-
-  <section class="block">
-    <div class="wrap">
-      <div class="head-row"><h2 class="h2">Study path</h2></div>
-      <ol class="path">
-        <li class="stop now">
-          <div class="d"><b>Aug 2026 to now</b>Grenoble, France</div><span class="dot"></span>
-          <div class="b">
-            <span class="st">Current</span>
-            <h3>Université Grenoble Alpes</h3>
-            <div class="deg">Bachelor of Engineering, Electrical Energy and Control Engineering<small>Énergie Électrique, Automatique</small></div>
-            <p>Building analytical, design and problem-solving skills through lab work and engineering projects.</p>
-            <div class="tags"><span class="tag">Mathematics</span><span class="tag">Electrical engineering</span><span class="tag">Electronics</span><span class="tag">Embedded systems</span><span class="tag">Automatic control</span><span class="tag">Power electronics</span><span class="tag">Electrical energy conversion</span><span class="tag">Programming</span><span class="tag">Object-oriented programming</span><span class="tag">Wireless communications</span><span class="tag">Robotics</span><span class="tag">Project management</span></div>
-          </div>
-        </li>
-        <li class="stop small">
-          <div class="d"><b>2026</b>Admissions</div><span class="dot"></span>
-          <div class="b">
-            <h3>Three offers, one choice</h3>
-            <p>Accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program fits my interests and long-term goals.</p>
-          </div>
-        </li>
-        <li class="stop">
-          <div class="d"><b>Sep 2025 to Jun 2026</b>Beirut, Lebanon</div><span class="dot"></span>
-          <div class="b">
-            <span class="st">First year completed</span>
-            <h3>Beirut Arab University</h3>
-            <div class="deg">Bachelor of Engineering, Electrical Power and Machines Engineering</div>
-            <p>A first year built on engineering, physics and maths, with lab work and technical writing. My <a class="textlink" href="#guides" data-goto="calculus">calculus notes</a> come from this year.</p>
-            <div class="tags"><span class="tag">Introduction to Engineering</span><span class="tag">Electric Circuits I</span><span class="tag">Classical Physics</span><span class="tag">Electricity and Magnetism</span><span class="tag">Dynamics</span><span class="tag">Calculus</span><span class="tag">Linear Algebra</span><span class="tag">Differential Equations</span><span class="tag">Probability and Statistics</span><span class="tag">Principles of Chemistry</span><span class="tag">Chemistry Laboratory</span><span class="tag">General English</span><span class="tag">Advanced Writing</span></div>
-          </div>
-        </li>
-        <li class="stop small">
-          <div class="d"><b>Dec 2024</b>Lebanon</div><span class="dot"></span>
-          <div class="b">
-            <h3>SAT and DELF B2</h3>
-            <p>Took the College Board SAT and earned the DELF B2 French diploma from the Institut français du Liban.</p>
-          </div>
-        </li>
-      </ol>
+<section class="sec gridbg" id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="num">02</span><h2 class="split">Education</h2></div>
+      <p class="rv">From a first year of engineering in Beirut to Grenoble. Scroll to follow the path.</p>
     </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <div class="head-row"><h2 class="h2">Certifications</h2></div>
-      <table class="table">
-        <thead><tr><th>Certificate</th><th>Issued</th><th>Credential ID</th><th></th></tr></thead>
-        <tbody id="certRows"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap two">
-      <div>
-        <h2 class="h2" style="margin-bottom:24px">Languages</h2>
-        <div class="langs">
-          <div><b>Arabic</b><span>Native</span></div>
-          <div><b>English</b><span>Full professional</span></div>
-          <div><b>French</b><span>Full professional, DELF B2</span></div>
+    <ol class="path" id="path">
+      <span class="rail" aria-hidden="true"></span><span class="fill" id="pFill" aria-hidden="true"></span><span class="spark" id="spark" aria-hidden="true"></span>
+      <li class="stop">
+        <div class="d"><b>Sep 2025</b>to Jun 2026<br>Beirut, Lebanon</div><span class="dot"></span>
+        <div class="b">
+          <span class="badge">First year completed</span>
+          <h3>Beirut Arab University</h3>
+          <div class="deg">Bachelor of Engineering, Electrical Power and Machines Engineering</div>
+          <p>A first year built on engineering, physics and mathematics. Lab work and technical writing sharpened my analytical and problem-solving skills.</p>
+          <details><summary>Show the 13 courses <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4.5 6 8.5l4-4"/></svg></summary>
+            <div class="tags" data-stagger><span class="tag">Introduction to Engineering</span><span class="tag">Electric Circuits I</span><span class="tag">Classical Physics</span><span class="tag">Electricity and Magnetism</span><span class="tag">Dynamics</span><span class="tag">Calculus</span><span class="tag">Linear Algebra</span><span class="tag">Differential Equations</span><span class="tag">Probability and Statistics</span><span class="tag">Principles of Chemistry</span><span class="tag">Chemistry Laboratory</span><span class="tag">General English</span><span class="tag">Advanced Writing</span></div>
+          </details>
         </div>
-      </div>
-      <div>
-        <h2 class="h2" style="margin-bottom:24px">Skills</h2>
-        <div class="skills">
-          <div><h3>CAD and design</h3><div class="tags"><span class="tag">SOLIDWORKS</span><span class="tag">CAD</span><span class="tag">3D modeling</span></div></div>
-          <div><h3>Computing</h3><div class="tags"><span class="tag">MATLAB</span><span class="tag">Arrays and matrices</span><span class="tag">Data visualization</span><span class="tag">Data analysis</span></div></div>
-          <div><h3>Aerospace</h3><div class="tags"><span class="tag">Orbital mechanics</span><span class="tag">Propulsion</span><span class="tag">Mechanics</span><span class="tag">Applied mathematics</span></div></div>
-          <div><h3>Maths and teaching</h3><div class="tags"><span class="tag">Linear algebra</span><span class="tag">Differential equations</span><span class="tag">Trigonometry</span><span class="tag">Tutoring</span><span class="tag">Lesson planning</span></div></div>
+      </li>
+      <li class="stop mini">
+        <div class="d"><b>2026</b>Admissions</div><span class="dot"></span>
+        <div class="b">
+          <span class="badge">Milestone</span>
+          <h3>Three offers, one choice</h3>
+          <p>Accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble because its program fits my interests and long-term engineering goals.</p>
         </div>
+      </li>
+      <li class="stop now">
+        <div class="d"><b>Aug 2026</b>to now<br>Grenoble, France</div><span class="dot"></span>
+        <div class="b">
+          <span class="badge y">Current</span>
+          <h3>Université Grenoble Alpes</h3>
+          <div class="deg">Bachelor of Engineering, Electrical Energy and Control Engineering<small>Énergie Électrique, Automatique</small></div>
+          <p>Building analytical, design and problem-solving skills through lab work and engineering projects, across electrical energy, electronics and control.</p>
+          <details><summary>Show the 12 subjects <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4.5 6 8.5l4-4"/></svg></summary>
+            <div class="tags" data-stagger><span class="tag">Mathematics</span><span class="tag">Electrical engineering</span><span class="tag">Electronics</span><span class="tag">Embedded systems</span><span class="tag">Automatic control</span><span class="tag">Power electronics</span><span class="tag">Electrical energy conversion</span><span class="tag">Programming</span><span class="tag">Object-oriented programming</span><span class="tag">Wireless communications</span><span class="tag">Robotics</span><span class="tag">Project management</span></div>
+          </details>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ CERTIFICATIONS ============================ -->
+<section class="sec ring-sec" id="certifications">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="num">03</span><h2 class="split">Certifications</h2></div>
+      <p class="rv">Five credentials, from rocket science to French. Drag the ring, use the arrows, or click a card to bring it to the front.</p>
+    </div>
+  </div>
+  <div class="cat rv" id="cat">
+    <div class="stage" id="stage"><ul class="ring" id="ring"></ul></div>
+    <div class="ring-bar">
+      <button class="rbtn" id="prev" aria-label="Previous certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
+      <span><b id="count">1</b> of 5</span>
+      <button class="rbtn" id="next" aria-label="Next certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+    </div>
+    <div class="wrap"><div class="detail" aria-live="polite">
+      <div class="swap" id="dSwap"><div class="k" id="dBy"></div><h4 id="dName"></h4><div class="meta" id="dMeta"></div><div class="tags" id="dTags"></div></div>
+      <a class="btn line sm" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">Show credential</a>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================ PROJECTS ============================ -->
+<section class="sec" id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="num">04</span><h2 class="split">Projects</h2></div>
+      <p class="rv">What I’m building right now.</p>
+    </div>
+    <div class="book-row">
+      <div class="book-stage gridbg rv" id="bookStage" role="button" tabindex="0" aria-label="Open the book cover">
+        <div class="book" id="book">
+          <div class="thick"></div>
+          <div class="pages"><div class="wr" id="writing"></div></div>
+          <div class="spine"></div>
+          <div class="cover">
+            <div class="cv-top"><span>Draft</span><span>Vol. 1</span></div>
+            <svg viewBox="0 0 190 190" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5" aria-hidden="true"><circle cx="95" cy="95" r="70"/><circle cx="95" cy="95" r="44" stroke-dasharray="4 5"/><circle cx="95" cy="25" r="7" fill="#ffb000" stroke="none"/><path d="M95 95 L145 45" stroke="#ffb000"/><circle cx="95" cy="95" r="4" fill="#fff" stroke="none"/></svg>
+            <h3>Classical<span>Physics</span></h3>
+            <div class="au">Adam El Sakka</div>
+          </div>
+        </div>
+        <div class="hint">Hover or tap to peek inside</div>
+      </div>
+      <div class="wip rv" style="--d:.1s">
+        <span class="badge y">Writing now</span>
+        <h3>A book on classical physics</h3>
+        <p>I’m writing a book on classical physics, building on the year I spent teaching it to high-school students. It’s a work in progress, and I’ll share chapters here as they come together.</p>
+        <div class="progress" role="img" aria-label="Book in progress"><i></i></div>
+        <div class="progress-l"><span>Started</span><span>In progress</span><span>Published</span></div>
+        <a class="btn mag" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">Follow along on LinkedIn</a>
+        <div class="next-slot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>More projects are on the way. This space will grow.</div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="talk" id="contact">
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path id="wave" fill="none" stroke="#0b1b33" stroke-width="2"/></svg>
+  <div class="wrap">
+    <div>
+      <h2 class="split">Working on something in energy, control or space?</h2>
+      <p>I’d love to hear about it. LinkedIn is the best way to reach me.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn mag" href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>Message me on LinkedIn</a>
+      <button class="btn line mag" id="copy">Copy profile link</button>
+    </div>
+  </div>
+</section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <div><small>Drawn by</small>Adam El Sakka</div>
-    <div><small>Field</small>Electrical energy and control</div>
-    <div><small>Based in</small>Grenoble, France</div>
-    <div><small>Contact</small><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">LinkedIn</a></div>
-  </div>
-</footer>
-
-<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Calculus notes" hidden>
-  <div class="r-top">
-    <div class="r-title"><b>Calculus, by hand</b><span id="rChap"></span></div>
-    <div class="r-count"><span id="rNum">1</span> / 34</div>
-    <button class="r-btn" id="rClose" aria-label="Close notes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
-  </div>
-  <div class="r-stage" id="rStage">
-    <button class="r-btn r-prev" id="rPrev" aria-label="Previous page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
-    <div class="r-page" id="rPage"><img id="rImg" alt=""></div>
-    <button class="r-btn r-next" id="rNext" aria-label="Next page"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
-  </div>
-  <div class="r-bar"><i id="rBar"></i></div>
-  <div class="r-thumbs" id="rThumbs"></div>
-</div>
+<footer><div class="wrap"><span>Adam El Sakka, Grenoble, France</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 (() => {
 "use strict";
-const LI = 'https://www.linkedin.com/in/adammskk';
-const NAVY = '#0b1b33', SIG = '#ffb000', GRID = '#e3eaf4', RULE = '#d3dceb', MUTE = '#73829a';
-const pad = n => String(n).padStart(2, '0');
-const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const $ = id => document.getElementById(id);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(pointer: fine)').matches;
+const NAVY = '#0b1b33', SIG = '#ffb000', GRID = '#e3eaf4';
+const LI = 'https://www.linkedin.com/in/adammskk';
 
-/* ---------- hero drawing ---------- */
-(function hero(){
-  let d = ''; for (let i = 0; i <= 92; i++){ const t = i / 92 * 5; const x = 60 + i * 5; const y = 500 - 90 * (1 - Math.exp(-t)); d += (i ? ' L' : 'M') + x + ' ' + y.toFixed(1); }
-  document.getElementById('curve').setAttribute('d', d);
-  document.querySelectorAll('#drawing .draw').forEach(p => { const l = Math.ceil(p.getTotalLength()) + 2; p.style.setProperty('--len', l); });
-})();
-let heroPlayed = false;
-function playHero(){ if (heroPlayed) return; heroPlayed = true; requestAnimationFrame(() => document.getElementById('drawing').classList.add('go')); }
+/* ================= name: fit to width, one line (two on phones) ================= */
+const nameEl = $('name');
+function buildName(){
+  const lines = innerWidth < 720 ? ['Adam', 'El Sakka'] : ['Adam El Sakka'];
+  let k = 0;
+  nameEl.innerHTML = lines.map(l => `<span class="ln">${[...l].map(c => c === ' ' ? '<span class="gap"></span>' : `<span class="ch" style="--i:${k++}">${c}</span>`).join('')}</span>`).join('<br>');
+  fitName();
+}
+function fitName(){
+  const w = nameEl.parentElement.clientWidth;
+  nameEl.style.fontSize = '100px';
+  const widest = Math.max(...[...nameEl.querySelectorAll('.ln')].map(l => l.getBoundingClientRect().width));
+  nameEl.style.fontSize = Math.min(w / widest * 100 * .99, 210) + 'px';
+}
+let lastTwo = null;
+function onResizeName(){ const two = innerWidth < 720; if (two !== lastTwo){ lastTwo = two; buildName(); } else fitName(); }
+onResizeName();
 
-/* ---------- illustrations (blueprint style, 720×480) ---------- */
-const svg = (inner) => `<svg viewBox="0 0 720 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`;
-const paper = (id, s = 24) => `<defs><pattern id="${id}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M${s} 0H0V${s}" fill="none" stroke="${GRID}" stroke-width="1"/></pattern></defs><rect width="720" height="480" fill="#fff"/><rect width="720" height="480" fill="url(#${id})"/>`;
-const T = (x, y, s, size = 15, anchor = 'start', fill = NAVY) => `<text x="${x}" y="${y}" font-family="IBM Plex Mono, monospace" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${s}</text>`;
-const ART = {
-  orbit(){
-    return svg(paper('po') + `
-      <ellipse cx="320" cy="250" rx="280" ry="92" fill="none" stroke="${NAVY}" stroke-width="2" transform="rotate(-14 320 250)"/>
-      <ellipse cx="320" cy="250" rx="180" ry="58" fill="none" stroke="${NAVY}" stroke-width="1.5" stroke-dasharray="6 6" transform="rotate(-14 320 250)"/>
-      <circle cx="320" cy="250" r="70" fill="${SIG}" stroke="${NAVY}" stroke-width="2.4"/>
-      <path d="M262 226 q58 -22 116 0 M256 254 q64 -14 128 0 M266 282 q54 -12 108 0" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".55"/>
-      <path d="M455 300 C 540 270 600 190 630 110" fill="none" stroke="${NAVY}" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round"/>
-      <g transform="translate(632 102) rotate(30)"><path d="M0 -22 L8 6 L0 2 L-8 6Z" fill="#fff" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M-3 7 L0 17 L3 7" fill="${SIG}" stroke="${NAVY}" stroke-width="1.5"/></g>
-      <circle cx="${320+180*Math.cos(2.4)}" cy="${250+58*Math.sin(2.4)}" r="7" fill="#fff" stroke="${NAVY}" stroke-width="2"/>
-      ${T(40, 446, 'Hohmann transfer, Δv = Δv₁ + Δv₂', 15, 'start', MUTE)}`);
-  },
-  cad(){
-    const iso = (x,y,z) => [360 + (x - y) * Math.cos(Math.PI/6) * 1.15, 260 + (x + y) * Math.sin(Math.PI/6) * 1.15 - z * 1.15];
-    const P = a => a.map(p => iso(...p).map(v => v.toFixed(1)).join(',')).join(' ');
-    const circ = (r, z) => { let d = ''; for (let i = 0; i <= 40; i++){ const a = i / 40 * Math.PI * 2; d += (i ? ' L' : 'M') + iso(Math.cos(a)*r, Math.sin(a)*r, z).map(v => v.toFixed(1)).join(' '); } return d; };
-    const [ax, ay] = iso(-120,-80,0), [bx, by] = iso(120,-80,0);
-    return svg(paper('pc') + `
-      <polygon points="${P([[-120,-80,60],[120,-80,60],[120,80,60],[-120,80,60]])}" fill="${SIG}" stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round"/>
-      <polygon points="${P([[120,-80,0],[120,80,0],[120,80,60],[120,-80,60]])}" fill="#fff" stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round"/>
-      <polygon points="${P([[-120,80,0],[120,80,0],[120,80,60],[-120,80,60]])}" fill="#f4f7fb" stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="${circ(40,60)}" fill="#fff" stroke="${NAVY}" stroke-width="2"/>
-      <path d="${circ(40,110)}" fill="#fff" stroke="${NAVY}" stroke-width="2"/>
-      ${[0,180].map(dg => { const a = dg * Math.PI / 180; const p = iso(Math.cos(a)*40, Math.sin(a)*40, 60), q = iso(Math.cos(a)*40, Math.sin(a)*40, 110); return `<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${NAVY}" stroke-width="2"/>`; }).join('')}
-      <line x1="${ax}" y1="${ay-36}" x2="${bx}" y2="${by-36}" stroke="${NAVY}" stroke-width="1.2"/>
-      <line x1="${ax}" y1="${ay-44}" x2="${ax}" y2="${ay-28}" stroke="${NAVY}" stroke-width="1.2"/><line x1="${bx}" y1="${by-44}" x2="${bx}" y2="${by-28}" stroke="${NAVY}" stroke-width="1.2"/>
-      ${T((ax+bx)/2-34, (ay+by)/2-46, '240.00', 15)}
-      ${T(40, 446, 'bracket.SLDPRT, extrude and cut', 15, 'start', MUTE)}`);
-  },
-  matlab(){
-    let d1 = '', d2 = ''; for (let x = 0; x <= 560; x += 4){ const t = x / 560 * 10; d1 += (x ? ' L' : 'M') + (100 + x) + ' ' + (250 - Math.exp(-t*.28) * Math.cos(t*2.2) * 120).toFixed(1); d2 += (x ? ' L' : 'M') + (100 + x) + ' ' + (250 - Math.exp(-t*.28) * 120).toFixed(1); }
-    return svg(paper('pm') + `
-      <rect x="100" y="100" width="560" height="300" fill="#fff" stroke="${NAVY}" stroke-width="2"/>
-      <line x1="100" y1="250" x2="660" y2="250" stroke="${RULE}" stroke-width="1.5"/>
-      <path d="${d2}" fill="none" stroke="${NAVY}" stroke-width="1.5" stroke-dasharray="6 6"/>
-      <path d="${d1}" fill="none" stroke="${SIG}" stroke-width="4" stroke-linecap="round"/>
-      <path d="${d1}" fill="none" stroke="${NAVY}" stroke-width="1" opacity=".35"/>
-      ${T(40, 66, "&gt;&gt; plot(t, x, 'LineWidth', 2)", 17)}
-      ${T(40, 446, 'damped oscillation and its envelope', 15, 'start', MUTE)}`);
-  },
-  physics(){
-    let par = ''; for (let x = 0; x <= 360; x += 6) par += (x ? ' L' : 'M') + (170 + x) + ' ' + (380 - (x * 1.1 - x * x / 330)).toFixed(1);
-    return svg(paper('pp', 20) + `
-      <line x1="40" y1="0" x2="40" y2="480" stroke="${SIG}" stroke-width="3"/>
-      <g font-family="Archivo, sans-serif" font-style="italic" fill="${NAVY}">
-        <text x="80" y="104" font-size="46">F = ma</text><text x="430" y="94" font-size="38">E = hν</text>
-        <text x="430" y="156" font-size="28">v² = v₀² + 2aΔx</text><text x="80" y="174" font-size="30">λ = c / f</text></g>
-      <line x1="140" y1="380" x2="620" y2="380" stroke="${NAVY}" stroke-width="2"/>
-      <path d="${par}" fill="none" stroke="${NAVY}" stroke-width="2.2" stroke-dasharray="8 7"/>
-      <circle cx="170" cy="380" r="10" fill="${SIG}" stroke="${NAVY}" stroke-width="2"/>
-      <path d="M170 380 l58 -58" stroke="${NAVY}" stroke-width="2.2"/><path d="M228 322 l-15 3 l12 11z" fill="${NAVY}"/>
-      ${T(80, 446, 'projectile motion, GS / LS / SE physics', 15, 'start', MUTE)}`);
-  },
-  maths(){
-    let c = ''; for (let x = -200; x <= 200; x += 5){ const y = -(x*x*x)/26000 + x*.55; c += (x === -200 ? 'M' : ' L') + (360 + x) + ' ' + (300 - y).toFixed(1); }
-    return svg(paper('pa', 20) + `
-      <line x1="40" y1="0" x2="40" y2="480" stroke="${SIG}" stroke-width="3"/>
-      <g stroke="${NAVY}" stroke-width="2"><line x1="140" y1="300" x2="580" y2="300"/><line x1="360" y1="150" x2="360" y2="430"/></g>
-      <path d="${c}" fill="none" stroke="${NAVY}" stroke-width="3"/>
-      <circle cx="${360-121}" cy="${300+(-(Math.pow(-121,3))/26000-121*.55)*-1}" r="7" fill="${SIG}" stroke="${NAVY}" stroke-width="2"/>
-      <g font-family="Archivo, sans-serif" font-style="italic" fill="${NAVY}">
-        <text x="80" y="100" font-size="42">∫₀¹ x² dx = ⅓</text><text x="450" y="100" font-size="34">f′(x) = 0</text></g>
-      ${T(80, 446, 'functions, limits, exam prep', 15, 'start', MUTE)}`);
-  }
+/* ================= hero spotlight, magnetic buttons, counters ================= */
+const hero = $('home');
+hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); hero.style.setProperty('--hx', (e.clientX - r.left) + 'px'); hero.style.setProperty('--hy', (e.clientY - r.top) + 'px'); });
+if (fine && !reduce) document.querySelectorAll('.mag').forEach(b => {
+  b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .22}px,${(e.clientY - r.top - r.height / 2) * .3}px)`; });
+  b.addEventListener('pointerleave', () => b.style.transform = '');
+});
+setTimeout(() => document.querySelectorAll('[data-count]').forEach(el => { const to = +el.dataset.count, t0 = performance.now();
+  (function f(t){ const p = Math.min(1, (t - t0) / 900); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); })(t0); }), reduce ? 0 : 1100);
+
+/* ================= RC lab ================= */
+document.querySelectorAll('#csvg .draw').forEach(p => p.style.setProperty('--len', Math.ceil(p.getTotalLength()) + 2));
+const Vs = 5, CV = [22, 47, 100, 220, 330, 470];
+let R = 10e3, C = 100e-6, v = 0, mode = 'idle', auto = true, swAng = 0, swTarget = 0, holdT = 0;
+const blade = $('blade'), capFill = $('capFill'), plus = $('plus'), pCharge = $('pCharge'), pDis = $('pDis'), dotsG = $('dots');
+const LCh = pCharge.getTotalLength(), LDi = pDis.getTotalLength();
+const NDOT = 22; let dOff = 0;
+const dotEls = Array.from({ length: NDOT }, () => { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', '4'); c.setAttribute('fill', SIG); c.setAttribute('stroke', NAVY); c.setAttribute('stroke-width', '1.5'); c.setAttribute('opacity', '0'); dotsG.appendChild(c); return c; });
+const tau = () => R * C;
+function setMode(m, user){
+  if (user) auto = false;
+  mode = m; swTarget = m === 'discharge' ? 1 : 0;
+  $('bCharge').classList.toggle('on', m === 'charge'); $('bDis').classList.toggle('on', m === 'discharge');
+  $('labFoot').textContent = m === 'discharge' ? 'Discharging: the capacitor empties through R. After one τ, 37 % is left.' : 'Charging: after one τ the capacitor reaches 63 % of the supply voltage.';
+}
+$('bCharge').addEventListener('click', () => setMode('charge', true));
+$('bDis').addEventListener('click', () => setMode('discharge', true));
+const sw = $('sw'), flip = () => setMode(mode === 'charge' ? 'discharge' : 'charge', true);
+sw.addEventListener('click', flip);
+sw.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flip(); } });
+function updRC(){
+  R = +$('rIn').value * 1e3; C = CV[+$('cIn').value] * 1e-6;
+  const rs = $('rIn').value + ' kΩ', cs = CV[+$('cIn').value] + ' µF';
+  $('rOut').textContent = rs; $('cOut').textContent = cs; $('rLbl').textContent = 'R = ' + rs; $('cLbl').textContent = 'C = ' + cs;
+  $('tRead').textContent = tau().toFixed(2) + ' s';
+}
+$('rIn').addEventListener('input', () => { auto = false; updRC(); });
+$('cIn').addEventListener('input', () => { auto = false; updRC(); });
+updRC();
+
+const sc = $('scope'), sx = sc.getContext('2d');
+let SW = 0, SH = 0; const WIN = 10, hist = []; let simT = 0;
+function sizeScope(){ const dpr = Math.min(devicePixelRatio || 1, 2); const r = sc.getBoundingClientRect(); SW = r.width; SH = r.height; sc.width = SW * dpr; sc.height = SH * dpr; sx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+sizeScope();
+function drawScope(){
+  sx.clearRect(0, 0, SW, SH);
+  sx.strokeStyle = 'rgba(255,255,255,.08)'; sx.lineWidth = 1;
+  for (let i = 1; i < 10; i++){ const x = i * SW / 10; sx.beginPath(); sx.moveTo(x, 0); sx.lineTo(x, SH); sx.stroke(); }
+  for (let j = 1; j < 6; j++){ const y = j * SH / 6; sx.beginPath(); sx.moveTo(0, y); sx.lineTo(SW, y); sx.stroke(); }
+  const top = 30, bot = SH - 14, mid = (top + bot) / 2, Y = val => bot - (val / Vs) * (bot - top);
+  sx.setLineDash([4, 5]); sx.strokeStyle = 'rgba(255,176,0,.35)'; sx.beginPath(); sx.moveTo(0, Y(Vs * .632)); sx.lineTo(SW, Y(Vs * .632)); sx.stroke(); sx.setLineDash([]);
+  sx.fillStyle = 'rgba(255,176,0,.75)'; sx.font = '11px "IBM Plex Mono", monospace'; sx.fillText('63 %', SW - 36, Y(Vs * .632) - 5);
+  if (hist.length < 2) return;
+  const t0 = Math.max(0, simT - WIN), X = t => (t - t0) / WIN * SW, imax = Vs / R * 1000;
+  sx.strokeStyle = '#7fb0ff'; sx.lineWidth = 1.6; sx.beginPath();
+  hist.forEach((h, k) => { const y = mid - (h.i / imax) * (mid - top); k ? sx.lineTo(X(h.t), y) : sx.moveTo(X(h.t), y); }); sx.stroke();
+  sx.strokeStyle = SIG; sx.lineWidth = 3; sx.shadowColor = 'rgba(255,176,0,.7)'; sx.shadowBlur = 10; sx.beginPath();
+  hist.forEach((h, k) => { const y = Y(h.v); k ? sx.lineTo(X(h.t), y) : sx.moveTo(X(h.t), y); }); sx.stroke(); sx.shadowBlur = 0;
+  const last = hist[hist.length - 1]; sx.fillStyle = '#fff'; sx.beginPath(); sx.arc(X(last.t), Y(last.v), 4, 0, 7); sx.fill();
+}
+
+const A = [133, 62], B = [134, 116], PV = [182, 90];
+const angA = Math.atan2(A[1] - PV[1], A[0] - PV[0]), angB = Math.atan2(B[1] - PV[1], B[0] - PV[0]), bl = Math.hypot(A[0] - PV[0], A[1] - PV[1]);
+let labOn = false, labVisible = true;
+new IntersectionObserver(es => es.forEach(e => labVisible = e.isIntersecting)).observe($('lab'));
+setTimeout(() => { labOn = true; setMode('charge'); }, reduce ? 0 : 1700);
+
+function labTick(dt){
+  swAng += (swTarget - swAng) * Math.min(1, dt * 14);
+  const a = angA + (angB - angA) * swAng;
+  blade.setAttribute('x2', (PV[0] + Math.cos(a) * bl).toFixed(1)); blade.setAttribute('y2', (PV[1] + Math.sin(a) * bl).toFixed(1));
+  if (!labOn) return;
+  const T = tau(); let i = 0;
+  if (mode === 'charge'){ v = Vs + (v - Vs) * Math.exp(-dt / T); i = (Vs - v) / R; }
+  else if (mode === 'discharge'){ v = v * Math.exp(-dt / T); i = -v / R; }
+  simT += dt; hist.push({ t: simT, v, i: i * 1000 }); while (hist.length && hist[0].t < simT - WIN - .2) hist.shift();
+  if (auto){ const done = mode === 'charge' ? v > Vs * .985 : v < Vs * .015; if (done){ holdT += dt; if (holdT > .9){ holdT = 0; setMode(mode === 'charge' ? 'discharge' : 'charge'); } } else holdT = 0; }
+  const q = v / Vs; capFill.setAttribute('opacity', (q * .95).toFixed(3)); plus.setAttribute('opacity', q.toFixed(3));
+  const rel = Math.min(1, Math.abs(i) / (Vs / R));
+  const path = mode === 'discharge' ? pDis : pCharge, L = mode === 'discharge' ? LDi : LCh;
+  dOff = (dOff + dt * (30 + 260 * rel) * (rel > .01 ? 1 : 0)) % L;
+  dotEls.forEach((d, k) => { const p = path.getPointAtLength((dOff + k * L / NDOT) % L); d.setAttribute('cx', p.x.toFixed(1)); d.setAttribute('cy', p.y.toFixed(1)); d.setAttribute('opacity', rel > .01 ? Math.min(1, .2 + rel).toFixed(2) : 0); });
+  $('vRead').textContent = v.toFixed(2) + ' V'; $('iRead').textContent = (i * 1000).toFixed(2) + ' mA';
+  drawScope();
+}
+
+/* ================= scroll: progress, header, spy, reveals ================= */
+const topEl = $('top'), prog = $('prog');
+const spyLinks = [...document.querySelectorAll('.nav a')];
+const secs = spyLinks.map(a => document.querySelector(a.getAttribute('href')));
+function onScroll(){
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+  topEl.classList.toggle('solid', scrollY > 10);
+  let cur = -1; secs.forEach((s, k) => { if (s.getBoundingClientRect().top < innerHeight * .4) cur = k; });
+  spyLinks.forEach((a, k) => a.classList.toggle('on', k === cur));
+  pathTick();
+}
+addEventListener('scroll', onScroll, { passive: true });
+
+document.querySelectorAll('.split').forEach(el => {
+  const words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map((w, k) => `<span class="w"><span style="--i:${k}">${w}</span></span>`).join(' ');
+});
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.rv,.split').forEach(el => io.observe(el));
+
+/* experience: link gantt rows and role cards */
+const rows = [...document.querySelectorAll('.g-row')], roles = [...document.querySelectorAll('.role')];
+const hl = (n, on) => { rows.forEach(r => r.classList.toggle('hl', on && r.dataset.role === n)); roles.forEach(r => r.classList.toggle('hl', on && r.dataset.role === n)); };
+[...rows, ...roles].forEach(el => { el.addEventListener('pointerenter', () => hl(el.dataset.role, true)); el.addEventListener('pointerleave', () => hl(el.dataset.role, false)); });
+rows.forEach(r => r.addEventListener('click', () => roles[+r.dataset.role].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' })));
+roles.forEach(c => c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }));
+
+/* education: scroll-drawn path */
+const pathEl = $('path'), pFill = $('pFill'), spark = $('spark'), stops = [...pathEl.querySelectorAll('.stop')];
+function pathTick(){
+  const r = pathEl.getBoundingClientRect(), reach = innerHeight * .62 - r.top, y = Math.max(0, Math.min(r.height, reach));
+  pFill.style.height = y + 'px'; spark.style.top = y + 'px'; spark.style.opacity = (reach > 0 && reach < r.height + 40) ? 1 : 0;
+  stops.forEach(s => s.classList.toggle('on', s.offsetTop + 14 <= y));
+}
+document.querySelectorAll('[data-stagger]').forEach(g => [...g.children].forEach((t, k) => t.style.setProperty('--i', k)));
+
+/* ================= certifications ring ================= */
+const svgA = inner => `<svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><pattern id="gp" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="${GRID}"/></pattern></defs><rect width="400" height="240" fill="#fff"/><rect width="400" height="240" fill="url(#gp)"/>${inner}</svg>`;
+const ARTS = {
+  cad(){ const iso = (x,y,z) => [200 + (x - y) * .87, 128 + (x + y) * .5 - z]; const P = a => a.map(p => iso(...p).map(n => n.toFixed(1)).join(',')).join(' '); const c = iso(0,0,36);
+    return svgA(`<polygon points="${P([[-70,-45,36],[70,-45,36],[70,45,36],[-70,45,36]])}" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="${P([[70,-45,0],[70,45,0],[70,45,36],[70,-45,36]])}" fill="#fff" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="${P([[-70,45,0],[70,45,0],[70,45,36],[-70,45,36]])}" fill="#f4f7fb" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="${c[0].toFixed(1)}" cy="${c[1].toFixed(1)}" rx="26" ry="15" fill="#fff" stroke="${NAVY}" stroke-width="2"/>`); },
+  matlab(){ let d = ''; for (let x = 0; x <= 300; x += 3){ const t = x / 300 * 10; d += (x ? ' L' : 'M') + (50 + x) + ' ' + (120 - Math.exp(-t * .28) * Math.cos(t * 2.2) * 70).toFixed(1); }
+    return svgA(`<rect x="50" y="40" width="300" height="160" fill="#fff" stroke="${NAVY}" stroke-width="2"/><line x1="50" y1="120" x2="350" y2="120" stroke="#d3dceb"/><path d="${d}" fill="none" stroke="${SIG}" stroke-width="4" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${NAVY}" stroke-width="1" opacity=".4"/>`); },
+  orbit(){ return svgA(`<ellipse cx="200" cy="125" rx="160" ry="52" fill="none" stroke="${NAVY}" stroke-width="2" transform="rotate(-12 200 125)"/><ellipse cx="200" cy="125" rx="100" ry="32" fill="none" stroke="${NAVY}" stroke-width="1.5" stroke-dasharray="5 5" transform="rotate(-12 200 125)"/><circle cx="200" cy="125" r="40" fill="${SIG}" stroke="${NAVY}" stroke-width="2"/><path d="M280 140 C 310 120 325 95 330 72" fill="none" stroke="${NAVY}" stroke-width="1.6" stroke-dasharray="2 5" stroke-linecap="round"/><g transform="translate(332 62) rotate(35)"><path d="M0 -16 L6 5 L0 2 L-6 5Z" fill="#fff" stroke="${NAVY}" stroke-width="1.8" stroke-linejoin="round"/></g>`); },
+  sat(){ return svgA(`<line x1="60" y1="190" x2="350" y2="190" stroke="${NAVY}" stroke-width="2"/><line x1="80" y1="210" x2="80" y2="40" stroke="${NAVY}" stroke-width="2"/><path d="M80 190 L320 190 L320 60 Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M300 190 V170 H320" fill="none" stroke="${NAVY}" stroke-width="1.6"/><path d="M122 190 A42 42 0 0 0 117 170" fill="none" stroke="${NAVY}" stroke-width="1.6"/><text x="130" y="181" font-family="IBM Plex Mono, monospace" font-size="16" fill="${NAVY}">θ</text>`); },
+  delf(){ return svgA(`<path d="M70 50 H330 a14 14 0 0 1 14 14 V150 a14 14 0 0 1 -14 14 H150 L110 200 L114 164 H70 a14 14 0 0 1 -14 -14 V64 a14 14 0 0 1 14 -14Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><text x="200" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-style="italic" font-weight="700" font-size="38" fill="${NAVY}">Bonjour</text>`); }
 };
-let uid = 0;
-for (const k of Object.keys(ART)) { const f = ART[k]; ART[k] = () => { const u = '_' + (++uid); return f().replace(/id="([\w-]+)"/g, 'id="$1' + u + '"').replace(/url\(#([\w-]+)\)/g, 'url(#$1' + u + ')'); }; }
-
-/* ---------- projects ---------- */
-const PROJECTS = [
-  { title:'Rocket Science 101', when:'July 2026, University of Michigan', art:'orbit', fig:'Orbital transfer',
-    body:['A specialization from the University of Michigan on the engineering and physics behind modern space missions.','It covered orbital mechanics, rocket propulsion, satellite systems and spacecraft design, plus the history of space exploration. It’s the aerospace side of what I want to do with electrical engineering.'],
-    tags:['Orbital mechanics','Propulsion','Spacecraft design'], link:'View the certificate' },
-  { title:'SOLIDWORKS 3D CAD', when:'August 2026, Dassault Systèmes', art:'cad', fig:'Bracket with boss',
-    body:['The SOLIDWORKS 3D CAD for Education specialization: sketching, extruding, cutting and assembling engineering parts in 3D.','Modelling a part properly closes the loop between an idea on paper and something that can be built.'],
-    tags:['3D modeling','SOLIDWORKS','Mechanical design'], link:'View the certificate' },
-  { title:'MATLAB Onramp', when:'July 2026, MathWorks', art:'matlab', fig:'A first MATLAB plot',
-    body:['MathWorks’ introductory MATLAB course: arrays, indexing, plotting and scripts.','It’s the tool I lean on for engineering maths and data. My <a class="textlink" href="#guides" data-goto="matlab">MATLAB starter builds</a> pick up where Onramp ends.'],
-    tags:['MATLAB','Data analysis','Scientific computing'], link:'View the certificate' },
-  { title:'Private physics tutor', when:'August 2025 to July 2026, part-time', art:'physics', fig:'Projectile motion',
-    body:['I taught physics to high-school students in Lebanon and abroad, online and in person, for the GS, LS and SE sections of the Lebanese Baccalaureate.','The goal: real problem-solving skills, complex ideas made simple, and students walking into official exams prepared. My <a class="textlink" href="#guides" data-goto="formulas">formula sheet</a> came out of these lessons.'],
-    tags:['Physics','Lesson planning','Tutoring'], link:'See it on LinkedIn' },
-  { title:'Private maths tutor', when:'November 2025 to July 2026, self-employed', art:'maths', fig:'Studying a function',
-    body:['Maths tutoring for GS and LS students of the Lebanese Baccalaureate, in Lebanon and abroad, online and in person.','Structured lessons, lots of practice and personal guidance, focused on analytical thinking and exam readiness.'],
-    tags:['Mathematics','Tutoring','Exam preparation'], link:'See it on LinkedIn' }
-];
-document.getElementById('projList').innerHTML = PROJECTS.map(p => `
-  <article class="proj">
-    <figure class="fig">${ART[p.art]()}<figcaption><span>${p.fig}</span></figcaption></figure>
-    <div>
-      <div class="when">${p.when}</div>
-      <h2>${p.title}</h2>
-      ${p.body.map(t => `<p>${t}</p>`).join('')}
-      <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      <a class="textlink" href="${LI}" target="_blank" rel="noopener">${p.link}</a>
-    </div>
-  </article>`).join('');
-
-/* ---------- MATLAB builds ---------- */
-const GUIDES = [
-  { title:'Plot a mains sine wave', sub:'Draw the 50 Hz voltage from a wall socket, then distort it with a harmonic.', level:1, file:'sine_wave.m',
-    need:['MATLAB, or the free MATLAB Online','10 minutes'],
-    steps:['Build a time vector with <code>linspace</code> covering two periods','Compute the peak voltage: 230 V RMS × √2 ≈ 325 V','Plot the fundamental, then overlay the distorted signal with <code>hold on</code>','Label the axes, title and legend'],
-    code:String.raw`% Plot a 50 Hz mains voltage and add a 3rd harmonic
-f  = 50;                          % frequency (Hz)
-Vm = 230*sqrt(2);                 % peak voltage (V)
-t  = linspace(0, 2/f, 1000);      % two full periods
-
-v1 = Vm*sin(2*pi*f*t);            % fundamental
-v3 = 0.2*Vm*sin(2*pi*3*f*t);      % 3rd harmonic, 20 % amplitude
-
-plot(t*1e3, v1, 'LineWidth', 2); hold on
-plot(t*1e3, v1 + v3, '--', 'LineWidth', 1.5); hold off
-grid on
-xlabel('Time (ms)'); ylabel('Voltage (V)')
-title('Mains voltage with a 3rd harmonic')
-legend('Fundamental', 'Fundamental + 3rd harmonic')` },
-  { title:'RC circuit charging', sub:'The circuit on the home page: watch τ = RC appear in a plot.', level:1, file:'rc_charging.m',
-    need:['MATLAB R2018b or newer (for <code>yline</code>)','The RC formula from the formula sheet'],
-    steps:['Pick R, C and a supply voltage','Compute τ and a time vector out to 5τ','Apply V<sub>C</sub> = V<sub>s</sub>(1 − e<sup>−t/τ</sup>) to the whole vector at once','Mark the 63.2 % level and print τ'],
-    code:String.raw`% Charging an RC circuit: Vc(t) = Vs*(1 - exp(-t/tau))
-Vs  = 5;           % supply voltage (V)
-R   = 10e3;        % resistance (ohm)
-C   = 100e-6;      % capacitance (F)
-tau = R*C;         % time constant (s)
-
-t  = linspace(0, 5*tau, 500);
-Vc = Vs*(1 - exp(-t/tau));        % element-wise, no loop needed
-
-plot(t, Vc, 'LineWidth', 2); grid on
-xlabel('Time (s)'); ylabel('V_C (V)')
-title(sprintf('RC charging, tau = %.2f s', tau))
-yline(0.632*Vs, '--', '63.2 % after one tau');
-
-fprintf('Time constant: %.2f s\n', tau);
-fprintf('Fully charged (99 %%) after about %.1f s\n', 5*tau);` },
-  { title:'Projectile range explorer', sub:'Five launch angles, five trajectories, and the best angle found in one line.', level:2, file:'projectile.m',
-    need:['MATLAB','Builds 1 and 2 done','Basic kinematics'],
-    steps:['Loop over launch angles and compute the time of flight for each','Plot every trajectory with its own legend label','Compute the range for 181 angles in one vector expression','Find the maximum with <code>max</code> and print it'],
-    code:String.raw`% Projectile motion: trajectories and range vs launch angle
-g  = 9.81;              % gravity (m/s^2)
-v0 = 20;                % launch speed (m/s)
-
-figure; hold on; grid on
-for a = 15:15:75
-    th = deg2rad(a);
-    tf = 2*v0*sin(th)/g;              % time of flight
-    t  = linspace(0, tf, 200);
-    x  = v0*cos(th)*t;
-    y  = v0*sin(th)*t - 0.5*g*t.^2;
-    plot(x, y, 'LineWidth', 1.5, 'DisplayName', sprintf('%d deg', a))
-end
-hold off
-xlabel('x (m)'); ylabel('y (m)'); legend show
-title('Same speed, different launch angles')
-
-% Vectorised: range for every angle at once
-th = deg2rad(0:0.5:90);
-R  = v0^2*sin(2*th)/g;
-[Rmax, k] = max(R);
-fprintf('Max range %.1f m at %.1f deg\n', Rmax, rad2deg(th(k)));` },
-  { title:'Three-phase power', sub:'Three phases 120° apart that add up to zero, which is why the grid uses them.', level:2, file:'three_phase.m',
-    need:['MATLAB','Build 1 done'],
-    steps:['Create v<sub>a</sub>, v<sub>b</sub> and v<sub>c</sub>, each shifted by 2π/3','Stack them in one matrix and plot all three in one call','Plot their sum on top','Check the largest value of the sum: it should be essentially zero'],
-    code:String.raw`% Three balanced phases, 120 degrees apart, and their sum
-Vm = 325;  f = 50;                % peak voltage (V), frequency (Hz)
-t  = linspace(0, 2/f, 1000);
-
-va = Vm*sin(2*pi*f*t);
-vb = Vm*sin(2*pi*f*t - 2*pi/3);
-vc = Vm*sin(2*pi*f*t + 2*pi/3);
-
-plot(t*1e3, [va; vb; vc], 'LineWidth', 1.6); hold on
-plot(t*1e3, va + vb + vc, 'k--', 'LineWidth', 1.2); hold off
-grid on; xlabel('Time (ms)'); ylabel('Voltage (V)')
-legend('v_a', 'v_b', 'v_c', 'v_a + v_b + v_c')
-title('Balanced three-phase system')
-
-fprintf('Largest |va + vb + vc| = %.2e V\n', max(abs(va + vb + vc)));` },
-  { title:'P vs PI controller', sub:'Add an integral term and watch the steady-state error disappear.', level:3, file:'pi_control.m',
-    need:['MATLAB, no Control Toolbox needed','Builds 1 to 4 done','Comfort with loops'],
-    steps:['Model the plant: dy/dt = (−y + K·u)/T','Step it forward in time with the Euler method','Run a P controller and a PI controller side by side','Compare the outputs and print the P-only error'],
-    code:String.raw`% First-order plant dy/dt = (-y + K*u)/T under P and PI control
-K  = 2;  T = 5;                   % plant gain and time constant (s)
-dt = 0.01;  t = 0:dt:30;          % simulation time (s)
-r  = ones(size(t));               % unit step setpoint
-Kp = 2;  Ki = 0.8;                % controller gains
-
-y_p  = zeros(size(t));            % output with P control
-y_pi = zeros(size(t));            % output with PI control
-integ = 0;
-
-for k = 1:numel(t)-1
-    % P controller
-    u = Kp*(r(k) - y_p(k));
-    y_p(k+1) = y_p(k) + dt*(-y_p(k) + K*u)/T;
-
-    % PI controller
-    e = r(k) - y_pi(k);
-    integ = integ + e*dt;
-    u = Kp*e + Ki*integ;
-    y_pi(k+1) = y_pi(k) + dt*(-y_pi(k) + K*u)/T;
-end
-
-plot(t, r, 'k:', t, y_p, t, y_pi, 'LineWidth', 1.6); grid on
-xlabel('Time (s)'); ylabel('Output')
-legend('Setpoint', 'P only', 'P + I', 'Location', 'southeast')
-title('The integral term removes steady-state error')
-
-fprintf('P-only steady-state error: %.3f\n', r(end) - y_p(end));
-fprintf('PI steady-state error:     %.3f\n', r(end) - y_pi(end));` }
-];
-const KW = new Set(['for','end','if','else','elseif','while','function','return','break','hold','on','off','grid','figure','legend','show']);
-function hl(line){
-  let out = '', i = 0, inStr = false, buf = '';
-  const flush = () => { if (!buf) return; out += esc(buf).replace(/\b([A-Za-z_]\w*)\b|(\b\d+(?:\.\d+)?(?:e-?\d+)?\b)/g, (m, w, n) => w ? (KW.has(w) ? `<span class="tk-k">${w}</span>` : w) : `<span class="tk-n">${n}</span>`); buf = ''; };
-  while (i < line.length){
-    const ch = line[i];
-    if (!inStr && ch === '%'){ flush(); out += `<span class="tk-c">${esc(line.slice(i))}</span>`; return out; }
-    if (ch === "'"){ const prev = line.slice(0, i).trimEnd().slice(-1);
-      if (!inStr && /[\w)\].']/.test(prev)){ buf += ch; i++; continue; }
-      if (!inStr){ flush(); inStr = true; buf = "'"; } else { buf += "'"; out += `<span class="tk-s">${esc(buf)}</span>`; buf = ''; inStr = false; } i++; continue; }
-    buf += ch; i++;
-  }
-  if (inStr) out += `<span class="tk-s">${esc(buf)}</span>`; else flush();
-  return out;
-}
-const lvl = n => `<span class="lvl"><i>${[1,2,3].map(k => `<s class="${k <= n ? 'f' : ''}"></s>`).join('')}</i>Level ${n} of 3</span>`;
-const chev = '<span class="chev"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4.5 6 8.5l4-4"/></svg></span>';
-document.getElementById('acc').innerHTML = GUIDES.map((g, i) => `
-  <li id="b-${i+1}">
-    <button class="acc-h" aria-expanded="false" aria-controls="bb-${i+1}"><span class="n">${pad(i+1)}</span><span class="t">${g.title}<small>${g.sub}</small></span>${lvl(g.level)}${chev}</button>
-    <div class="acc-b" id="bb-${i+1}"><div><div class="acc-in">
-      <div>
-        <h4>What you need</h4><ul>${g.need.map(n => `<li>${n}</li>`).join('')}</ul>
-        <h4>Steps</h4><ol>${g.steps.map(s => `<li>${s}</li>`).join('')}</ol>
-      </div>
-      <div class="code"><div class="code-h">${g.file}<button class="btn line sm" data-copy="${i}">Copy code</button></div>
-        <pre>${g.code.split('\n').map((l, n) => `<span class="ln" data-n="${n+1}">${hl(l) || ' '}</span>`).join('')}</pre></div>
-    </div></div></div>
-  </li>`).join('');
-document.getElementById('acc').addEventListener('click', e => {
-  const c = e.target.closest('[data-copy]'); if (c){ copy(GUIDES[+c.dataset.copy].code, 'Code copied'); return; }
-  const h = e.target.closest('.acc-h'); if (!h) return;
-  const li = h.parentElement, open = li.classList.toggle('open'); h.setAttribute('aria-expanded', open);
-});
-
-/* ---------- education ---------- */
 const CERTS = [
-  { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F' },
-  { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'' },
-  { name:'Rocket Science 101 Specialization', by:'University of Michigan, on Coursera', date:'Jul 2026', id:'MBLQOVFHSK82' },
-  { name:'SAT', by:'College Board', date:'Dec 2024', id:'' },
-  { name:'DELF B2', by:'Institut français du Liban', date:'Dec 2024', id:'' }
+  { name:'Rocket Science 101 Specialization', by:'University of Michigan, Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', art:'orbit', skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics'] },
+  { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F', art:'cad', skills:['SOLIDWORKS','CAD','3D modeling'] },
+  { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'', art:'matlab', skills:['MATLAB','Arrays and matrices','Data visualization','Data analysis'] },
+  { name:'SAT', by:'College Board', date:'Dec 2024', id:'', art:'sat', skills:['Advanced mathematics','Algebra','Geometry','Trigonometry'] },
+  { name:'DELF B2', by:'Institut français du Liban', date:'Dec 2024', id:'', art:'delf', skills:['French','Written communication','Reading comprehension'] }
 ];
-document.getElementById('certRows').innerHTML = CERTS.map(c => `<tr>
-  <td><b>${c.name}</b><span>${c.by}</span></td>
-  <td data-l="Issued">${c.date}</td>
-  <td data-l="Credential ID" class="id">${c.id || '<span style="color:var(--mute)">None listed</span>'}</td>
-  <td><a class="textlink" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">Show credential</a></td></tr>`).join('');
-
-/* ---------- router ---------- */
-const views = [...document.querySelectorAll('.view')];
-const links = [...document.querySelectorAll('.nav a')];
-const ALIAS = { about:['home','about-me'], contact:['home','contact'], resources:['guides','formulas'] };
-let current = null, pending = null;
-const scrollToId = id => { const t = document.getElementById(id); if (t) setTimeout(() => scrollTo({ top: t.getBoundingClientRect().top + scrollY - 84, behavior: reduce ? 'auto' : 'smooth' }), 40); };
-function show(name, anchor){
-  if (ALIAS[name]){ [name, anchor] = [ALIAS[name][0], anchor || ALIAS[name][1]]; }
-  if (!views.some(v => v.dataset.view === name)) name = 'home';
-  current = name;
-  views.forEach(v => v.classList.toggle('on', v.dataset.view === name));
-  links.forEach(a => { const on = a.getAttribute('href') === '#' + name; a.classList.toggle('on', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-  document.body.classList.remove('open'); document.getElementById('burger').setAttribute('aria-expanded', 'false');
-  const titles = { home:'Adam El Sakka, electrical engineering student', projects:'Projects, Adam El Sakka', guides:'Guides, Adam El Sakka', education:'Education, Adam El Sakka' };
-  document.title = titles[name];
-  scrollTo(0, 0); if (anchor) scrollToId(anchor);
-  if (name === 'home') playHero();
+let uid = 0; const uniq = s => { const u = '_' + (++uid); return s.replace(/id="([\w-]+)"/g, 'id="$1' + u + '"').replace(/url\(#([\w-]+)\)/g, 'url(#$1' + u + ')'); };
+const ring = $('ring'), stage = $('stage'), cat = $('cat');
+const total = CERTS.length, copies = 3;
+let html = '';
+for (let c = 0; c < copies; c++) CERTS.forEach(ct => { html += `<li class="slot"${c ? ' aria-hidden="true"' : ''}><button class="card"${c ? ' tabindex="-1"' : ''} aria-label="${ct.name}"><span class="art">${uniq(ARTS[ct.art]())}</span><span class="cb"><span class="by">${ct.by}</span><h3>${ct.name}</h3><span class="dt">Issued ${ct.date}</span></span></button></li>`; });
+ring.innerHTML = html;
+const slots = [...ring.children], N = slots.length, STEP = 360 / N;
+slots.forEach((s, i) => s.style.setProperty('--i', i)); ring.style.setProperty('--step', STEP + 'deg');
+let radius = 900;
+function measure(){ const w = slots[0].offsetWidth; if (!w) return; radius = (w + 34) / (2 * Math.sin(STEP / 2 * Math.PI / 180)); ring.style.setProperty('--r', radius.toFixed(1) + 'px'); }
+let angle = 0, target = null, vel = 0, spin = 0, holdUntil = 0, hover = false, dragging = false, front = -1, shown = -1;
+const wrapD = d => ((((d % 360) + 540) % 360) - 180);
+function paint(){
+  ring.style.setProperty('--a', angle.toFixed(3) + 'deg');
+  let best = 0, bo = 1e9;
+  for (let i = 0; i < N; i++){ const off = Math.abs(wrapD(i * STEP + angle)), s = slots[i];
+    s.style.setProperty('--dim', Math.min(1, off / 55).toFixed(3));
+    const op = Math.max(0, Math.min(1, (80 - off) / 50)); s.style.opacity = op.toFixed(3); s.classList.toggle('away', op < .05);
+    if (off < bo){ bo = off; best = i; } }
+  if (best !== front){ if (front >= 0) slots[front].classList.remove('front'); front = best; slots[front].classList.add('front'); showDetail(best % total); }
 }
-document.addEventListener('click', e => {
-  const c = e.target.closest('[data-goto]'); if (!c) return;
-  const view = c.getAttribute('href').slice(1);
-  if (view === current){ e.preventDefault(); scrollToId(c.dataset.goto); } else pending = c.dataset.goto;
+function showDetail(k){
+  if (k === shown) return; shown = k; $('count').textContent = k + 1;
+  const sw2 = $('dSwap'); sw2.classList.add('out');
+  setTimeout(() => { const c = CERTS[k];
+    $('dBy').textContent = c.by; $('dName').textContent = c.name;
+    $('dMeta').innerHTML = `<span>Issued <b>${c.date}</b></span>` + (c.id ? `<span>Credential ID <b>${c.id}</b></span>` : '');
+    $('dTags').innerHTML = c.skills.map(s => `<span class="tag">${s}</span>`).join('');
+    sw2.classList.remove('out'); }, reduce ? 0 : 180);
+}
+function stepTo(dir){ holdUntil = performance.now() + 6000; vel = 0; spin = 0; const base = target !== null ? target : angle; target = Math.round(base / STEP) * STEP - dir * STEP; }
+$('next').addEventListener('click', () => stepTo(1)); $('prev').addEventListener('click', () => stepTo(-1));
+stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
+stage.addEventListener('pointerleave', () => hover = false);
+let px = 0, pt = 0, moved = 0, pid = null;
+stage.addEventListener('pointerdown', e => { if (e.button !== 0) return; pid = e.pointerId; px = e.clientX; pt = performance.now(); moved = 0; target = null; vel = 0; spin = 0; });
+addEventListener('pointermove', e => {
+  if (pid !== e.pointerId) return; const dx = e.clientX - px; moved += Math.abs(dx);
+  if (!dragging && moved > 6){ dragging = true; cat.classList.add('dragging'); try { stage.setPointerCapture(pid); } catch (_) {} }
+  if (!dragging) return; const now = performance.now(), d = dx * (180 / Math.PI / radius) * 1.1; angle += d; vel = vel * .6 + d / Math.max(1, now - pt) * .4; px = e.clientX; pt = now;
 });
-function route(){ const a = pending; pending = null; show((location.hash || '#home').slice(1), a); }
-addEventListener('hashchange', route);
-const burger = document.getElementById('burger');
-burger.addEventListener('click', () => { const o = document.body.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
-
-/* ---------- copy ---------- */
-const toast = document.getElementById('toast');
-async function copy(text, msg){ let ok = false; try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {} toast.textContent = ok ? msg : 'Copying isn’t allowed here. The link is linkedin.com/in/adammskk'; toast.classList.add('on'); clearTimeout(copy.t); copy.t = setTimeout(() => toast.classList.remove('on'), 2200); }
-document.getElementById('copy').addEventListener('click', () => copy(LI, 'Profile link copied'));
-
-/* ---------- calculus reader ---------- */
-const PAGES = 34;
-const CHAPTERS = [ { n:1, title:'Differentiation', page:1 }, { n:2, title:'Hyperbolic functions', page:10 }, { n:3, title:'Partial derivatives', page:14 }, { n:4, title:'Taylor and Maclaurin expansions', page:18 }, { n:5, title:'Integrals', page:20 }, { n:6, title:'Double integrals', page:30 } ];
-const src = (p, t) => `calculus/${t ? 't' : 'p'}${pad(p)}.jpg`;
-document.getElementById('chapters').innerHTML = CHAPTERS.map(c => `<tr><td>${c.n}</td><td><button data-read="${c.page}">${c.title}</button></td><td>page ${c.page}</td></tr>`).join('');
-const reader = document.getElementById('reader'), rImg = document.getElementById('rImg'), rPage = document.getElementById('rPage');
-const rNum = document.getElementById('rNum'), rChap = document.getElementById('rChap'), rBar = document.getElementById('rBar');
-const rPrev = document.getElementById('rPrev'), rNext = document.getElementById('rNext'), rThumbs = document.getElementById('rThumbs');
-rThumbs.innerHTML = Array.from({ length: PAGES }, (_, i) => `<button data-p="${i+1}" aria-label="Page ${i+1}"><img src="${src(i+1, 1)}" alt="" loading="lazy"></button>`).join('');
-const thumbs = [...rThumbs.children];
-let page = 1, lastFocus = null;
-const preload = p => { if (p >= 1 && p <= PAGES) { const im = new Image(); im.src = src(p); } };
-function setPage(p){
-  p = Math.max(1, Math.min(PAGES, p));
-  const swap = () => {
-    page = p; rImg.src = src(p); rImg.alt = `Calculus notes, page ${p} of ${PAGES}`;
-    const ch = [...CHAPTERS].reverse().find(c => p >= c.page);
-    rChap.textContent = `Chapter ${ch.n}: ${ch.title}`; rNum.textContent = p;
-    rBar.style.width = (p / PAGES * 100) + '%'; rPrev.disabled = p === 1; rNext.disabled = p === PAGES;
-    thumbs.forEach((b, i) => b.classList.toggle('on', i + 1 === p));
-    const tb = thumbs[p - 1]; rThumbs.scrollLeft = tb.offsetLeft - rThumbs.clientWidth / 2 + tb.offsetWidth / 2;
-    rPage.classList.remove('zoom'); preload(p + 1); preload(p - 1);
-    const done = () => rImg.classList.remove('fade'); if (rImg.complete) requestAnimationFrame(done); else rImg.onload = done;
-  };
-  if (reduce || reader.hidden) { swap(); return; }
-  rImg.classList.add('fade'); setTimeout(swap, 150);
+function release(e){ if (pid !== e.pointerId) return; pid = null; if (dragging){ dragging = false; cat.classList.remove('dragging'); holdUntil = performance.now() + 4000; if (performance.now() - pt > 90) vel = 0; vel = Math.max(-.6, Math.min(.6, vel)); } }
+addEventListener('pointerup', release); addEventListener('pointercancel', release);
+stage.addEventListener('click', e => {
+  if (moved > 6){ e.preventDefault(); e.stopPropagation(); return; }
+  const s = e.target.closest('.slot'); if (!s) return;
+  const i = slots.indexOf(s); holdUntil = performance.now() + 7000; vel = 0; spin = 0;
+  target = angle - wrapD(i * STEP + angle);
+}, true);
+addEventListener('keydown', e => { const r = cat.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return; if (e.key === 'ArrowRight') stepTo(1); if (e.key === 'ArrowLeft') stepTo(-1); });
+let ringVisible = false; new IntersectionObserver(es => es.forEach(e => ringVisible = e.isIntersecting)).observe(cat);
+function ringTick(dt, now){
+  if (!dragging){
+    if (target !== null){ const d = target - angle; angle += d * Math.min(1, dt * 9); if (Math.abs(d) < .02){ angle = target; target = null; } }
+    else if (Math.abs(vel) > .0005){ angle += vel * dt * 1000; vel *= Math.pow(.94, dt * 60); }
+    else { vel = 0; const want = (!reduce && !hover && now > holdUntil) ? -.0045 : 0; spin += (want - spin) * Math.min(1, dt * 2.5); angle += spin * dt * 1000; }
+  }
+  paint();
 }
-function openReader(p){ lastFocus = document.activeElement; reader.hidden = false; document.body.style.overflow = 'hidden'; setPage(p); requestAnimationFrame(() => reader.classList.add('on')); document.getElementById('rClose').focus(); }
-function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = ''; setTimeout(() => reader.hidden = true, 300); if (lastFocus) lastFocus.focus(); }
-document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read); });
-document.getElementById('rClose').addEventListener('click', closeReader);
-rPrev.addEventListener('click', () => setPage(page - 1));
-rNext.addEventListener('click', () => setPage(page + 1));
-rThumbs.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) setPage(+b.dataset.p); });
-let swiped = false;
-rImg.addEventListener('click', () => { if (swiped){ swiped = false; return; } rPage.classList.toggle('zoom'); });
-addEventListener('keydown', e => { if (reader.hidden) return; if (e.key === 'Escape') closeReader(); if (e.key === 'ArrowRight') setPage(page + 1); if (e.key === 'ArrowLeft') setPage(page - 1); });
-let sx = null;
-const stage = document.getElementById('rStage');
-stage.addEventListener('pointerdown', e => { if (!rPage.classList.contains('zoom')) sx = e.clientX; });
-stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50){ swiped = true; setTimeout(() => swiped = false, 300); setPage(page + (dx < 0 ? 1 : -1)); } });
 
-route();
+/* ================= book ================= */
+const bookStage = $('bookStage'), book = $('book');
+if (fine && !reduce){
+  bookStage.addEventListener('pointermove', e => { const r = bookStage.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; book.style.setProperty('--ry', (-24 + x * 28) + 'deg'); book.style.setProperty('--rx', (8 - y * 16) + 'deg'); });
+  bookStage.addEventListener('pointerleave', () => { book.style.removeProperty('--ry'); book.style.removeProperty('--rx'); });
+}
+const toggleBook = () => book.classList.toggle('open');
+bookStage.addEventListener('click', toggleBook);
+bookStage.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleBook(); } });
+const LINES = ['Chapter 1: Motion', '', 'v = dx/dt', 'a = dv/dt', 'ΣF = ma', '', 'Energy is conserved', 'in an isolated system,'];
+const wr = $('writing'); let li = 0, ci = 0, txt = '';
+function typeStep(){
+  if (reduce){ wr.textContent = LINES.join('\n'); return; }
+  if (li >= LINES.length){ setTimeout(() => { li = 0; ci = 0; txt = ''; typeStep(); }, 2600); return; }
+  const line = LINES[li];
+  if (ci <= line.length){ wr.innerHTML = (txt + line.slice(0, ci)).replace(/</g, '&lt;') + '<span class="caret"></span>'; ci++; setTimeout(typeStep, 55 + Math.random() * 60); }
+  else { txt += line + '\n'; li++; ci = 0; setTimeout(typeStep, 260); }
+}
+let typing = false; new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !typing){ typing = true; typeStep(); } })).observe(bookStage);
+
+/* ================= contact wave ================= */
+const wave = $('wave'); let waveVisible = false;
+new IntersectionObserver(es => es.forEach(e => waveVisible = e.isIntersecting)).observe($('contact'));
+function waveTick(t){ let d = ''; for (let x = 0; x <= 1440; x += 12){ const y = 60 + Math.sin(x * .012 + t * 1.6) * 22 * Math.sin(x * .002 + t * .3); d += (x ? ' L' : 'M') + x + ' ' + y.toFixed(1); } wave.setAttribute('d', d); }
+waveTick(0);
+
+/* ================= copy ================= */
+const toast = $('toast');
+$('copy').addEventListener('click', async () => { let ok = false; try { await navigator.clipboard.writeText(LI); ok = true; } catch (_) {} toast.textContent = ok ? 'Profile link copied' : 'Copying isn’t allowed here. The link is linkedin.com/in/adammskk'; toast.classList.add('on'); setTimeout(() => toast.classList.remove('on'), 2200); });
+
+/* ================= main loop ================= */
+let prev = performance.now();
+function loop(now){
+  const dt = Math.min(.05, (now - prev) / 1000); prev = now;
+  if (labVisible) labTick(dt);
+  if (ringVisible) ringTick(dt, now);
+  if (waveVisible && !reduce) waveTick(now / 1000);
+  requestAnimationFrame(loop);
+}
+addEventListener('resize', () => { clearTimeout(loop.r); loop.r = setTimeout(() => { onResizeName(); sizeScope(); measure(); onScroll(); }, 120); });
+measure(); paint(); onScroll(); requestAnimationFrame(loop);
+document.fonts && document.fonts.ready.then(() => { measure(); fitName(); });
 })();
 </script>
 </body>
