@@ -8,7 +8,7 @@ A static site with no build step: open `index.html` in a browser, or host it as-
 - **Hero**: an interactive Ohm's law lab: switch, DC/AC source, resistor and lamp, with a live oscilloscope
 - **Experience**: physics and maths tutoring, with a timeline chart
 - **Education**: Beirut Arab University, admissions (May 2026), Université Grenoble Alpes, as a scroll-drawn timeline
-- **Certifications**: a draggable 3D ring of five credentials, with issuer logos
+- **Certifications**: a draggable 3D ring of five credentials, showing my certificates (`certs/`), with a full-size view
 - **Projects**: a classical physics book, in progress
 - **Guides**: handwritten calculus notes (34 pages) in an in-page reader
 

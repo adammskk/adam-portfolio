@@ -125,11 +125,11 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 
 /* ---------- sections ---------- */
 .sec{padding:clamp(72px,10vw,136px) 0;border-bottom:1px solid var(--rule);position:relative}
-.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 48px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:20px clamp(32px,5vw,72px);align-items:end;margin-bottom:clamp(36px,5vw,64px)}
 .sec-head h2{font-size:clamp(40px,6vw,80px);line-height:.92;font-weight:850;font-variation-settings:"wdth" 120;letter-spacing:-.03em}
 .sec-head p{color:var(--slate);max-width:32em;font-size:1.06rem}
 .num{display:block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--mute);letter-spacing:0;margin-bottom:12px}
-@media (max-width:820px){.sec-head{grid-template-columns:1fr}}
+@media (max-width:1100px){.sec-head{grid-template-columns:1fr}}
 .rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
@@ -206,6 +206,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .offer .ulogo{width:42px;height:42px;border-radius:12px}
 .offer.pick{color:var(--ink)}
 .offer.pick .ulogo{box-shadow:0 0 0 3px var(--signal),0 12px 26px -14px rgba(11,27,51,.55)}
+.tag.pick{background:var(--signal);border-color:var(--signal);color:var(--ink);font-weight:600}
 .offer.pick small{display:inline-block;margin-left:2px;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--signal)}
 @media (max-width:700px){.ulogo{width:48px;height:48px;border-radius:13px}}
 .stop .deg small{display:block;font-weight:400;color:var(--mute);font-size:14.5px}
@@ -231,29 +232,33 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .card{position:relative;display:flex;flex-direction:column;width:100%;height:100%;border:1px solid var(--rule);border-radius:22px;background:#fff;overflow:hidden;cursor:pointer;text-align:left;padding:0;transition:box-shadow .3s,border-color .3s}
 .card::after{content:"";position:absolute;inset:0;background:#fff;opacity:calc(var(--dim,0) * .7);pointer-events:none}
 .card .art{position:relative;display:block;height:54%;border-bottom:1px solid var(--rule);overflow:hidden}
+.card .art.photo{background:var(--panel);display:grid;place-items:center;padding:10px}
+.card .art.photo img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 8px 18px -10px rgba(11,27,51,.45);pointer-events:none}
 .card .art svg{display:block;width:100%;height:100%}
 .card .cb{flex:1;display:flex;flex-direction:column;padding:14px 16px 16px}
 .card .by{font-size:13px;color:var(--mute)}
 .card h3{font-size:clamp(17px,1.5vw,20px);font-weight:720;font-variation-settings:"wdth" 108;line-height:1.18;letter-spacing:-.01em;margin-top:4px}
 .card .dt{margin-top:auto;font-family:var(--mono);font-size:12.5px;color:var(--slate)}
 .slot.front .card{border-color:var(--signal);box-shadow:0 0 0 3px rgba(255,176,0,.35),0 30px 50px -28px rgba(11,27,51,.45)}
-.card .logo{position:absolute;left:12px;top:12px;width:46px;height:46px;border-radius:12px;overflow:hidden;box-shadow:0 6px 14px -6px rgba(11,27,51,.45);background:#fff}
-.card .logo img,.detail .logo img{display:block;width:100%;height:100%;object-fit:cover}
+
 .ring-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px;font-size:14px;color:var(--slate)}
 .ring-bar b{font-family:var(--mono);color:var(--ink);font-weight:500}
 .rbtn{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--rule);background:#fff;cursor:pointer;transition:background-color .2s,transform .2s}
 .rbtn:hover{background:var(--signal)}
 .rbtn:active{transform:scale(.92)}
 .rbtn svg{width:16px;height:16px}
-.detail{max-width:820px;margin:36px auto 0;display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px 24px;align-items:center;padding:8px 0}
-.detail .logo{width:64px;height:64px;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px -12px rgba(11,27,51,.5)}
+.detail{max-width:860px;margin:36px auto 0;display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px 24px;align-items:center;padding:8px 0}
+.dthumb{width:120px;height:88px;padding:6px;border:1px solid var(--rule);border-radius:14px;background:var(--panel);cursor:zoom-in;display:grid;place-items:center;transition:transform .3s var(--ease),box-shadow .3s}
+.dthumb:hover{transform:translateY(-2px);box-shadow:0 14px 26px -16px rgba(11,27,51,.5)}
+.dthumb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+.dthumb span{font-size:12px;color:var(--mute)}
 .detail .k{font-size:13px;color:var(--mute)}
 .detail h4{font-size:20px;font-weight:720;font-variation-settings:"wdth" 108;line-height:1.2;margin:2px 0 8px}
 .detail .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--slate);margin-bottom:12px}
 .detail .meta b{font-family:var(--mono);font-weight:500;color:var(--ink)}
 .swap{transition:opacity .25s,transform .25s}
 .swap.out{opacity:0;transform:translateY(6px)}
-@media (max-width:640px){.detail{grid-template-columns:52px 1fr}.detail .logo{width:52px;height:52px}.detail .btn{grid-column:1/-1;justify-self:start}}
+@media (max-width:640px){.detail{grid-template-columns:88px 1fr}.dthumb{width:88px;height:66px}.detail .btn{grid-column:1/-1;justify-self:start}}
 
 /* projects */
 .book-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
@@ -332,6 +337,14 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .r-thumbs button:hover{opacity:.85;transform:translateY(-3px)}
 .r-thumbs button.on{opacity:1;outline:2.5px solid var(--signal);outline-offset:1px}
 @media (max-width:700px){.r-stage>.r-btn{position:absolute;bottom:20px;z-index:2}.r-stage>.r-prev{left:20px}.r-stage>.r-next{right:20px}.r-stage{padding-bottom:84px}}
+
+.lb{position:fixed;inset:0;z-index:92;display:grid;place-items:center;padding:clamp(16px,5vw,64px);background:rgba(11,27,51,.88);backdrop-filter:blur(8px);opacity:0;transition:opacity .3s var(--ease)}
+.lb[hidden]{display:none}.lb.on{opacity:1}
+.lb figure{max-width:min(960px,100%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:14px;transform:scale(.96);transition:transform .4s var(--spring)}
+.lb.on figure{transform:none}
+.lb img{max-width:100%;max-height:78vh;border-radius:10px;background:#fff;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.lb figcaption{color:#e6ecf5;font-size:15px}
+.lb-x{position:absolute;top:18px;right:18px}
 
 /* contact */
 .talk{background:var(--signal);border-bottom:1.5px solid var(--ink);overflow:hidden;position:relative}
@@ -508,7 +521,7 @@ footer a{font-weight:600;color:var(--ink)}
         <div class="d"><b>Sep 2025</b>to Jun 2026<br>Beirut, Lebanon</div><span class="dot"></span>
         <div class="b">
           <span class="badge">First year completed</span>
-          <div class="uni"><span class="ulogo"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2234%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EBAU%3C/text%3E%3C/svg%3E" alt="Beirut Arab University monogram"></span><h3>Beirut Arab University</h3></div>
+          <h3>Beirut Arab University</h3>
           <div class="deg">Bachelor of Engineering, Electrical Power and Machines Engineering</div>
           <p>A first year built on engineering, physics and mathematics. Lab work and technical writing sharpened my analytical and problem-solving skills.</p>
           <details><summary>Show the 13 courses <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4.5 6 8.5l4-4"/></svg></summary>
@@ -522,10 +535,10 @@ footer a{font-weight:600;color:var(--ink)}
           <span class="badge">Milestone</span>
           <h3>Three offers, one choice</h3>
           <p>Accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble for its Electrical Energy and Control Engineering program, which fits my interests and long-term goals.</p>
-          <div class="offers">
-            <span class="offer"><span class="ulogo"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2244%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3ESU%3C/text%3E%3C/svg%3E" alt="Sorbonne Université monogram"></span>Sorbonne Université</span>
-            <span class="offer pick"><span class="ulogo"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2234%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EUGA%3C/text%3E%3C/svg%3E" alt="Université Grenoble Alpes monogram"></span>Université Grenoble Alpes <small>Chosen</small></span>
-            <span class="offer"><span class="ulogo"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2234%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EUBO%3C/text%3E%3C/svg%3E" alt="Université de Bretagne Occidentale monogram"></span>Université de Bretagne Occidentale</span>
+          <div class="tags offers">
+            <span class="tag">Sorbonne Université</span>
+            <span class="tag pick">Université Grenoble Alpes, chosen</span>
+            <span class="tag">Université de Bretagne Occidentale</span>
           </div>
         </div>
       </li>
@@ -533,7 +546,7 @@ footer a{font-weight:600;color:var(--ink)}
         <div class="d"><b>Aug 2026</b>to now<br>Grenoble, France</div><span class="dot"></span>
         <div class="b">
           <span class="badge y">Current</span>
-          <div class="uni"><span class="ulogo"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2234%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EUGA%3C/text%3E%3C/svg%3E" alt="Université Grenoble Alpes monogram"></span><h3>Université Grenoble Alpes</h3></div>
+          <h3>Université Grenoble Alpes</h3>
           <div class="deg">Bachelor of Engineering, Electrical Energy and Control Engineering<small>Énergie Électrique, Automatique</small></div>
           <p>Building analytical, design and problem-solving skills through lab work and engineering projects, across electrical energy, electronics and control.</p>
           <details><summary>Show the 12 subjects <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4.5 6 8.5l4-4"/></svg></summary>
@@ -561,7 +574,7 @@ footer a{font-weight:600;color:var(--ink)}
       <button class="rbtn" id="next" aria-label="Next certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
     </div>
     <div class="wrap"><div class="detail" aria-live="polite">
-      <div class="logo swap" id="dLogo"></div><div class="swap" id="dSwap"><div class="k" id="dBy"></div><h4 id="dName"></h4><div class="meta" id="dMeta"></div><div class="tags" id="dTags"></div></div>
+      <button class="dthumb swap" id="dLogo" aria-label="View certificate"></button><div class="swap" id="dSwap"><div class="k" id="dBy"></div><h4 id="dName"></h4><div class="meta" id="dMeta"></div><div class="tags" id="dTags"></div></div>
       <a class="btn line sm" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">Show credential</a>
     </div></div>
   </div>
@@ -645,6 +658,7 @@ footer a{font-weight:600;color:var(--ink)}
 
 <footer><div class="wrap"><span>Adam El Sakka, Grenoble, France. This site sets no cookies and uses no analytics or tracking. University, company and product names are trademarks of their respective owners, used only to say where I studied and who issued my certificates. No affiliation or endorsement is implied.</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
 <div class="toast" id="toast" role="status"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate" hidden><button class="r-btn lb-x" id="lbX" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l10 10M13 3 3 13"/></svg></button><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure></div>
 <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Calculus notes" hidden>
   <div class="r-top">
     <div class="r-title"><b>Calculus, by hand</b><span id="rChap"></span></div>
@@ -823,7 +837,7 @@ const ARTS = {
   sat(){ return svgA(`<line x1="60" y1="190" x2="350" y2="190" stroke="${NAVY}" stroke-width="2"/><line x1="80" y1="210" x2="80" y2="40" stroke="${NAVY}" stroke-width="2"/><path d="M80 190 L320 190 L320 60 Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M300 190 V170 H320" fill="none" stroke="${NAVY}" stroke-width="1.6"/><path d="M122 190 A42 42 0 0 0 117 170" fill="none" stroke="${NAVY}" stroke-width="1.6"/><text x="130" y="181" font-family="IBM Plex Mono, monospace" font-size="16" fill="${NAVY}">θ</text>`); },
   delf(){ return svgA(`<path d="M70 50 H330 a14 14 0 0 1 14 14 V150 a14 14 0 0 1 -14 14 H150 L110 200 L114 164 H70 a14 14 0 0 1 -14 -14 V64 a14 14 0 0 1 14 -14Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><text x="200" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-style="italic" font-weight="700" font-size="38" fill="${NAVY}">Bonjour</text>`); }
 };
-const LOGO = {"umich": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2244%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EUM%3C/text%3E%3C/svg%3E", "dassault": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2244%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EDS%3C/text%3E%3C/svg%3E", "mathworks": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2244%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EMW%3C/text%3E%3C/svg%3E", "collegeboard": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2244%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3ECB%3C/text%3E%3C/svg%3E", "ifl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%230b1b33%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2274%22%20width%3D%2256%22%20height%3D%225%22%20rx%3D%222.5%22%20fill%3D%22%23ffb000%22/%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%20font-family%3D%22Archivo%2CArial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2234%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221%22%3EIFL%3C/text%3E%3C/svg%3E"};
+const CERTIMG = {umich:'certs/rocket.jpg', dassault:'certs/solidworks.jpg', mathworks:'certs/matlab.jpg', collegeboard:'certs/sat.jpg'};
 const CERTS = [
   { name:'Rocket Science 101 Specialization', by:'University of Michigan, Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', art:'orbit', logo:'umich', skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics'] },
   { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F', art:'cad', logo:'dassault', skills:['SOLIDWORKS','CAD','3D modeling'] },
@@ -835,7 +849,7 @@ let uid = 0; const uniq = s => { const u = '_' + (++uid); return s.replace(/id="
 const ring = $('ring'), stage = $('stage'), cat = $('cat');
 const total = CERTS.length, copies = 3;
 let html = '';
-for (let c = 0; c < copies; c++) CERTS.forEach(ct => { html += `<li class="slot"${c ? ' aria-hidden="true"' : ''}><button class="card"${c ? ' tabindex="-1"' : ''} aria-label="${ct.name}"><span class="art">${uniq(ARTS[ct.art]())}<span class="logo"><img src="${LOGO[ct.logo]}" alt=""></span></span><span class="cb"><span class="by">${ct.by}</span><h3>${ct.name}</h3><span class="dt">Issued ${ct.date}</span></span></button></li>`; });
+for (let c = 0; c < copies; c++) CERTS.forEach(ct => { html += `<li class="slot"${c ? ' aria-hidden="true"' : ''}><button class="card"${c ? ' tabindex="-1"' : ''} aria-label="${ct.name}"><span class="art${CERTIMG[ct.logo] ? ' photo' : ''}">${CERTIMG[ct.logo] ? `<img src="${CERTIMG[ct.logo]}" alt="${ct.name} certificate" loading="lazy" draggable="false">` : uniq(ARTS[ct.art]())}</span><span class="cb"><span class="by">${ct.by}</span><h3>${ct.name}</h3><span class="dt">Issued ${ct.date}</span></span></button></li>`; });
 ring.innerHTML = html;
 const slots = [...ring.children], N = slots.length, STEP = 360 / N;
 slots.forEach((s, i) => s.style.setProperty('--i', i)); ring.style.setProperty('--step', STEP + 'deg');
@@ -859,7 +873,7 @@ function showDetail(k){
     $('dBy').textContent = c.by; $('dName').textContent = c.name;
     $('dMeta').innerHTML = `<span>Issued <b>${c.date}</b></span>` + (c.id ? `<span>Credential ID <b>${c.id}</b></span>` : '');
     $('dTags').innerHTML = c.skills.map(s => `<span class="tag">${s}</span>`).join('');
-    lg.innerHTML = `<img src="${LOGO[c.logo]}" alt="">`;
+    lg.innerHTML = CERTIMG[c.logo] ? `<img src="${CERTIMG[c.logo]}" alt="">` : '<span>No image</span>'; lg.dataset.img = CERTIMG[c.logo] || ''; lg.dataset.name = c.name;
     sw2.classList.remove('out'); lg.classList.remove('out'); }, reduce ? 0 : 180);
 }
 function stepTo(dir){ holdUntil = performance.now() + 6000; vel = 0; spin = 0; const base = target !== null ? target : angle; target = Math.round(base / STEP) * STEP - dir * STEP; }
@@ -960,6 +974,16 @@ addEventListener('keydown', e => { if (reader.hidden) return; if (e.key === 'Esc
 let rsx = null;
 $('rStage').addEventListener('pointerdown', e => { if (!rPage.classList.contains('zoom')) rsx = e.clientX; });
 $('rStage').addEventListener('pointerup', e => { if (rsx === null) return; const dx = e.clientX - rsx; rsx = null; if (Math.abs(dx) > 50){ swiped = true; setTimeout(() => swiped = false, 300); setPage(page + (dx < 0 ? 1 : -1)); } });
+
+/* ================= certificate lightbox ================= */
+const lb = $('lb');
+function openLB(src, cap){ if (!src) return; $('lbImg').src = src; $('lbImg').alt = cap + ' certificate'; $('lbCap').textContent = cap; lb.hidden = false; requestAnimationFrame(() => lb.classList.add('on')); $('lbX').focus(); }
+function closeLB(){ lb.classList.remove('on'); setTimeout(() => lb.hidden = true, 300); }
+$('dLogo').addEventListener('click', e => { const b = e.currentTarget; openLB(b.dataset.img, b.dataset.name); });
+$('lbX').addEventListener('click', closeLB);
+lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+addEventListener('keydown', e => { if (!lb.hidden && e.key === 'Escape') closeLB(); });
+stage.addEventListener('click', e => { if (moved > 6) return; const s = e.target.closest('.slot'); if (s && s.classList.contains('front')){ const c = CERTS[slots.indexOf(s) % total]; openLB(CERTIMG[c.logo], c.name); } });
 
 /* ================= main loop ================= */
 let prev = performance.now();
