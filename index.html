@@ -346,6 +346,66 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .lb figcaption{color:#e6ecf5;font-size:15px}
 .lb-x{position:absolute;top:18px;right:18px}
 
+/* certification pages */
+.cpage{position:fixed;inset:0;z-index:85;overflow-y:auto;overscroll-behavior:contain;background:#fff;transform:translateY(40px);opacity:0;transition:transform .55s var(--ease-out,cubic-bezier(.16,1,.3,1)),opacity .4s}
+.cpage[hidden]{display:none}
+.cpage.on{transform:none;opacity:1}
+.cp-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:14px;height:64px;padding:0 var(--edge);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.cp-back{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--rule);background:#fff;font-weight:600;font-size:14.5px;cursor:pointer;transition:background-color .2s}
+.cp-back:hover{background:var(--panel)}
+.cp-back svg,.cp-nav svg{width:15px;height:15px}
+.cp-crumb{font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp-nav{margin-left:auto;display:flex;gap:8px}
+.cp-nav a{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--rule);text-decoration:none;transition:background-color .2s}
+.cp-nav a:hover{background:var(--signal)}
+.cp-in{max-width:1180px;margin:0 auto;padding:clamp(32px,5vw,64px) var(--edge) 96px}
+.cp-hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.cp-kick{font-size:15px;color:var(--slate)}
+.cp-hero h1{font-size:clamp(34px,3.6vw,54px);line-height:1;overflow-wrap:anywhere;font-weight:850;font-variation-settings:"wdth" 118;letter-spacing:-.025em;margin:12px 0 22px}
+.cp-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px;margin-bottom:26px}
+.cp-meta small{display:block;font-size:13px;color:var(--mute)}
+.cp-meta b{font-weight:600;font-size:15.5px}
+.cp-meta b.mono{font-family:var(--mono);font-weight:500}
+.cp-ctas{display:flex;flex-wrap:wrap;gap:10px}
+.cp-doc{position:relative;display:block;width:100%;padding:16px;border:0;border-radius:24px;background:var(--panel);cursor:zoom-in}
+.cp-doc img{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;border-radius:8px;box-shadow:0 30px 60px -30px rgba(11,27,51,.5);transition:transform .5s var(--spring)}
+.cp-doc:hover img{transform:scale(1.015) rotate(-.4deg)}
+.cp-doc span{position:absolute;right:26px;bottom:24px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:#fff;box-shadow:0 6px 16px -8px rgba(11,27,51,.5)}
+.cp-sec{margin-top:clamp(56px,7vw,96px)}
+.cp-sec h2{font-size:clamp(26px,2.8vw,36px);line-height:1.1;font-weight:800;font-variation-settings:"wdth" 116;letter-spacing:-.015em;margin-bottom:18px}
+.cp-sec p.lead{color:var(--slate);max-width:46em;margin-bottom:18px}
+.cp-list{list-style:none;counter-reset:c;display:grid;gap:10px}
+.cp-list li{counter-increment:c;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:var(--panel);opacity:0;transform:translateY(14px);animation:cpin .6s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * 60ms)}
+.cp-list li::before{content:counter(c,decimal-leading-zero);font-family:var(--mono);font-size:13px;color:var(--mute)}
+.cp-list li b{font-weight:600}
+.cp-list li span{font-size:13.5px;color:var(--mute)}
+@keyframes cpin{to{opacity:1;transform:none}}
+.cp-bar-row{display:grid;grid-template-columns:minmax(0,1fr) 46px;align-items:center;gap:10px;margin-top:6px}
+.cp-pbar{height:8px;border-radius:999px;background:var(--grid);overflow:hidden}
+.cp-pbar i{display:block;height:100%;width:0;border-radius:999px;background:var(--signal);transition:width 1.2s var(--ease);transition-delay:calc(.3s + var(--i) * 60ms)}
+.cpage.on .cp-pbar i{width:var(--w)}
+.cp-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cp-score{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cp-score div{padding:22px;border-radius:20px;background:var(--panel)}
+.cp-score small{display:block;font-size:13.5px;color:var(--slate)}
+.cp-score b{display:block;font-size:clamp(40px,4.4vw,60px);font-weight:850;font-variation-settings:"wdth" 118;line-height:1;margin:8px 0 6px}
+.cp-score em{font-style:normal;font-size:13.5px;color:var(--mute)}
+.cp-docs{display:flex;flex-wrap:wrap;gap:14px}
+.cp-docs button{width:220px;padding:10px;border:1px solid var(--rule);border-radius:16px;background:#fff;cursor:zoom-in;text-align:left;transition:transform .3s var(--ease),box-shadow .3s}
+.cp-docs button:hover{transform:translateY(-3px);box-shadow:0 18px 30px -18px rgba(11,27,51,.45)}
+.cp-docs img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--panel);border-radius:10px}
+.cp-docs span{display:block;font-size:13.5px;font-weight:600;margin-top:8px}
+.cp-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(56px,7vw,96px)}
+.cp-pager a{display:block;padding:20px 22px;border-radius:18px;border:1px solid var(--rule);text-decoration:none;transition:background-color .2s,transform .3s var(--ease)}
+.cp-pager a:hover{background:var(--signal-soft);transform:translateY(-2px)}
+.cp-pager a:last-child{text-align:right}
+.cp-pager small{display:block;font-size:13px;color:var(--mute)}
+.cp-pager b{font-size:17px;font-weight:650}
+.cp-rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.cpage.on .cp-rv{opacity:1;transform:none}
+.lb{z-index:95}
+@media (max-width:860px){.cp-hero,.cp-two,.cp-score{grid-template-columns:1fr}.cp-meta{grid-template-columns:1fr 1fr}.cp-list li{grid-template-columns:34px minmax(0,1fr)}.cp-list li span{grid-column:2}.cp-crumb{display:none}}
+
 /* contact */
 .talk{background:var(--signal);border-bottom:1.5px solid var(--ink);overflow:hidden;position:relative}
 .talk .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 48px;align-items:center;padding-top:clamp(64px,8vw,110px);padding-bottom:clamp(64px,8vw,110px)}
@@ -563,7 +623,7 @@ footer a{font-weight:600;color:var(--ink)}
   <div class="wrap">
     <div class="sec-head">
       <div><span class="num">03</span><h2 class="split">Certifications</h2></div>
-      <p class="rv">Five credentials, from rocket science to French. Drag the ring, use the arrows, or click a card to bring it to the front.</p>
+      <p class="rv">Five credentials, from rocket science to French. Drag the ring or use the arrows, and click any certificate to see everything about it.</p>
     </div>
   </div>
   <div class="cat rv" id="cat">
@@ -575,7 +635,7 @@ footer a{font-weight:600;color:var(--ink)}
     </div>
     <div class="wrap"><div class="detail" aria-live="polite">
       <button class="dthumb swap" id="dLogo" aria-label="View certificate"></button><div class="swap" id="dSwap"><div class="k" id="dBy"></div><h4 id="dName"></h4><div class="meta" id="dMeta"></div><div class="tags" id="dTags"></div></div>
-      <a class="btn line sm" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">Show credential</a>
+      <a class="btn sig sm" id="dOpen" href="#cert-rocket">View details</a>
     </div></div>
   </div>
 </section>
@@ -658,6 +718,14 @@ footer a{font-weight:600;color:var(--ink)}
 
 <footer><div class="wrap"><span>Adam El Sakka, Grenoble, France. This site sets no cookies and uses no analytics or tracking. University, company and product names are trademarks of their respective owners, used only to say where I studied and who issued my certificates. No affiliation or endorsement is implied.</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
 <div class="toast" id="toast" role="status"></div>
+<div class="cpage" id="cpage" role="dialog" aria-modal="true" aria-labelledby="cpTitle" hidden>
+  <div class="cp-bar">
+    <button class="cp-back" id="cpBack"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg>All certifications</button>
+    <span class="cp-crumb" id="cpCrumb"></span>
+    <nav class="cp-nav" aria-label="Other certifications"><a id="cpPrev" href="#" aria-label="Previous certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg></a><a id="cpNext" href="#" aria-label="Next certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></nav>
+  </div>
+  <div class="cp-in" id="cpBody"></div>
+</div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate" hidden><button class="r-btn lb-x" id="lbX" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l10 10M13 3 3 13"/></svg></button><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure></div>
 <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Calculus notes" hidden>
   <div class="r-top">
@@ -839,11 +907,11 @@ const ARTS = {
 };
 const CERTIMG = {umich:'certs/rocket.jpg', dassault:'certs/solidworks.jpg', mathworks:'certs/matlab.jpg', collegeboard:'certs/sat.jpg'};
 const CERTS = [
-  { name:'Rocket Science 101 Specialization', by:'University of Michigan, Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', art:'orbit', logo:'umich', skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics'] },
-  { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F', art:'cad', logo:'dassault', skills:['SOLIDWORKS','CAD','3D modeling'] },
-  { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'', art:'matlab', logo:'mathworks', skills:['MATLAB','Arrays and matrices','Data visualization','Data analysis'] },
-  { name:'SAT', by:'College Board', date:'Dec 2024', id:'', art:'sat', logo:'collegeboard', skills:['Advanced mathematics','Algebra','Geometry','Trigonometry'] },
-  { name:'DELF B2', by:'Institut français du Liban', date:'Dec 2024', id:'', art:'delf', logo:'ifl', skills:['French','Written communication','Reading comprehension'] }
+  { name:'Rocket Science 101 Specialization', by:'University of Michigan, Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', art:'orbit', logo:'umich', slug:'rocket', skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics'] },
+  { name:'SOLIDWORKS 3D CAD for Education Specialization', by:'Dassault Systèmes', date:'Aug 2026', id:'RGR29KUBJI5F', art:'cad', logo:'dassault', slug:'solidworks', skills:['SOLIDWORKS','CAD','3D modeling'] },
+  { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'', art:'matlab', logo:'mathworks', slug:'matlab', skills:['MATLAB','Arrays and matrices','Data visualization','Data analysis'] },
+  { name:'SAT', by:'College Board', date:'Dec 2024', id:'', art:'sat', logo:'collegeboard', slug:'sat', skills:['Advanced mathematics','Algebra','Geometry','Trigonometry'] },
+  { name:'DELF B2', by:'Institut français du Liban', date:'Dec 2024', id:'', art:'delf', logo:'ifl', slug:'delf', skills:['French','Written communication','Reading comprehension'] }
 ];
 let uid = 0; const uniq = s => { const u = '_' + (++uid); return s.replace(/id="([\w-]+)"/g, 'id="$1' + u + '"').replace(/url\(#([\w-]+)\)/g, 'url(#$1' + u + ')'); };
 const ring = $('ring'), stage = $('stage'), cat = $('cat');
@@ -873,7 +941,7 @@ function showDetail(k){
     $('dBy').textContent = c.by; $('dName').textContent = c.name;
     $('dMeta').innerHTML = `<span>Issued <b>${c.date}</b></span>` + (c.id ? `<span>Credential ID <b>${c.id}</b></span>` : '');
     $('dTags').innerHTML = c.skills.map(s => `<span class="tag">${s}</span>`).join('');
-    lg.innerHTML = CERTIMG[c.logo] ? `<img src="${CERTIMG[c.logo]}" alt="">` : '<span>No image</span>'; lg.dataset.img = CERTIMG[c.logo] || ''; lg.dataset.name = c.name;
+    lg.innerHTML = CERTIMG[c.logo] ? `<img src="${CERTIMG[c.logo]}" alt="">` : '<span>No image</span>'; lg.dataset.img = CERTIMG[c.logo] || ''; lg.dataset.name = c.name; $('dOpen').href = '#cert-' + c.slug;
     sw2.classList.remove('out'); lg.classList.remove('out'); }, reduce ? 0 : 180);
 }
 function stepTo(dir){ holdUntil = performance.now() + 6000; vel = 0; spin = 0; const base = target !== null ? target : angle; target = Math.round(base / STEP) * STEP - dir * STEP; }
@@ -891,9 +959,8 @@ function release(e){ if (pid !== e.pointerId) return; pid = null; if (dragging){
 addEventListener('pointerup', release); addEventListener('pointercancel', release);
 stage.addEventListener('click', e => {
   if (moved > 6){ e.preventDefault(); e.stopPropagation(); return; }
-  const s = e.target.closest('.slot'); if (!s) return;
-  const i = slots.indexOf(s); holdUntil = performance.now() + 7000; vel = 0; spin = 0;
-  target = angle - wrapD(i * STEP + angle);
+  const sl = e.target.closest('.slot'); if (!sl) return;
+  location.hash = 'cert-' + CERTS[slots.indexOf(sl) % total].slug;
 }, true);
 addEventListener('keydown', e => { const r = cat.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return; if (e.key === 'ArrowRight') stepTo(1); if (e.key === 'ArrowLeft') stepTo(-1); });
 let ringVisible = false; new IntersectionObserver(es => es.forEach(e => ringVisible = e.isIntersecting)).observe(cat);
@@ -979,11 +1046,102 @@ $('rStage').addEventListener('pointerup', e => { if (rsx === null) return; const
 const lb = $('lb');
 function openLB(src, cap){ if (!src) return; $('lbImg').src = src; $('lbImg').alt = cap + ' certificate'; $('lbCap').textContent = cap; lb.hidden = false; requestAnimationFrame(() => lb.classList.add('on')); $('lbX').focus(); }
 function closeLB(){ lb.classList.remove('on'); setTimeout(() => lb.hidden = true, 300); }
-$('dLogo').addEventListener('click', e => { const b = e.currentTarget; openLB(b.dataset.img, b.dataset.name); });
+$('dLogo').addEventListener('click', () => location.hash = 'cert-' + CERTS[shown].slug);
 $('lbX').addEventListener('click', closeLB);
 lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
 addEventListener('keydown', e => { if (!lb.hidden && e.key === 'Escape') closeLB(); });
-stage.addEventListener('click', e => { if (moved > 6) return; const s = e.target.closest('.slot'); if (s && s.classList.contains('front')){ const c = CERTS[slots.indexOf(s) % total]; openLB(CERTIMG[c.logo], c.name); } });
+
+/* ================= certification pages ================= */
+const CP = {
+  rocket: {
+    kick:'University of Michigan, on Coursera', title:'Rocket Science 101 Specialization',
+    meta:[['Issued','2 July 2026'],['Credential ID','MBLQOVFHSK82',1],['Format','Online specialization, 3 courses'],['Instructor','Dr. Aaron Ridley']],
+    verify:'https://coursera.org/verify/specialization/MBLQOVFHSK82',
+    doc:'certs/full/rocket.jpg', docs:[['certs/full/rocket.jpg','Specialization certificate']],
+    about:'A three-course specialization from the University of Michigan, taught by Dr. Aaron Ridley, Professor of Climate and Space Sciences and Engineering. It covers the basics of rocket science, the history of rocketry around the world, and how rocket science shows up in everyday life, with skills in rocket mechanics, space engineering, physics and astronomy. Understanding was assessed through multiple-choice questions.',
+    listTitle:'The 3 courses', list:['The Basics of Rocket Science','The History of Rocket Science','Rocket Science in Everyday Life'],
+    skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics','Mechanics','Astronomy']
+  },
+  solidworks: {
+    kick:'Dassault Systèmes (SOLIDWORKS), on Coursera', title:'SOLIDWORKS 3D CAD for Education Specialization',
+    meta:[['Issued','20 August 2026'],['Credential ID','RGR29KUBJI5F',1],['Format','Online specialization, 5 courses'],['Issued by','SOLIDWORKS']],
+    verify:'https://coursera.org/verify/specialization/RGR29KUBJI5F',
+    doc:'certs/full/solidworks.jpg', docs:[['certs/full/solidworks.jpg','Specialization certificate']],
+    about:'A five-course specialization in 3D CAD with SOLIDWORKS: sketching, 3D modelling, applying features, creating patterns and designing assemblies. Hands-on projects throughout gave practical experience solving real-world CAD problems, ending with assemblies and exam-level part modelling.',
+    listTitle:'The 5 courses', list:['SOLIDWORKS Foundations: Sketching and Extrusion','SOLIDWORKS Advanced Sketching and Reference Geometry','SOLIDWORKS Revolution and Cut Features','SOLIDWORKS Feature Patterns and Sweeps','SOLIDWORKS Assemblies and Exam Level Part Modeling'],
+    skills:['SOLIDWORKS','CAD','3D modeling','Sketching','Assembly design']
+  },
+  matlab: {
+    kick:'MathWorks', title:'MATLAB Onramp',
+    meta:[['Completed','19 July 2026'],['Progress','100% complete'],['Format','Self-paced training course'],['Chapters','14 of 14']],
+    doc:'certs/full/matlab.jpg', docs:[['certs/full/matlab.jpg','Course completion certificate'],['certs/full/matlab-progress.jpg','Progress report']],
+    about:'MathWorks’ introductory, self-paced MATLAB course. I completed all 14 chapters, from the desktop and editor through vectors, matrices, indexing, calculations, plotting, data import, logical arrays and programming, to a final project.',
+    progress:['Course Overview','Commands','MATLAB Desktop and Editor','Vectors and Matrices','Array Indexing and Modification','Array Calculations','Function Calls','Documentation','Plots','Data Import','Logical Arrays','Programming','Final Project','Conclusion'],
+    skills:['MATLAB','Arrays and matrices','Mathematical computations','Data visualization','Data analysis']
+  },
+  sat: {
+    kick:'College Board', title:'SAT',
+    meta:[['Test date','7 December 2024'],['Grade','12'],['Total score','1100 of 1600'],['Percentile','63rd']],
+    doc:'certs/full/sat.jpg', docs:[['certs/full/sat.jpg','Score report (record locator hidden)']],
+    about:'The digital SAT, taken in December 2024 in grade 12. Percentiles compare with 12th-grade test takers from the past three years who scored the same as or below me.',
+    scores:[['Total score','1100','400–1600 · 63rd percentile · range 1060–1140'],['Math','620','200–800 · 81st percentile'],['Reading and Writing','480','200–800 · 38th percentile']],
+    domains:[['Algebra','610–670',.78],['Advanced Math','610–670',.78],['Problem-Solving and Data Analysis','470–540',.55],['Geometry and Trigonometry','680–800',.92],['Information and Ideas','490–540',.58],['Craft and Structure','420–480',.45],['Expression of Ideas','420–480',.45],['Standard English Conventions','490–540',.58]],
+    skills:['Advanced mathematics','Algebra','Geometry','Trigonometry','Data analysis']
+  },
+  delf: {
+    kick:'Institut français du Liban', title:'DELF B2',
+    meta:[['Issued','December 2024'],['Level','B2, upper intermediate'],['Language','French'],['Awarded through','Institut français du Liban']],
+    about:'The DELF B2 is the official French-language diploma awarded by France’s Ministry of Education. Level B2 on the Common European Framework of Reference means I can work and study comfortably in French, which I now do every day in Grenoble.',
+    skills:['French','Written communication','Reading comprehension','Oral comprehension']
+  }
+};
+const ORDER = ['rocket','solidworks','matlab','sat','delf'];
+const cpage = $('cpage'), cpBody = $('cpBody');
+let cpOpen = false, cpReturn = 0;
+const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>';
+function renderCP(slug){
+  const c = CP[slug], i = ORDER.indexOf(slug), prev = ORDER[(i + ORDER.length - 1) % ORDER.length], next = ORDER[(i + 1) % ORDER.length];
+  $('cpCrumb').textContent = 'Certifications / ' + c.title;
+  $('cpPrev').href = '#cert-' + prev; $('cpNext').href = '#cert-' + next;
+  let h = `<div class="cp-hero"><div>
+    <div class="cp-kick cp-rv">${c.kick}</div>
+    <h1 id="cpTitle" class="cp-rv" style="--d:.06s">${c.title}</h1>
+    <div class="cp-meta cp-rv" style="--d:.12s">${c.meta.map(m => `<div><small>${m[0]}</small><b${m[2] ? ' class="mono"' : ''}>${m[1]}</b></div>`).join('')}</div>
+    <div class="cp-ctas cp-rv" style="--d:.18s">${c.verify ? `<a class="btn sig" href="${c.verify}" target="_blank" rel="noopener">Verify on Coursera ${arrow}</a>` : ''}<a class="btn line" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">See it on LinkedIn ${arrow}</a></div>
+  </div>
+  ${c.doc ? `<button class="cp-doc cp-rv" style="--d:.1s" data-zoom="${c.doc}" data-cap="${c.title}"><img src="${c.doc}" alt="${c.title} certificate"><span>Click to enlarge</span></button>` : `<div class="cp-doc cp-rv" style="--d:.1s;cursor:default;display:grid;place-items:center;min-height:300px">${uniq(ARTS.delf())}</div>`}
+  </div>`;
+  h += `<section class="cp-sec cp-rv" style="--d:.24s"><h2>About</h2><p class="lead">${c.about}</p></section>`;
+  if (c.list) h += `<section class="cp-sec"><h2>${c.listTitle}</h2><ol class="cp-list">${c.list.map((x, k) => `<li style="--i:${k}"><b>${x}</b><span>Completed</span></li>`).join('')}</ol></section>`;
+  if (c.progress) h += `<section class="cp-sec"><h2>Progress: 14 of 14 chapters</h2><div class="cp-two">${c.progress.map((x, k) => `<div class="cp-list-item" style="--i:${k}"><b style="font-weight:600;font-size:15px">${pad2(k + 1)}. ${x}</b><div class="cp-bar-row"><div class="cp-pbar"><i style="--w:100%;--i:${k}"></i></div><span style="font-family:var(--mono);font-size:13px">100%</span></div></div>`).join('')}</div></section>`;
+  if (c.scores) h += `<section class="cp-sec"><h2>Scores</h2><div class="cp-score">${c.scores.map(x => `<div><small>${x[0]}</small><b>${x[1]}</b><em>${x[2]}</em></div>`).join('')}</div></section>
+    <section class="cp-sec"><h2>Performance by skill area</h2><p class="lead">The score band for each of the 8 content domains on the test.</p><div class="cp-two">${c.domains.map((d, k) => `<div><b style="font-weight:600;font-size:15px">${d[0]}</b><div class="cp-bar-row"><div class="cp-pbar"><i style="--w:${Math.round(d[2] * 100)}%;--i:${k}"></i></div><span style="font-family:var(--mono);font-size:12.5px;white-space:nowrap">${d[1]}</span></div></div>`).join('')}</div></section>`;
+  h += `<section class="cp-sec"><h2>Skills</h2><div class="tags">${c.skills.map(x => `<span class="tag">${x}</span>`).join('')}</div></section>`;
+  if (c.docs) h += `<section class="cp-sec"><h2>Documents</h2><div class="cp-docs">${c.docs.map(d => `<button data-zoom="${d[0]}" data-cap="${c.title}: ${d[1]}"><img src="${d[0]}" alt="" loading="lazy"><span>${d[1]}</span></button>`).join('')}</div></section>`;
+  h += `<nav class="cp-pager"><a href="#cert-${prev}"><small>Previous</small><b>${CP[prev].title}</b></a><a href="#cert-${next}"><small>Next</small><b>${CP[next].title}</b></a></nav>`;
+  cpBody.innerHTML = h;
+}
+function openCP(slug){
+  if (!cpOpen){ cpReturn = scrollY; }
+  renderCP(slug); cpage.scrollTop = 0;
+  cpage.classList.remove('on'); cpage.hidden = false; document.body.style.overflow = 'hidden'; cpOpen = true;
+  requestAnimationFrame(() => requestAnimationFrame(() => cpage.classList.add('on')));
+  $('cpBack').focus({ preventScroll: true });
+  document.title = CP[slug].title + ', Adam El Sakka';
+}
+function closeCP(){
+  if (!cpOpen) return; cpOpen = false;
+  cpage.classList.remove('on'); document.body.style.overflow = '';
+  setTimeout(() => { cpage.hidden = true; }, 450);
+  document.title = 'Adam El Sakka, electrical engineering student';
+  scrollTo(0, cpReturn || document.getElementById('certifications').offsetTop);
+}
+function routeCP(){ const m = location.hash.match(/^#cert-([a-z]+)$/); if (m && CP[m[1]]) openCP(m[1]); else closeCP(); }
+addEventListener('hashchange', routeCP);
+$('cpBack').addEventListener('click', () => { history.pushState('', '', location.pathname + location.search + '#certifications'); closeCP(); });
+addEventListener('keydown', e => { if (cpOpen && lb.hidden && e.key === 'Escape') $('cpBack').click(); });
+cpBody.addEventListener('click', e => { const z = e.target.closest('[data-zoom]'); if (z) openLB(z.dataset.zoom, z.dataset.cap); });
+routeCP();
 
 /* ================= main loop ================= */
 let prev = performance.now();
