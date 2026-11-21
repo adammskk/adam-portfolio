@@ -692,6 +692,8 @@ footer a{font-weight:600;color:var(--ink)}
 .card .art.photo{display:block;padding:0}
 .card .art.photo img{position:absolute;left:10px;top:10px;width:calc(100% - 20px);height:calc(100% - 20px);max-width:none;max-height:none;object-fit:contain;border-radius:0;box-shadow:none;filter:drop-shadow(0 8px 12px rgba(11,27,51,.28))}
 
+.mk-sep{width:1px;height:18px;background:var(--rule);margin:0 14px;flex:none}
+.mk-role{font-weight:500;font-size:14px;font-variation-settings:"wdth" 100;text-transform:none;letter-spacing:0;color:var(--slate)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
@@ -703,7 +705,7 @@ footer a{font-weight:600;color:var(--ink)}
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="mark" href="#about" aria-label="Engineer Adam El Sakka, back to the top">Engineer Adam El Sakka</a>
+    <a class="mark" href="#about" aria-label="Adam El Sakka, Electrical Engineer, back to the top">Adam El Sakka<span class="mk-sep" aria-hidden="true"></span><span class="mk-role">Electrical Engineer</span></a>
   </div>
   <div class="prog" id="prog"></div>
 </header>
