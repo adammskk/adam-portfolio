@@ -696,6 +696,11 @@ footer a{font-weight:600;color:var(--ink)}
 .mk-role{font-weight:500;font-size:14px;font-variation-settings:"wdth" 100;text-transform:none;letter-spacing:0;color:var(--slate)}
 .top .wrap{justify-content:center}
 .top .mark{margin-right:0}
+/* photo: shown as a background behind a transparent shield, so there is no image to right-click, drag or long-press save */
+.ab-photo{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.ab-photo .ph{width:100%;aspect-ratio:4/5;background:url(img/adam-2026.jpg) center/cover no-repeat;transition:transform 1.2s var(--ease)}
+.ab-photo:hover .ph{transform:scale(1.03)}
+.ab-photo .ph-shield{position:absolute;inset:0;z-index:1}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
@@ -720,7 +725,7 @@ footer a{font-weight:600;color:var(--ink)}
   <div class="wrap">
     <div class="name-wrap"><h1 class="name" id="name" aria-label="Hi, I’m Adam El Sakka"></h1></div>
     <div class="ab-grid">
-      <figure class="ab-photo"><img src="img/adam-2026.jpg" alt="Adam El Sakka" width="960" height="1200"></figure>
+      <figure class="ab-photo" oncontextmenu="return false"><div class="ph" role="img" aria-label="Adam El Sakka"></div><span class="ph-shield" aria-hidden="true"></span></figure>
       <div class="ab-text">
         <p class="ab-lead fade-up" style="--d:.7s">I’m an electrical engineering student at Université Grenoble Alpes, electronics, energy systems, automatic control and space technology.</p>
         <p class="fade-up" style="--d:.8s">I started engineering at Beirut Arab University, in Electrical Power and Machines Engineering. My first year was all foundations: electric circuits, classical physics, electricity and magnetism, calculus, linear algebra and differential equations.</p>
