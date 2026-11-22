@@ -583,6 +583,37 @@ html{scroll-behavior:smooth}
 .g-stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 4px;font-size:14.5px;color:var(--slate)}
 .g-stats b{font-family:var(--mono);font-weight:500;color:var(--ink)}
 .guide+.guide{margin-top:22px}
+/* library: bookshelf */
+.lib-hint{margin:-12px 0 22px;color:var(--slate);font-size:15.5px}
+.bookcase{position:relative;margin:0 0 clamp(28px,4vw,44px);padding:56px clamp(14px,3vw,34px) 0;border-radius:26px 26px 12px 12px;background:linear-gradient(180deg,var(--panel),var(--grid));box-shadow:inset 0 0 0 1.5px var(--rule)}
+.case-label{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:4px 14px;border-radius:6px;background:#fff;border:1px solid var(--rule);box-shadow:0 6px 14px -10px rgba(11,27,51,.5);font-family:var(--mono);font-size:12px;color:var(--slate);white-space:nowrap}
+.case-label b{font-weight:500;color:var(--ink)}
+.shelf{display:flex;align-items:flex-end;justify-content:center;gap:7px;min-height:380px;padding:30px 10px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.shelf::-webkit-scrollbar{display:none}
+.plank{position:relative;height:22px;margin:0 calc(-1 * clamp(14px,3vw,34px));border-radius:0 0 12px 12px;background:var(--ink);box-shadow:inset 0 3px 0 rgba(255,255,255,.14),0 22px 30px -20px rgba(11,27,51,.75)}
+.lbook{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:space-between;width:var(--w,84px);height:var(--h,340px);padding:18px 0 14px;border:0;border-radius:6px 6px 2px 2px;background:var(--c);color:var(--fg);font:inherit;cursor:pointer;transform-origin:50% 100%;box-shadow:inset 5px 0 0 rgba(255,255,255,.12),inset -8px 0 12px rgba(0,0,0,.18),0 12px 20px -14px rgba(11,27,51,.7);transition:transform .5s var(--spring),box-shadow .3s}
+.lbook::before,.lbook::after{content:"";position:absolute;left:0;right:0;height:3px;background:var(--band);box-shadow:0 7px 0 var(--band)}
+.lbook::before{top:46px}.lbook::after{bottom:66px}
+.lbook:hover{transform:translateY(-10px)}
+.lbook[aria-selected="true"]{transform:translateY(-28px);box-shadow:inset 5px 0 0 rgba(255,255,255,.12),inset -8px 0 12px rgba(0,0,0,.18),0 34px 34px -22px rgba(11,27,51,.75)}
+.lbook:focus-visible{outline-offset:4px;border-radius:6px}
+.b-top{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.b-title{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:20px 0;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:820;font-variation-settings:"wdth" 78;font-size:21px;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;white-space:nowrap}
+.b-call{width:calc(100% - 22px);padding:5px 4px;border-radius:3px;background:#fff;color:var(--ink);font-family:var(--mono);font-size:10.5px;line-height:1.3;text-align:center;box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.b-rib{position:absolute;top:-2px;right:14px;width:11px;height:0;background:var(--signal);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 6px),0 100%);transition:height .45s var(--spring) .1s}
+#bk-de .b-rib{background:var(--ink)}
+.lbook[aria-selected="true"] .b-rib{height:54px}
+.b-soon{cursor:default;background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(115,130,154,.08) 8px 16px);border:1.5px dashed var(--rule);box-shadow:none;color:var(--mute)}
+.b-soon::before,.b-soon::after{display:none}
+.b-soon:hover{transform:none}
+.b-soon .b-title{font-size:13px;font-weight:600;letter-spacing:.14em}
+.bookend.l{transform:scaleX(-1)}
+.bookend{flex:none;align-self:flex-end;width:44px;height:150px;margin:0 4px;background:var(--slate);clip-path:polygon(0 0,32% 0,32% 86%,100% 86%,100% 100%,0 100%);opacity:.8}
+.guide[hidden]{display:none}
+.guide.swap{animation:gIn .55s var(--ease) both}
+@keyframes gIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (max-width:600px){.lbook{height:calc(var(--h,340px) * .82)}.shelf{min-height:320px;justify-content:flex-start}.bookend.l{display:none}.case-label span{display:none}}
+@media (prefers-reduced-motion:reduce){.lbook,.b-rib{transition:none}.guide.swap{animation:none}}
 .g-soon{display:flex;align-items:center;gap:16px;margin-top:22px;padding:22px 24px;border:1.5px dashed var(--rule);border-radius:22px}
 .g-soon svg{width:26px;height:26px;flex:none;color:var(--mute)}
 .g-soon b{display:block}.g-soon span{font-size:14.5px;color:var(--slate)}
@@ -673,7 +704,7 @@ footer a{font-weight:600;color:var(--ink)}
 /* ===== update: guides, centred ===== */
 .notes{grid-template-columns:1fr!important;justify-items:center;gap:clamp(28px,4vw,48px)!important;text-align:center}
 .g-intro{max-width:46em}
-.g-intro h3{margin:0 0 16px}
+.g-intro h3{margin:0 0 16px;text-wrap:balance}
 .notes .g-intro p{max-width:none;margin:0 auto;font-size:1.06rem;line-height:1.7}
 .notes .scan{width:min(100%,600px);text-align:left}
 .notes .scan-note{text-align:center}
@@ -896,11 +927,10 @@ footer a{font-weight:600;color:var(--ink)}
   <div class="wrap">
     <div class="sec-head">
       <div><h2 class="split">Guides</h2></div>
-      <p class="rv">Written by hand, digitised by AI.</p>
     </div>
     <div class="notes">
       <div class="rv g-intro">
-        <h3>From handwritten notes to digital study guides</h3>
+        <h3>Written by hand, digitised by AI.</h3>
         <p>Over the years, I’ve built a collection of handwritten notes across different subjects and courses. I’m gradually digitizing and organizing them into clear, typeset study guides to make them accessible to anyone who might find them useful. This section showcases the process, from my original handwritten notes to their digital versions.</p>
       </div>
       <div class="scan rv" id="scan" style="--d:.1s">
@@ -965,7 +995,30 @@ footer a{font-weight:600;color:var(--ink)}
   <div class="cp-in">
     <div class="cp-kick cp-rv">My notes, free to read</div>
     <h1 class="lib-title cp-rv" id="libTitle" style="--d:.06s">Guide library</h1>
-    <article class="guide cp-rv" style="--d:.14s">
+    <p class="lib-hint cp-rv" style="--d:.1s">Pick a book from the shelf to see what’s inside. Pick it again to start reading.</p>
+    <div class="bookcase cp-rv" style="--d:.14s">
+      <div class="case-label" aria-hidden="true"><b>515</b><span>Mathematics · Analysis</span></div>
+      <div class="shelf" id="shelf" role="tablist" aria-label="Guides on the shelf">
+        <span class="bookend l" aria-hidden="true"></span>
+        <button class="lbook" id="bk-calc" role="tab" aria-selected="true" aria-controls="g-calc" data-book="calc" style="--c:var(--ink);--fg:#fff;--band:var(--signal);--w:84px;--h:350px">
+          <i class="b-rib" aria-hidden="true"></i>
+          <span class="b-top">Maths</span>
+          <span class="b-title"><span>Calculus</span></span>
+          <span class="b-call">515<br>ELS</span>
+        </button>
+        <button class="lbook" id="bk-de" role="tab" aria-selected="false" tabindex="-1" aria-controls="g-de" data-book="de" style="--c:var(--signal);--fg:var(--ink);--band:var(--ink);--w:96px;--h:330px">
+          <i class="b-rib" aria-hidden="true"></i>
+          <span class="b-top">Maths</span>
+          <span class="b-title"><span>Differential</span><span>Equations</span></span>
+          <span class="b-call">515.35<br>ELS</span>
+        </button>
+        <span class="lbook b-soon" aria-hidden="true" style="--w:62px;--h:310px"><span class="b-title"><span>Coming soon</span></span></span>
+        <span class="lbook b-soon" aria-hidden="true" style="--w:54px;--h:290px"></span>
+        <span class="bookend" aria-hidden="true"></span>
+      </div>
+      <div class="plank" aria-hidden="true"></div>
+    </div>
+    <article class="guide cp-rv" id="g-calc" role="tabpanel" aria-labelledby="bk-calc" style="--d:.2s">
       <button class="g-cover" data-read="1" data-mode="dig" aria-label="Read the calculus guide"><img src="calculus/digital/d01.jpg" alt="Cover of the calculus guide"></button>
       <div class="g-body">
         <div class="g-meta"><span class="badge">Mathematics</span></div>
@@ -978,7 +1031,7 @@ footer a{font-weight:600;color:var(--ink)}
         <ol class="chap" id="chapters"></ol>
       </div>
     </article>
-    <article class="guide cp-rv" style="--d:.18s">
+    <article class="guide cp-rv" id="g-de" role="tabpanel" aria-labelledby="bk-de" style="--d:.2s" hidden>
       <button class="g-cover" data-read="1" data-mode="dig" data-guide="de" aria-label="Read the differential equations guide"><img src="differential-equations/digital/d01.jpg" alt="Cover of the differential equations guide"></button>
       <div class="g-body">
         <div class="g-meta"><span class="badge">Mathematics</span></div>
@@ -1235,6 +1288,14 @@ function setMode(m){
 function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES[g] ? g : 'calc'; mode = 'dig'; reader.setAttribute('aria-label', `${G().name} notes`); buildThumbs(); reader.hidden = false; document.body.style.overflow = 'hidden'; setPage(p); requestAnimationFrame(() => reader.classList.add('on')); $('rClose').focus(); }
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
+/* library shelf: pick a book to show it, pick it again to read */
+const books = [...document.querySelectorAll('.lbook[data-book]')];
+function pickBook(g){
+  books.forEach(b => { const on = b.dataset.book === g; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+  Object.keys(GUIDES).forEach(k => { const a = $('g-' + k), on = k === g; if (on && a.hidden){ a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); } else if (!on) a.hidden = true; });
+}
+books.forEach(b => b.addEventListener('click', () => { if (b.getAttribute('aria-selected') === 'true') openReader(1, 'dig', b.dataset.book); else pickBook(b.dataset.book); }));
+$('shelf').addEventListener('keydown', e => { const d = { ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1 }[e.key]; if (!d) return; const i = books.indexOf(document.activeElement); if (i < 0) return; e.preventDefault(); const n = books[(i + d + books.length) % books.length]; pickBook(n.dataset.book); n.focus(); });
 $('rClose').addEventListener('click', closeReader);
 $('rPrev').addEventListener('click', () => setPage(page - 1));
 $('rNext').addEventListener('click', () => setPage(page + 1));
