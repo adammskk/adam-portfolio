@@ -1248,6 +1248,16 @@ const GUIDES = {
       dig:  { pages:32, title:'Probability and statistics, digital edition', src:(p, t) => `probability-statistics/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
     },
     CH: [ { n:1, title:'Probability', hand:1, dig:2 }, { n:2, title:'Mathematical expectation', hand:16, dig:11 }, { n:3, title:'Distributions', hand:22, dig:15 }, { n:4, title:'Sampling', hand:33, dig:21 }, { n:5, title:'Estimation and confidence intervals', hand:40, dig:25 }, { n:6, title:'Hypothesis testing', hand:42, dig:29 } ]
+  },
+  em: {
+    name:'Electricity and magnetism', title:'Electricity & Magnetism', slug:'electricity-magnetism', folder:'physics', intro:'Title page',
+    pdf:'electricity-magnetism/electricity-magnetism-guide.pdf', file:'Electricity and Magnetism - Adam El Sakka.pdf',
+    desc:'Electric charges and fields, Gauss\u2019s law, electric potential, capacitors, current and resistance, magnetic fields and their sources, Faraday\u2019s law and inductance. Written by hand, completed from the lectures where chapters were missing, then typeset into a revision guide with explanations, worked examples and diagrams added.',
+    ED: {
+      hand: { pages:39, title:'Electricity and magnetism, handwritten', src:(p, t) => `electricity-magnetism/${t ? 't' : 'p'}${pad2(p)}.jpg` },
+      dig:  { pages:42, title:'Electricity and magnetism, digital edition', src:(p, t) => `electricity-magnetism/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+    },
+    CH: [ { n:1, title:'Electric charges and electric fields', hand:1, dig:2 }, { n:2, title:'Gauss\u2019s law', hand:7, dig:10 }, { n:3, title:'Electric potential', hand:8, dig:15 }, { n:4, title:'Capacitance and dielectrics', hand:15, dig:21 }, { n:5, title:'Current and resistance', hand:20, dig:25 }, { n:6, title:'Magnetic field', hand:25, dig:29 }, { n:7, title:'Sources of the magnetic field', hand:31, dig:34 }, { n:8, title:'Faraday\u2019s law', hand:36, dig:37 }, { n:9, title:'Self-induction and inductance', hand:39, dig:41 } ]
   }
 };
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
@@ -1284,7 +1294,7 @@ function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
 /* ================= guide library: folders, guide cards, search ================= */
-const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] } ];
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] }, { id:'physics', name:'Physics', guides:['em'] } ];
 const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
