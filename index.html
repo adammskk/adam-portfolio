@@ -1228,6 +1228,16 @@ const GUIDES = {
       dig:  { pages:21, title:'Differential equations, digital edition', src:(p, t) => `differential-equations/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
     },
     CH: [ { n:1, title:'First order ordinary differential equations', hand:1, dig:2 }, { n:2, title:'Higher order ordinary differential equations', hand:8, dig:7 }, { n:3, title:'Laplace transform', hand:14, dig:13 }, { n:4, title:'Fourier series', hand:20, dig:17 }, { n:5, title:'Partial differential equations', hand:24, dig:20 } ]
+  },
+  la: {
+    name:'Linear algebra', title:'Linear Algebra', slug:'linear-algebra', folder:'mathematics', intro:'Title page',
+    pdf:'linear-algebra/linear-algebra-guide.pdf', file:'Linear Algebra - Adam El Sakka.pdf',
+    desc:'Partial fractions, the binomial theorem, complex numbers, roots of polynomials, determinants, matrices and eigenvalues, series and conic sections. Written by hand, completed from the lecture slides where chapters were missing, then typeset into a revision guide with short explanations and worked examples added.',
+    ED: {
+      hand: { pages:43, title:'Linear algebra, handwritten', src:(p, t) => `linear-algebra/${t ? 't' : 'p'}${pad2(p)}.jpg` },
+      dig:  { pages:38, title:'Linear algebra, digital edition', src:(p, t) => `linear-algebra/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+    },
+    CH: [ { n:1, title:'Partial fractions', hand:1, dig:2 }, { n:2, title:'Binomial theorem', hand:8, dig:7 }, { n:3, title:'Complex analysis', hand:8, dig:12 }, { n:4, title:'Roots of higher order polynomials', hand:13, dig:17 }, { n:5, title:'Determinants', hand:18, dig:21 }, { n:6, title:'Matrices', hand:22, dig:24 }, { n:7, title:'Series', hand:31, dig:30 }, { n:8, title:'Conic sections', hand:38, dig:35 } ]
   }
 };
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
@@ -1264,7 +1274,7 @@ function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
 /* ================= guide library: folders, guide cards, search ================= */
-const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de'] } ];
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la'] } ];
 const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
