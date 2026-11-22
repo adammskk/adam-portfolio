@@ -1238,6 +1238,16 @@ const GUIDES = {
       dig:  { pages:38, title:'Linear algebra, digital edition', src:(p, t) => `linear-algebra/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
     },
     CH: [ { n:1, title:'Partial fractions', hand:1, dig:2 }, { n:2, title:'Binomial theorem', hand:8, dig:7 }, { n:3, title:'Complex analysis', hand:8, dig:12 }, { n:4, title:'Roots of higher order polynomials', hand:13, dig:17 }, { n:5, title:'Determinants', hand:18, dig:21 }, { n:6, title:'Matrices', hand:22, dig:24 }, { n:7, title:'Series', hand:31, dig:30 }, { n:8, title:'Conic sections', hand:38, dig:35 } ]
+  },
+  ps: {
+    name:'Probability and statistics', title:'Probability & Statistics', slug:'probability-statistics', folder:'mathematics', intro:'Title page',
+    pdf:'probability-statistics/probability-statistics-guide.pdf', file:'Probability and Statistics - Adam El Sakka.pdf',
+    desc:'Probability rules, counting, random variables and joint distributions, expectation and variance, discrete and continuous distributions, sampling and the central limit theorem, confidence intervals and hypothesis testing. Written by hand, completed from the lectures where chapters were missing, then typeset into a revision guide with short explanations and worked examples added.',
+    ED: {
+      hand: { pages:42, title:'Probability and statistics, handwritten', src:(p, t) => `probability-statistics/${t ? 't' : 'p'}${pad2(p)}.jpg` },
+      dig:  { pages:32, title:'Probability and statistics, digital edition', src:(p, t) => `probability-statistics/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+    },
+    CH: [ { n:1, title:'Probability', hand:1, dig:2 }, { n:2, title:'Mathematical expectation', hand:16, dig:11 }, { n:3, title:'Distributions', hand:22, dig:15 }, { n:4, title:'Sampling', hand:33, dig:21 }, { n:5, title:'Estimation and confidence intervals', hand:40, dig:25 }, { n:6, title:'Hypothesis testing', hand:42, dig:29 } ]
   }
 };
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
@@ -1274,7 +1284,7 @@ function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
 /* ================= guide library: folders, guide cards, search ================= */
-const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la'] } ];
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] } ];
 const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
