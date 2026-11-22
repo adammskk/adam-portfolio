@@ -583,37 +583,51 @@ html{scroll-behavior:smooth}
 .g-stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 4px;font-size:14.5px;color:var(--slate)}
 .g-stats b{font-family:var(--mono);font-weight:500;color:var(--ink)}
 .guide+.guide{margin-top:22px}
-/* library: bookshelf */
-.lib-hint{margin:-12px 0 22px;color:var(--slate);font-size:15.5px}
-.bookcase{position:relative;margin:0 0 clamp(28px,4vw,44px);padding:56px clamp(14px,3vw,34px) 0;border-radius:26px 26px 12px 12px;background:linear-gradient(180deg,var(--panel),var(--grid));box-shadow:inset 0 0 0 1.5px var(--rule)}
-.case-label{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:4px 14px;border-radius:6px;background:#fff;border:1px solid var(--rule);box-shadow:0 6px 14px -10px rgba(11,27,51,.5);font-family:var(--mono);font-size:12px;color:var(--slate);white-space:nowrap}
-.case-label b{font-weight:500;color:var(--ink)}
-.shelf{display:flex;align-items:flex-end;justify-content:center;gap:7px;min-height:380px;padding:30px 10px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
-.shelf::-webkit-scrollbar{display:none}
-.plank{position:relative;height:22px;margin:0 calc(-1 * clamp(14px,3vw,34px));border-radius:0 0 12px 12px;background:var(--ink);box-shadow:inset 0 3px 0 rgba(255,255,255,.14),0 22px 30px -20px rgba(11,27,51,.75)}
-.lbook{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:space-between;width:var(--w,84px);height:var(--h,340px);padding:18px 0 14px;border:0;border-radius:6px 6px 2px 2px;background:var(--c);color:var(--fg);font:inherit;cursor:pointer;transform-origin:50% 100%;box-shadow:inset 5px 0 0 rgba(255,255,255,.12),inset -8px 0 12px rgba(0,0,0,.18),0 12px 20px -14px rgba(11,27,51,.7);transition:transform .5s var(--spring),box-shadow .3s}
-.lbook::before,.lbook::after{content:"";position:absolute;left:0;right:0;height:3px;background:var(--band);box-shadow:0 7px 0 var(--band)}
-.lbook::before{top:46px}.lbook::after{bottom:66px}
-.lbook:hover{transform:translateY(-10px)}
-.lbook[aria-selected="true"]{transform:translateY(-28px);box-shadow:inset 5px 0 0 rgba(255,255,255,.12),inset -8px 0 12px rgba(0,0,0,.18),0 34px 34px -22px rgba(11,27,51,.75)}
-.lbook:focus-visible{outline-offset:4px;border-radius:6px}
-.b-top{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
-.b-title{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:20px 0;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:820;font-variation-settings:"wdth" 78;font-size:21px;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;white-space:nowrap}
-.b-call{width:calc(100% - 22px);padding:5px 4px;border-radius:3px;background:#fff;color:var(--ink);font-family:var(--mono);font-size:10.5px;line-height:1.3;text-align:center;box-shadow:0 1px 0 rgba(0,0,0,.12)}
-.b-rib{position:absolute;top:-2px;right:14px;width:11px;height:0;background:var(--signal);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 6px),0 100%);transition:height .45s var(--spring) .1s}
-#bk-de .b-rib{background:var(--ink)}
-.lbook[aria-selected="true"] .b-rib{height:54px}
-.b-soon{cursor:default;background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(115,130,154,.08) 8px 16px);border:1.5px dashed var(--rule);box-shadow:none;color:var(--mute)}
-.b-soon::before,.b-soon::after{display:none}
-.b-soon:hover{transform:none}
-.b-soon .b-title{font-size:13px;font-weight:600;letter-spacing:.14em}
-.bookend.l{transform:scaleX(-1)}
-.bookend{flex:none;align-self:flex-end;width:44px;height:150px;margin:0 4px;background:var(--slate);clip-path:polygon(0 0,32% 0,32% 86%,100% 86%,100% 100%,0 100%);opacity:.8}
-.guide[hidden]{display:none}
-.guide.swap{animation:gIn .55s var(--ease) both}
-@keyframes gIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@media (max-width:600px){.lbook{height:calc(var(--h,340px) * .82)}.shelf{min-height:320px;justify-content:flex-start}.bookend.l{display:none}.case-label span{display:none}}
-@media (prefers-reduced-motion:reduce){.lbook,.b-rib{transition:none}.guide.swap{animation:none}}
+/* library: folders, guide cards and search */
+.lib-top{position:sticky!important;top:0}
+.lib-in{padding-top:clamp(24px,3vw,36px)}
+.lib-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:22px;margin-bottom:clamp(24px,4vw,44px);font-size:14px;color:var(--mute)}
+.lib-crumbs a{color:var(--slate);text-decoration:none}
+.lib-crumbs a:hover{color:var(--ink);text-decoration:underline}
+.lib-crumbs [aria-current]{color:var(--ink);font-weight:600}
+.lib-head{max-width:720px;margin:0 auto clamp(40px,5vw,60px);text-align:center}
+.lib-head .lib-title{margin:0;font-size:clamp(52px,7vw,104px);letter-spacing:-.01em}
+.lib-sub{margin:14px 0 28px;font-size:18px;color:var(--slate)}
+#libTitle:focus{outline:none}
+.lib-head.compact{margin-bottom:clamp(28px,4vw,40px)}
+.lib-head.compact .lib-title,.lib-head.compact .lib-sub{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lib-search{display:flex;align-items:center;gap:12px;height:56px;padding:0 22px;border:1.5px solid var(--rule);border-radius:999px;background:#fff;box-shadow:0 14px 30px -24px rgba(11,27,51,.5);cursor:text;transition:border-color .2s,box-shadow .2s}
+.lib-search:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px var(--signal-soft)}
+.lib-search svg{flex:none;width:20px;height:20px;color:var(--mute)}
+.lib-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:none;font:inherit;font-size:16px;color:var(--ink)}
+.lib-search input::placeholder{color:var(--mute)}
+.lib-sec+.lib-sec{margin-top:clamp(36px,4vw,52px)}
+.lib-h{display:flex;align-items:baseline;gap:10px;margin:0 0 18px;font-size:22px;font-weight:760;line-height:1.2}
+.lib-h small{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--mute)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.lcard{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:18px;background:#fff;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 1px 2px rgba(11,27,51,.05);transition:transform .35s var(--ease),box-shadow .35s,border-color .25s}
+.lcard:hover{transform:translateY(-4px);border-color:#c3cee0;box-shadow:0 24px 40px -28px rgba(11,27,51,.5)}
+.lc-prev{position:relative;margin:10px 10px 0;aspect-ratio:4/3.2;border-radius:12px;background:var(--panel);overflow:hidden}
+.lc-prev>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transition:transform .5s var(--ease)}
+.lcard:hover .lc-prev>img{transform:scale(1.04)}
+.lc-pill,.lc-count{position:absolute;left:10px;display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;background:#fff;border:1px solid var(--rule);font-size:12px;font-weight:650;line-height:1.5}
+.lc-pill{top:10px}
+.lc-count{bottom:10px;font-family:var(--mono);font-weight:500}
+.lc-pill svg,.lc-count svg{width:13px;height:13px}
+.lc-body{padding:16px 18px 18px}
+.lc-body h3{margin:0;font-size:18px;font-weight:720;line-height:1.3}
+.lc-body p{margin:6px 0 0;font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lcard.folder .lc-prev{background:linear-gradient(160deg,var(--signal-soft),var(--panel))}
+.lc-stack img{position:absolute;left:50%;top:50%;width:36%;aspect-ratio:1240/1754;object-fit:cover;border-radius:4px;box-shadow:0 12px 20px -12px rgba(11,27,51,.55);transform:translate(calc(-50% + var(--o) * 46%),-50%) rotate(calc(var(--o) * 7deg));transition:transform .45s var(--spring)}
+.lcard.folder:hover .lc-stack img{transform:translate(calc(-50% + var(--o) * 64%),-52%) rotate(calc(var(--o) * 10deg))}
+.lib-empty{padding:40px 0;text-align:center;color:var(--slate)}
+.lib-more{margin:clamp(56px,7vw,88px) 0 0;text-align:center;font-size:15px;color:var(--mute)}
+.lib-view-in{animation:gIn .5s var(--ease) both}
+@keyframes gIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lib footer{border-top:1px solid var(--rule)}
+.btn.line svg{width:17px;height:17px}
+@media (max-width:600px){.lgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lc-prev{margin:7px 7px 0;border-radius:9px}.lc-body{padding:12px 12px 14px}.lc-body h3{font-size:15.5px}.lc-body p{font-size:13px}.lib-search{height:52px;padding:0 18px}}
+@media (prefers-reduced-motion:reduce){.lcard,.lc-prev>img,.lc-stack img{transition:none}.lib-view-in{animation:none}}
 .g-soon{display:flex;align-items:center;gap:16px;margin-top:22px;padding:22px 24px;border:1.5px dashed var(--rule);border-radius:22px}
 .g-soon svg{width:26px;height:26px;flex:none;color:var(--mute)}
 .g-soon b{display:block}.g-soon span{font-size:14.5px;color:var(--slate)}
@@ -937,7 +951,7 @@ footer a{font-weight:600;color:var(--ink)}
         <div class="scan-stage">
           <div class="sheet" id="sheet" role="slider" tabindex="0" aria-label="Compare the handwritten page with the digital page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <img id="sHand" src="calculus/p01.jpg" alt="My handwritten calculus page">
-            <div class="s-dig"><img id="sDig" src="calculus/digital/d03.jpg" alt="The same page, digitised"></div>
+            <div class="s-dig"><img id="sDig" src="calculus/digital/d02.jpg" alt="The same page, digitised"></div>
             <span class="s-band" aria-hidden="true"></span>
             <span class="beam" id="beam" aria-hidden="true" data-pct="0%"></span>
             <span class="crn tl"></span><span class="crn tr"></span><span class="crn bl"></span><span class="crn br"></span>
@@ -988,64 +1002,22 @@ footer a{font-weight:600;color:var(--ink)}
   <div class="cp-in" id="cpBody"></div>
 </div>
 <div class="cpage lib" id="lib" role="dialog" aria-modal="true" aria-labelledby="libTitle" hidden>
-  <div class="cp-bar">
-    <button class="cp-back" id="libBack"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg>Back to the site</button>
-    <span class="cp-crumb">Guides / Library</span>
-  </div>
-  <div class="cp-in">
-    <div class="cp-kick cp-rv">My notes, free to read</div>
-    <h1 class="lib-title cp-rv" id="libTitle" style="--d:.06s">Guide library</h1>
-    <p class="lib-hint cp-rv" style="--d:.1s">Pick a book from the shelf to see what’s inside. Pick it again to start reading.</p>
-    <div class="bookcase cp-rv" style="--d:.14s">
-      <div class="case-label" aria-hidden="true"><b>515</b><span>Mathematics · Analysis</span></div>
-      <div class="shelf" id="shelf" role="tablist" aria-label="Guides on the shelf">
-        <span class="bookend l" aria-hidden="true"></span>
-        <button class="lbook" id="bk-calc" role="tab" aria-selected="true" aria-controls="g-calc" data-book="calc" style="--c:var(--ink);--fg:#fff;--band:var(--signal);--w:84px;--h:350px">
-          <i class="b-rib" aria-hidden="true"></i>
-          <span class="b-top">Maths</span>
-          <span class="b-title"><span>Calculus</span></span>
-          <span class="b-call">515<br>ELS</span>
-        </button>
-        <button class="lbook" id="bk-de" role="tab" aria-selected="false" tabindex="-1" aria-controls="g-de" data-book="de" style="--c:var(--signal);--fg:var(--ink);--band:var(--ink);--w:96px;--h:330px">
-          <i class="b-rib" aria-hidden="true"></i>
-          <span class="b-top">Maths</span>
-          <span class="b-title"><span>Differential</span><span>Equations</span></span>
-          <span class="b-call">515.35<br>ELS</span>
-        </button>
-        <span class="lbook b-soon" aria-hidden="true" style="--w:62px;--h:310px"><span class="b-title"><span>Coming soon</span></span></span>
-        <span class="lbook b-soon" aria-hidden="true" style="--w:54px;--h:290px"></span>
-        <span class="bookend" aria-hidden="true"></span>
-      </div>
-      <div class="plank" aria-hidden="true"></div>
+  <header class="top solid lib-top">
+    <div class="wrap">
+      <a class="mark" href="#guides" id="libHome" aria-label="Adam El Sakka, Electrical Engineer, back to the site">Adam El Sakka<span class="mk-sep" aria-hidden="true"></span><span class="mk-role">Electrical Engineer</span></a>
     </div>
-    <article class="guide cp-rv" id="g-calc" role="tabpanel" aria-labelledby="bk-calc" style="--d:.2s">
-      <button class="g-cover" data-read="1" data-mode="dig" aria-label="Read the calculus guide"><img src="calculus/digital/d01.jpg" alt="Cover of the calculus guide"></button>
-      <div class="g-body">
-        <div class="g-meta"><span class="badge">Mathematics</span></div>
-        <h2>Calculus</h2>
-        <p>From the definition of the derivative to double integrals in polar coordinates. Written by hand during my first year of engineering, then typeset into a clean digital edition.</p>
-        <div class="g-stats"><span><b>6</b> chapters</span><span><b>23</b> digital pages</span><span><b>34</b> handwritten pages</span></div>
-        <div class="read-btns">
-          <button class="btn sig mag" data-read="1" data-mode="dig">Read the digital edition</button>
-        </div>
-        <ol class="chap" id="chapters"></ol>
-      </div>
-    </article>
-    <article class="guide cp-rv" id="g-de" role="tabpanel" aria-labelledby="bk-de" style="--d:.2s" hidden>
-      <button class="g-cover" data-read="1" data-mode="dig" data-guide="de" aria-label="Read the differential equations guide"><img src="differential-equations/digital/d01.jpg" alt="Cover of the differential equations guide"></button>
-      <div class="g-body">
-        <div class="g-meta"><span class="badge">Mathematics</span></div>
-        <h2>Differential Equations</h2>
-        <p>From first order ODEs to the heat equation, through higher order equations, the Laplace transform and Fourier series. Written by hand, then typeset into a revision guide with short explanations and worked examples added.</p>
-        <div class="g-stats"><span><b>5</b> chapters</span><span><b>21</b> digital pages</span><span><b>27</b> handwritten pages</span></div>
-        <div class="read-btns">
-          <button class="btn sig mag" data-read="1" data-mode="dig" data-guide="de">Read the digital edition</button>
-        </div>
-        <ol class="chap" id="chaptersDE"></ol>
-      </div>
-    </article>
-    <div class="g-soon cp-rv" style="--d:.2s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><div><b>More guides are coming</b><span>This shelf grows as I write. Follow along on <a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">LinkedIn</a>.</span></div></div>
+  </header>
+  <div class="cp-in lib-in">
+    <nav class="lib-crumbs" id="libCrumbs" aria-label="You are here"></nav>
+    <div class="lib-head">
+      <h1 class="lib-title" id="libTitle" tabindex="-1">Guide library</h1>
+      <p class="lib-sub">My notes, free to read</p>
+      <label class="lib-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="libQ" type="search" placeholder="Search notes, folders and chapters" aria-label="Search notes, folders and chapters" autocomplete="off"></label>
+    </div>
+    <div id="libView" aria-live="polite"></div>
+    <p class="lib-more">More guides are coming.</p>
   </div>
+  <footer><div class="wrap"><span>Adam El Sakka, Grenoble, France. This site sets no cookies and uses no analytics or tracking. University, company and product names are trademarks of their respective owners, used only to say where I studied and who issued my certificates. No affiliation or endorsement is implied.</span><a href="https://www.linkedin.com/in/adammskk" target="_blank" rel="noopener">linkedin.com/in/adammskk</a></div></footer>
 </div>
 <div class="where" id="where" aria-hidden="true"><b id="whereN"></b><span id="whereT">Education</span></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate" hidden><button class="r-btn lb-x" id="lbX" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l10 10M13 3 3 13"/></svg></button><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure></div>
@@ -1240,13 +1212,17 @@ $('copy').addEventListener('click', async () => { let ok = false; try { await na
 const pad2 = n => String(n).padStart(2, '0');
 const ED = {
   hand: { pages:34, title:'Calculus, handwritten', src:(p, t) => `calculus/${t ? 't' : 'p'}${pad2(p)}.jpg` },
-  dig:  { pages:23, title:'Calculus, digital edition', src:(p, t) => `calculus/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+  dig:  { pages:26, title:'Calculus, digital edition', src:(p, t) => `calculus/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
 };
-const CHAPTERS = [ { n:1, title:'Differentiation', hand:1, dig:3 }, { n:2, title:'Hyperbolic functions', hand:10, dig:9 }, { n:3, title:'Partial derivatives', hand:14, dig:11 }, { n:4, title:'Taylor and Maclaurin expansions', hand:18, dig:14 }, { n:5, title:'Integrals', hand:20, dig:15 }, { n:6, title:'Double integrals', hand:30, dig:21 } ];
+const CHAPTERS = [ { n:1, title:'Differentiation', hand:1, dig:2 }, { n:2, title:'Hyperbolic functions', hand:10, dig:9 }, { n:3, title:'Partial derivatives', hand:14, dig:12 }, { n:4, title:'Taylor and Maclaurin expansions', hand:18, dig:15 }, { n:5, title:'Integrals', hand:20, dig:17 }, { n:6, title:'Double integrals', hand:30, dig:23 } ];
 const GUIDES = {
-  calc: { name:'Calculus', ED, CH:CHAPTERS, list:'chapters', intro:'Title and contents' },
+  calc: { name:'Calculus', title:'Calculus', slug:'calculus', folder:'mathematics', ED, CH:CHAPTERS, intro:'Title page',
+    pdf:'calculus/calculus-guide.pdf', file:'Calculus - Adam El Sakka.pdf',
+    desc:'From the definition of the derivative to double integrals in polar coordinates, through hyperbolic functions, partial derivatives, Taylor series and integration techniques. Written by hand during my first year of engineering, then typeset into a revision guide with short explanations and worked examples added.' },
   de: {
-    name:'Differential equations', list:'chaptersDE', intro:'Title page',
+    name:'Differential equations', title:'Differential Equations', slug:'differential-equations', folder:'mathematics', intro:'Title page',
+    pdf:'differential-equations/differential-equations-guide.pdf', file:'Differential Equations - Adam El Sakka.pdf',
+    desc:'From first order ODEs to the heat equation, through higher order equations, the Laplace transform and Fourier series. Written by hand, then typeset into a revision guide with short explanations and worked examples added.',
     ED: {
       hand: { pages:27, title:'Differential equations, handwritten', src:(p, t) => `differential-equations/${t ? 't' : 'p'}${pad2(p)}.jpg` },
       dig:  { pages:21, title:'Differential equations, digital edition', src:(p, t) => `differential-equations/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
@@ -1254,7 +1230,6 @@ const GUIDES = {
     CH: [ { n:1, title:'First order ordinary differential equations', hand:1, dig:2 }, { n:2, title:'Higher order ordinary differential equations', hand:8, dig:7 }, { n:3, title:'Laplace transform', hand:14, dig:13 }, { n:4, title:'Fourier series', hand:20, dig:17 }, { n:5, title:'Partial differential equations', hand:24, dig:20 } ]
   }
 };
-Object.entries(GUIDES).forEach(([g, G]) => { $(G.list).innerHTML = G.CH.map(c => `<li><button data-read="${c.dig}" data-mode="dig" data-guide="${g}"><b>${c.n}</b><span>${c.title}</span><span>page ${c.dig}</span></button></li>`).join(''); });
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
 let guide = 'calc', mode = 'dig', page = 1, lastFocus = null, thumbs = [];
 const G = () => GUIDES[guide];
@@ -1288,14 +1263,67 @@ function setMode(m){
 function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES[g] ? g : 'calc'; mode = 'dig'; reader.setAttribute('aria-label', `${G().name} notes`); buildThumbs(); reader.hidden = false; document.body.style.overflow = 'hidden'; setPage(p); requestAnimationFrame(() => reader.classList.add('on')); $('rClose').focus(); }
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
-/* library shelf: pick a book to show it, pick it again to read */
-const books = [...document.querySelectorAll('.lbook[data-book]')];
-function pickBook(g){
-  books.forEach(b => { const on = b.dataset.book === g; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
-  Object.keys(GUIDES).forEach(k => { const a = $('g-' + k), on = k === g; if (on && a.hidden){ a.hidden = false; a.classList.remove('swap'); void a.offsetWidth; a.classList.add('swap'); } else if (!on) a.hidden = true; });
+/* ================= guide library: folders, guide cards, search ================= */
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de'] } ];
+const IC = {
+  pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
+  hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
+  folder:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 3.5h4.3l1.5 1.7h6.6v8.3H1.8z"/></svg>',
+  dl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>'
+};
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const fold = id => FOLDERS.find(f => f.id === id);
+const gHref = id => `#library/${GUIDES[id].folder}/${GUIDES[id].slug}`;
+const chapRow = (id, c, label) => `<li><button data-read="${c.dig}" data-mode="dig" data-guide="${id}"><b>${c.n}</b><span>${label || c.title}</span><span>page ${c.dig}</span></button></li>`;
+function guideCard(id){
+  const g = GUIDES[id];
+  return `<a class="lcard" href="${gHref(id)}"><div class="lc-prev"><img src="${g.ED.dig.src(1)}" alt="" loading="lazy"><span class="lc-pill">${IC.pdf}PDF</span><span class="lc-count" title="${g.ED.dig.pages} pages">${IC.hash}${g.ED.dig.pages}</span></div><div class="lc-body"><h3>${g.title}</h3><p>${fold(g.folder).name} · ${g.CH.length} chapters</p></div></a>`;
 }
-books.forEach(b => b.addEventListener('click', () => { if (b.getAttribute('aria-selected') === 'true') openReader(1, 'dig', b.dataset.book); else pickBook(b.dataset.book); }));
-$('shelf').addEventListener('keydown', e => { const d = { ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1 }[e.key]; if (!d) return; const i = books.indexOf(document.activeElement); if (i < 0) return; e.preventDefault(); const n = books[(i + d + books.length) % books.length]; pickBook(n.dataset.book); n.focus(); });
+function folderCard(f){
+  const n = f.guides.length, imgs = f.guides.slice(0, 3).map((id, k) => `<img src="${GUIDES[id].ED.dig.src(1, 1)}" alt="" style="--o:${(k - (Math.min(n, 3) - 1) / 2).toFixed(2)}">`).join('');
+  return `<a class="lcard folder" href="#library/${f.id}"><div class="lc-prev"><div class="lc-stack">${imgs}</div><span class="lc-pill">${IC.folder}Folder</span><span class="lc-count" title="${n} guides">${IC.pdf}${n}</span></div><div class="lc-body"><h3>${f.name}</h3><p>${f.guides.map(id => GUIDES[id].title).join(', ')}</p></div></a>`;
+}
+const sec = (title, n, inner) => `<section class="lib-sec"><h2 class="lib-h">${title}${n === undefined ? '' : `<small>${n}</small>`}</h2>${inner}</section>`;
+const grid = cards => `<div class="lgrid">${cards.join('')}</div>`;
+function guideView(id){
+  const g = GUIDES[id], f = fold(g.folder);
+  return `<article class="guide"><button class="g-cover" data-read="1" data-mode="dig" data-guide="${id}" aria-label="Read the ${g.title} guide"><img src="${g.ED.dig.src(1)}" alt="Cover of the ${g.title} guide"></button>
+    <div class="g-body"><div class="g-meta"><span class="badge">${f.name}</span></div><h2>${g.title}</h2><p>${g.desc}</p>
+    <div class="g-stats"><span><b>${g.CH.length}</b> chapters</span><span><b>${g.ED.dig.pages}</b> digital pages</span><span><b>${g.ED.hand.pages}</b> handwritten pages</span></div>
+    <div class="read-btns"><button class="btn sig mag" data-read="1" data-mode="dig" data-guide="${id}">Read online</button><a class="btn line" href="${g.pdf}" download="${g.file}">${IC.dl}Download PDF</a></div>
+    <ol class="chap">${g.CH.map(c => chapRow(id, c)).join('')}</ol></div></article>`;
+}
+function searchView(q){
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean), hit = t => words.every(w => t.toLowerCase().includes(w));
+  const ids = Object.keys(GUIDES);
+  const fs = FOLDERS.filter(f => hit(f.name + ' ' + f.guides.map(id => GUIDES[id].title).join(' ')));
+  const gs = ids.filter(id => { const g = GUIDES[id]; return hit([g.title, g.desc, fold(g.folder).name, g.CH.map(c => c.title).join(' ')].join(' ')); });
+  const cs = ids.flatMap(id => GUIDES[id].CH.filter(c => hit(c.title + ' ' + GUIDES[id].title)).map(c => chapRow(id, c, `${GUIDES[id].title} · ${c.title}`)));
+  if (!fs.length && !gs.length && !cs.length) return `<p class="lib-empty">No notes match “${esc(q)}”.</p>`;
+  return (fs.length ? sec('Folders', fs.length, grid(fs.map(folderCard))) : '') + (gs.length ? sec('Guides', gs.length, grid(gs.map(guideCard))) : '') + (cs.length ? sec('Chapters', cs.length, `<ol class="chap">${cs.join('')}</ol>`) : '');
+}
+const libView = $('libView'), libQ = $('libQ'), libCrumbs = $('libCrumbs');
+let libPath = [];
+function renderLib(fid, gslug){
+  const f = fold(fid), gid = f && Object.keys(GUIDES).find(id => GUIDES[id].folder === f.id && GUIDES[id].slug === gslug);
+  libPath = [f ? f.id : null, gid || null];
+  const q = libQ.value.trim();
+  const crumbs = [`<a href="#guides">Home</a>`, f ? `<a href="#library">Library</a>` : `<span aria-current="page">Library</span>`];
+  if (f) crumbs.push(gid ? `<a href="#library/${f.id}">${f.name}</a>` : `<span aria-current="page">${f.name}</span>`);
+  if (gid) crumbs.push(`<span aria-current="page">${GUIDES[gid].title}</span>`);
+  libCrumbs.innerHTML = crumbs.join('<span aria-hidden="true">/</span>');
+  let h;
+  if (q) h = searchView(q);
+  else if (gid) h = guideView(gid);
+  else if (f) h = sec(f.name, `${f.guides.length} guides`, grid(f.guides.map(guideCard)));
+  else h = sec('Folders', FOLDERS.length, grid(FOLDERS.map(folderCard))) + sec('All guides', Object.keys(GUIDES).length, grid(Object.keys(GUIDES).map(guideCard)));
+  libView.innerHTML = `<div class="lib-view-in">${h}</div>`;
+  document.querySelector('.lib-head').classList.toggle('compact', !!(f && !q));
+  document.title = (gid ? GUIDES[gid].title + ', ' : f ? f.name + ', ' : '') + 'Guide library, Adam El Sakka';
+}
+libQ.addEventListener('input', () => renderLib(...libPath.map((v, k) => k === 0 ? v : v && GUIDES[v].slug)));
+libQ.addEventListener('keydown', e => { if (e.key === 'Escape' && libQ.value){ e.stopPropagation(); libQ.value = ''; libQ.dispatchEvent(new Event('input')); } });
+libView.addEventListener('click', e => { if (e.target.closest('a.lcard') && libQ.value){ libQ.value = ''; } });
 $('rClose').addEventListener('click', closeReader);
 $('rPrev').addEventListener('click', () => setPage(page - 1));
 $('rNext').addEventListener('click', () => setPage(page + 1));
@@ -1450,19 +1478,19 @@ function openLib(){
   if (libOpen) return; libOpen = true; libReturn = scrollY;
   lib.classList.remove('on'); lib.hidden = false; lib.scrollTop = 0; document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => requestAnimationFrame(() => lib.classList.add('on')));
-  $('libBack').focus({ preventScroll: true }); document.title = 'Guide library, Adam El Sakka';
+  $('libTitle').focus({ preventScroll: true });
 }
 function closeLib(){
   if (!libOpen) return; libOpen = false; lib.classList.remove('on'); document.body.style.overflow = '';
   setTimeout(() => { lib.hidden = true; }, 450); document.title = 'Adam El Sakka, electrical engineering student';
   document.documentElement.style.scrollBehavior = 'auto'; scrollTo(0, libReturn); document.documentElement.style.scrollBehavior = '';
 }
-$('libBack').addEventListener('click', () => { history.pushState('', '', location.pathname + location.search + '#guides'); closeLib(); });
-addEventListener('keydown', e => { if (libOpen && reader.hidden && e.key === 'Escape') $('libBack').click(); });
+addEventListener('keydown', e => { if (libOpen && reader.hidden && e.key === 'Escape'){ if (libPath[1]) location.hash = '#library/' + libPath[0]; else if (libPath[0]) location.hash = '#library'; else location.hash = '#guides'; } });
 function route(){
   const h = location.hash.slice(1);
   if (/^cert-[a-z]+$/.test(h)){ closeLib(); routeCP(); return; }
-  if (h === 'library'){ if (cpOpen) closeCP(); openLib(); return; }
+  const lm = h.match(/^library(?:\/([a-z-]+))?(?:\/([a-z-]+))?$/);
+  if (lm){ if (cpOpen) closeCP(); const was = libOpen; openLib(); renderLib(lm[1], lm[2]); if (was) lib.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
   if (cpOpen) closeCP(); if (libOpen) closeLib();
 }
 
