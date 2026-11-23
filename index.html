@@ -1259,6 +1259,16 @@ const GUIDES = {
       dig:  { pages:42, title:'Electricity and magnetism, digital edition', src:(p, t) => `electricity-magnetism/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
     },
     CH: [ { n:1, title:'Electric charges and electric fields', hand:1, dig:2 }, { n:2, title:'Gauss\u2019s law', hand:7, dig:10 }, { n:3, title:'Electric potential', hand:8, dig:15 }, { n:4, title:'Capacitance and dielectrics', hand:15, dig:21 }, { n:5, title:'Current and resistance', hand:20, dig:25 }, { n:6, title:'Magnetic field', hand:25, dig:29 }, { n:7, title:'Sources of the magnetic field', hand:31, dig:34 }, { n:8, title:'Faraday\u2019s law', hand:36, dig:37 }, { n:9, title:'Self-induction and inductance', hand:39, dig:41 } ]
+  },
+  ch: {
+    name:'Principles of chemistry', title:'Principles of Chemistry', slug:'principles-of-chemistry', folder:'chemistry', intro:'Title page',
+    pdf:'principles-of-chemistry/principles-of-chemistry-guide.pdf', file:'Principles of Chemistry - Adam El Sakka.pdf',
+    desc:'Chemical foundations, atoms and ions, stoichiometry, reactions in solution, gases, thermochemistry, atomic structure, bonding and VSEPR, liquids and solids, kinetics, equilibrium, and entropy and free energy. Written by hand, completed from the lectures where chapters were missing, then typeset into a revision guide with explanations, worked examples and diagrams added.',
+    ED: {
+      hand: { pages:62, title:'Principles of chemistry, handwritten', src:(p, t) => `principles-of-chemistry/${t ? 't' : 'p'}${pad2(p)}.jpg` },
+      dig:  { pages:68, title:'Principles of chemistry, digital edition', src:(p, t) => `principles-of-chemistry/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+    },
+    CH: [ { n:1, title:'Chemical foundations', hand:1, dig:2 }, { n:2, title:'Atoms, molecules and ions', hand:1, dig:10 }, { n:3, title:'Stoichiometry', hand:6, dig:14 }, { n:4, title:'Types of chemical reactions and solution stoichiometry', hand:11, dig:17 }, { n:5, title:'Gases', hand:11, dig:25 }, { n:6, title:'Thermochemistry', hand:20, dig:31 }, { n:7, title:'Atomic structure and periodicity', hand:36, dig:36 }, { n:8, title:'Bonding: general concepts', hand:53, dig:43 }, { n:10, title:'Liquids and solids', hand:29, dig:50 }, { n:12, title:'Chemical kinetics', hand:29, dig:56 }, { n:13, title:'Chemical equilibrium', hand:29, dig:60 }, { n:17, title:'Spontaneity, entropy and free energy', hand:29, dig:65 } ]
   }
 };
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
@@ -1275,7 +1285,7 @@ function setPage(p){
   p = Math.max(1, Math.min(ed().pages, p));
   const swap = () => {
     page = p; rImg.src = ed().src(p); rImg.alt = `${ed().title}, page ${p} of ${ed().pages}`;
-    const ch = [...G().CH].reverse().find(c => p >= c[mode]);
+    const ch = G().CH.reduce((b, c) => (p >= c[mode] && (!b || c[mode] >= b[mode])) ? c : b, null);
     $('rChap').textContent = ch ? `Chapter ${ch.n}: ${ch.title}` : G().intro; $('rNum').textContent = p;
     $('rBar').style.width = (p / ed().pages * 100) + '%'; $('rPrev').disabled = p === 1; $('rNext').disabled = p === ed().pages;
     thumbs.forEach((b, i) => b.classList.toggle('on', i + 1 === p));
@@ -1295,7 +1305,7 @@ function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
 /* ================= guide library: folders, guide cards, search ================= */
-const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] }, { id:'physics', name:'Physics', guides:['em'] } ];
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] }, { id:'physics', name:'Physics', guides:['em'] }, { id:'chemistry', name:'Chemistry', guides:['ch'] } ];
 const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
