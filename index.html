@@ -1279,6 +1279,16 @@ const GUIDES = {
       dig:  { pages:31, title:'Classical physics, digital edition', src:(p, t) => `classical-physics/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
     },
     CH: [ { n:1, title:'Units and vectors', hand:1, dig:2 }, { n:2, title:'Motion in a straight line', hand:9, dig:7 }, { n:4, title:'Newton’s laws of motion', hand:13, dig:10 }, { n:5, title:'Work and energy', hand:19, dig:14 }, { n:7, title:'Rotational motion', hand:24, dig:17 }, { n:11, title:'Fluids', hand:29, dig:21 }, { n:12, title:'Temperature and heat', hand:36, dig:25 }, { n:13, title:'Stress and strain of solid materials', hand:41, dig:28 } ]
+  },
+  dy: {
+    name:'Dynamics', title:'Dynamics', slug:'dynamics', folder:'physics', intro:'Title page',
+    pdf:'dynamics/dynamics-guide.pdf', file:'Dynamics - Adam El Sakka.pdf',
+    desc:'Kinematics of a particle, kinetics with force and acceleration, the work of a force and energy methods, impulse and momentum with impact, and kinematics of a rigid body. Written by hand, then typeset into a revision guide with explanations, worked examples and diagrams added.',
+    ED: {
+      hand: { pages:40, title:'Dynamics, handwritten', src:(p, t) => `dynamics/${t ? 't' : 'p'}${pad2(p)}.jpg` },
+      dig:  { pages:25, title:'Dynamics, digital edition', src:(p, t) => `dynamics/digital/${t ? 't' : 'd'}${pad2(p)}.jpg` }
+    },
+    CH: [ { n:1, title:'Kinematics of a particle', hand:1, dig:2 }, { n:2, title:'Kinetics of a particle: force and acceleration', hand:21, dig:12 }, { n:3, title:'The work of a force', hand:27, dig:16 }, { n:4, title:'Impulse and momentum', hand:32, dig:20 }, { n:5, title:'Kinematics of a rigid body', hand:37, dig:23 } ]
   }
 };
 const reader = $('reader'), rImg = $('rImg'), rPage = $('rPage'), rThumbs = $('rThumbs');
@@ -1315,7 +1325,7 @@ function openReader(p, m, g){ lastFocus = document.activeElement; guide = GUIDES
 function closeReader(){ reader.classList.remove('on'); document.body.style.overflow = (cpOpen || libOpen) ? 'hidden' : ''; setTimeout(() => reader.hidden = true, 350); if (lastFocus) lastFocus.focus(); }
 document.addEventListener('click', e => { const b = e.target.closest('[data-read]'); if (b) openReader(+b.dataset.read, b.dataset.mode, b.dataset.guide); });
 /* ================= guide library: folders, guide cards, search ================= */
-const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] }, { id:'physics', name:'Physics', guides:['em', 'cp'] }, { id:'chemistry', name:'Chemistry', guides:['ch'] } ];
+const FOLDERS = [ { id:'mathematics', name:'Mathematics', guides:['calc', 'de', 'la', 'ps'] }, { id:'physics', name:'Physics', guides:['em', 'cp', 'dy'] }, { id:'chemistry', name:'Chemistry', guides:['ch'] } ];
 const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
