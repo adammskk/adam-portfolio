@@ -777,7 +777,7 @@ footer a{font-weight:600;color:var(--ink)}
         <p class="fade-up" style="--d:.8s">I started engineering at Beirut Arab University, in Electrical Power and Machines Engineering. My first year was all foundations: electric circuits, classical physics, electricity and magnetism, calculus, linear algebra and differential equations.</p>
         <p class="fade-up" style="--d:.88s">During that year I also worked as a private physics and maths tutor for the Lebanese Baccalaureate, teaching students in Lebanon and abroad, online and in person. Explaining hard ideas simply, week after week, changed how I learn them myself.</p>
         <p class="rv">In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble for its Electrical Energy and Control Engineering program, where I now study power electronics, automatic control, embedded systems and robotics, in French.</p>
-        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan and MATLAB through MathWorks, and earned the CSWA certification from Dassault Systèmes.</p>
+        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan, MATLAB through MathWorks and Python through Cisco Networking Academy, and earned the CSWA certification from Dassault Systèmes.</p>
         <p class="rv">Over the years, I have built a collection of handwritten notes across several courses. I am now digitizing them to make these resources publicly available to students and anyone who may find them useful. I am also writing my first book, <i>Classical Physics</i>, aimed at students, scientists and engineers.</p>
         <div class="ab-actions rv">
           <div class="duo" role="group" aria-label="Contact">
@@ -850,7 +850,7 @@ footer a{font-weight:600;color:var(--ink)}
     <div class="stage" id="stage"><ul class="ring" id="ring"></ul></div>
     <div class="ring-bar">
       <button class="rbtn" id="prev" aria-label="Previous certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
-      <span><b id="count">1</b> of 5</span>
+      <span><b id="count">1</b> of 6</span>
       <button class="rbtn" id="next" aria-label="Next certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
     </div>
     <div class="wrap"><div class="detail" aria-live="polite">
@@ -1121,10 +1121,11 @@ const ARTS = {
   sat(){ return svgA(`<line x1="60" y1="190" x2="350" y2="190" stroke="${NAVY}" stroke-width="2"/><line x1="80" y1="210" x2="80" y2="40" stroke="${NAVY}" stroke-width="2"/><path d="M80 190 L320 190 L320 60 Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M300 190 V170 H320" fill="none" stroke="${NAVY}" stroke-width="1.6"/><path d="M122 190 A42 42 0 0 0 117 170" fill="none" stroke="${NAVY}" stroke-width="1.6"/><text x="130" y="181" font-family="IBM Plex Mono, monospace" font-size="16" fill="${NAVY}">θ</text>`); },
   delf(){ return svgA(`<path d="M70 50 H330 a14 14 0 0 1 14 14 V150 a14 14 0 0 1 -14 14 H150 L110 200 L114 164 H70 a14 14 0 0 1 -14 -14 V64 a14 14 0 0 1 14 -14Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><text x="200" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-style="italic" font-weight="700" font-size="38" fill="${NAVY}">Bonjour</text>`); }
 };
-const CERTIMG = {umich:'certs/rocket.jpg', dassault:'certs/cswa.jpg', mathworks:'certs/matlab.jpg', collegeboard:'certs/sat.jpg'};
-const LOGOS = {umich:'logos/umich.png', dassault:'logos/dassault.png', mathworks:'logos/mathworks.png', collegeboard:'logos/collegeboard.png', ifl:'logos/ifl.png'};
+const CERTIMG = {cisco:'certs/python.jpg', umich:'certs/rocket.jpg', dassault:'certs/cswa.jpg', mathworks:'certs/matlab.jpg', collegeboard:'certs/sat.jpg'};
+const LOGOS = {cisco:'logos/cisco.png', umich:'logos/umich.png', dassault:'logos/dassault.png', mathworks:'logos/mathworks.png', collegeboard:'logos/collegeboard.png', ifl:'logos/ifl.png'};
 const lgx = (k, cls) => `<img class="lg ${cls === undefined ? 'xs' : cls}" src="${LOGOS[k]}" alt="" width="22" height="22">`;
 const CERTS = [
+  { name:'Python Essentials 1', by:'Cisco Networking Academy', date:'Nov 2026', id:'', art:'matlab', logo:'cisco', slug:'python', skills:['Python','Programming fundamentals','Python Standard Library','Problem solving'] },
   { name:'SOLIDWORKS Design Associate (CSWA)', by:'Dassault Systèmes', date:'Nov 2026', id:'C-WJTZ2SLF5Y', art:'cad', logo:'dassault', slug:'cswa', skills:['SOLIDWORKS','3D modeling','Assemblies','Engineering drawings'] },
   { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'', art:'matlab', logo:'mathworks', slug:'matlab', skills:['MATLAB','Arrays and matrices','Data visualization','Data analysis'] },
   { name:'Rocket Science 101 Specialization', by:'University of Michigan, Coursera', date:'Jul 2026', id:'MBLQOVFHSK82', art:'orbit', logo:'umich', slug:'rocket', skills:['Orbital mechanics','Propulsion','Aerospace engineering','Applied mathematics'] },
@@ -1414,6 +1415,15 @@ addEventListener('keydown', e => { if (!lb.hidden && e.key === 'Escape') closeLB
 
 /* ================= certification pages ================= */
 const CP = {
+  python: {
+    kick:'Cisco Networking Academy', logo:'cisco', title:'Python Essentials 1',
+    meta:[['Issued','23 November 2026'],['Credential','Student level'],['Format','Self-paced online course'],['Verified by','Credly']],
+    verify:'https://www.credly.com/badges/1cf82384-1324-4d33-9132-d83c12478c36', verifyLabel:'Verify on Credly',
+    doc:'certs/full/python.jpg', docs:[['certs/full/python.jpg','Statement of Achievement']],
+    about:'Cisco Networking Academy’s first Python course, built with the OpenEDG Python Institute. It covers the fundamentals of programming in Python 3: syntax and semantics, thinking algorithmically, and using the Python Standard Library to write scripts and solve practical problems. It also prepares for the PCEP (Certified Entry-Level Python Programmer) exam.',
+    listTitle:'What I studied', list:['Designing, writing, debugging and refactoring simple Python 3 programs','Thinking algorithmically to analyze problems','Python syntax, semantics and the Standard Library','The role of a programmer in software development'],
+    skills:['Python','Programming fundamentals','Algorithmic thinking','Debugging','Python Standard Library']
+  },
   rocket: {
     kick:'University of Michigan, on Coursera', logo:'umich', title:'Rocket Science 101 Specialization',
     meta:[['Issued','2 July 2026'],['Credential ID','MBLQOVFHSK82',1],['Format','Online specialization, 3 courses'],['Instructor','Dr. Aaron Ridley']],
@@ -1455,7 +1465,7 @@ const CP = {
     skills:['French','Written communication','Reading comprehension','Oral comprehension']
   }
 };
-const ORDER = ['cswa','matlab','rocket','sat','delf'];
+const ORDER = ['python','cswa','matlab','rocket','sat','delf'];
 const cpage = $('cpage'), cpBody = $('cpBody');
 let cpOpen = false, cpReturn = 0;
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>';
@@ -1467,7 +1477,7 @@ function renderCP(slug){
     <div class="cp-kick cp-rv">${c.logo ? lgx(c.logo, '') : ''}${c.kick}</div>
     <h1 id="cpTitle" class="cp-rv" style="--d:.06s">${c.title}</h1>
     <div class="cp-meta cp-rv" style="--d:.12s">${c.meta.map(m => `<div><small>${m[0]}</small><b${m[2] ? ' class="mono"' : ''}>${m[1]}</b></div>`).join('')}</div>
-    <div class="cp-ctas cp-rv" style="--d:.18s">${c.verify ? `<a class="btn sig" href="${c.verify}" target="_blank" rel="noopener">Verify on Coursera ${arrow}</a>` : ''}<a class="btn line" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">See it on LinkedIn ${arrow}</a></div>
+    <div class="cp-ctas cp-rv" style="--d:.18s">${c.verify ? `<a class="btn sig" href="${c.verify}" target="_blank" rel="noopener">${c.verifyLabel || 'Verify on Coursera'} ${arrow}</a>` : ''}<a class="btn line" href="https://www.linkedin.com/in/adammskk/details/certifications/" target="_blank" rel="noopener">See it on LinkedIn ${arrow}</a></div>
   </div>
   ${c.doc ? `<button class="cp-doc cp-rv" style="--d:.1s" data-zoom="${c.doc}" data-cap="${c.title}"><img src="${c.doc}" alt="${c.title} certificate"><span>Click to enlarge</span></button>` : `<div class="cp-doc cp-rv" style="--d:.1s;cursor:default;display:grid;place-items:center;min-height:300px">${uniq(ARTS.delf())}</div>`}
   </div>`;
