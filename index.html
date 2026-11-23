@@ -614,6 +614,8 @@ html{scroll-behavior:smooth}
 .lc-pill{top:10px}
 .lc-count{bottom:10px;font-family:var(--mono);font-weight:500}
 .lc-pill svg,.lc-count svg{width:13px;height:13px}
+.lc-stats{position:absolute;left:10px;bottom:10px;display:flex;gap:6px}
+.lc-stats .lc-count{position:static}
 .lc-body{padding:16px 18px 18px}
 .lc-body h3{margin:0;font-size:18px;font-weight:720;line-height:1.3}
 .lc-body p{margin:6px 0 0;font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1300,15 +1302,23 @@ const IC = {
   pdf:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13"/></svg>',
   hash:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 2 4.8 14M11.2 2 10 14M2.5 5.7h11.5M2 10.3h11.5"/></svg>',
   folder:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 3.5h4.3l1.5 1.7h6.6v8.3H1.8z"/></svg>',
+  eye:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>',
   dl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>'
 };
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+/* view counter (shared across visitors, stored on abacus.jasoncameron.dev) */
+const VIEWS = {}, VAPI = 'https://abacus.jasoncameron.dev', VNS = 'adammskk-github-io';
+const showViews = id => document.querySelectorAll(`[data-views="${id}"]`).forEach(el => el.textContent = VIEWS[id].toLocaleString('en'));
+function loadViews(){ document.querySelectorAll('[data-views]').forEach(el => { const id = el.dataset.views; if (id in VIEWS) return; VIEWS[id] = null;
+  fetch(`${VAPI}/get/${VNS}/${GUIDES[id].slug}`).then(r => r.ok ? r.json() : { value:0 }).then(d => { if (VIEWS[id] === null){ VIEWS[id] = d.value || 0; showViews(id); } }).catch(() => { VIEWS[id] = 0; showViews(id); }); }); }
+function countView(id){ const k = 'viewed-' + id; try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch (e) {}
+  fetch(`${VAPI}/hit/${VNS}/${GUIDES[id].slug}`).then(r => r.json()).then(d => { VIEWS[id] = d.value; showViews(id); }).catch(() => {}); }
 const fold = id => FOLDERS.find(f => f.id === id);
 const gHref = id => `#library/${GUIDES[id].folder}/${GUIDES[id].slug}`;
 const chapRow = (id, c, label) => `<li><button data-read="${c.dig}" data-mode="dig" data-guide="${id}"><b>${c.n}</b><span>${label || c.title}</span><span>page ${c.dig}</span></button></li>`;
 function guideCard(id){
   const g = GUIDES[id];
-  return `<a class="lcard" href="${gHref(id)}"><div class="lc-prev"><img src="${g.ED.dig.src(1)}" alt="" loading="lazy"><span class="lc-pill">${IC.pdf}PDF</span><span class="lc-count" title="${g.ED.dig.pages} pages">${IC.hash}${g.ED.dig.pages}</span></div><div class="lc-body"><h3>${g.title}</h3><p>${fold(g.folder).name} · ${g.CH.length} chapters</p></div></a>`;
+  return `<a class="lcard" href="${gHref(id)}"><div class="lc-prev"><img src="${g.ED.dig.src(1)}" alt="" loading="lazy"><span class="lc-pill">${IC.pdf}PDF</span><span class="lc-stats"><span class="lc-count" title="${g.ED.dig.pages} pages">${IC.hash}${g.ED.dig.pages}</span><span class="lc-count" title="Views">${IC.eye}<span data-views="${id}">${VIEWS[id] ?? '–'}</span></span></span></div><div class="lc-body"><h3>${g.title}</h3><p>${fold(g.folder).name} · ${g.CH.length} chapters</p></div></a>`;
 }
 function folderCard(f){
   const n = f.guides.length, imgs = f.guides.slice(0, 3).map((id, k) => `<img src="${GUIDES[id].ED.dig.src(1, 1)}" alt="" style="--o:${(k - (Math.min(n, 3) - 1) / 2).toFixed(2)}">`).join('');
@@ -1349,6 +1359,8 @@ function renderLib(fid, gslug){
   else if (f) h = sec(f.name, `${f.guides.length} guides`, grid(f.guides.map(guideCard)));
   else h = sec('Folders', FOLDERS.length, grid(FOLDERS.map(folderCard))) + sec('All guides', Object.keys(GUIDES).length, grid(Object.keys(GUIDES).map(guideCard)));
   libView.innerHTML = `<div class="lib-view-in">${h}</div>`;
+  if (gid) countView(gid);
+  loadViews();
   document.querySelector('.lib-head').classList.toggle('compact', !!(f && !q));
   document.title = (gid ? GUIDES[gid].title + ', ' : f ? f.name + ', ' : '') + 'Guide library, Adam El Sakka';
 }
