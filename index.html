@@ -752,7 +752,7 @@ footer a{font-weight:600;color:var(--ink)}
         <p class="fade-up" style="--d:.8s">I started engineering at Beirut Arab University, in Electrical Power and Machines Engineering. My first year was all foundations: electric circuits, classical physics, electricity and magnetism, calculus, linear algebra and differential equations.</p>
         <p class="fade-up" style="--d:.88s">During that year I also worked as a private physics and maths tutor for the Lebanese Baccalaureate, teaching students in Lebanon and abroad, online and in person. Explaining hard ideas simply, week after week, changed how I learn them myself.</p>
         <p class="rv">In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble for its Electrical Energy and Control Engineering program, where I now study power electronics, automatic control, embedded systems and robotics, in French.</p>
-        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan, MATLAB and Simulink through MathWorks and Python through Cisco Networking Academy, and earned the CSWA certification from Dassault Systèmes.</p>
+        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan, MATLAB, Simulink and Simscape through MathWorks and Python through Cisco Networking Academy, and earned the CSWA certification from Dassault Systèmes.</p>
         <p class="rv">Over the years, I have built a collection of handwritten notes across several courses. I am now digitizing them to make these resources publicly available to students and anyone who may find them useful. I am also writing my first book, <i>Classical Physics</i>, aimed at students, scientists and engineers.</p>
         <div class="ab-actions rv">
           <div class="duo" role="group" aria-label="Contact">
@@ -1111,10 +1111,11 @@ const ARTS = {
   sat(){ return svgA(`<line x1="60" y1="190" x2="350" y2="190" stroke="${NAVY}" stroke-width="2"/><line x1="80" y1="210" x2="80" y2="40" stroke="${NAVY}" stroke-width="2"/><path d="M80 190 L320 190 L320 60 Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M300 190 V170 H320" fill="none" stroke="${NAVY}" stroke-width="1.6"/><path d="M122 190 A42 42 0 0 0 117 170" fill="none" stroke="${NAVY}" stroke-width="1.6"/><text x="130" y="181" font-family="IBM Plex Mono, monospace" font-size="16" fill="${NAVY}">θ</text>`); },
   delf(){ return svgA(`<path d="M70 50 H330 a14 14 0 0 1 14 14 V150 a14 14 0 0 1 -14 14 H150 L110 200 L114 164 H70 a14 14 0 0 1 -14 -14 V64 a14 14 0 0 1 14 -14Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><text x="200" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-style="italic" font-weight="700" font-size="38" fill="${NAVY}">Bonjour</text>`); }
 };
-const CERTIMG = {python:'certs/python.jpg', rocket:'certs/rocket.jpg', cswa:'certs/cswa.jpg', matlab:'certs/matlab.jpg', simulink:'certs/simulink.jpg', sat:'certs/sat.jpg'};
+const CERTIMG = {python:'certs/python.jpg', rocket:'certs/rocket.jpg', cswa:'certs/cswa.jpg', matlab:'certs/matlab.jpg', simulink:'certs/simulink.jpg', simscape:'certs/simscape.jpg', sat:'certs/sat.jpg'};
 const LOGOS = {cisco:'logos/cisco.png', umich:'logos/umich.png', dassault:'logos/dassault.png', mathworks:'logos/mathworks.png', collegeboard:'logos/collegeboard.png', ifl:'logos/ifl.png'};
 const lgx = (k, cls) => `<img class="lg ${cls === undefined ? 'xs' : cls}" src="${LOGOS[k]}" alt="" width="22" height="22">`;
 const CERTS = [
+  { name:'Simscape Onramp', by:'MathWorks', date:'Nov 2026', id:'', art:'matlab', logo:'mathworks', slug:'simscape', skills:['Simscape','Physical modeling','Multidomain modeling','Simulink'] },
   { name:'Simulink Onramp', by:'MathWorks', date:'Nov 2026', id:'', art:'matlab', logo:'mathworks', slug:'simulink', skills:['Simulink','MATLAB','Dynamic systems','Modeling and simulation'] },
   { name:'Python Essentials 1', by:'Cisco Networking Academy', date:'Nov 2026', id:'', art:'matlab', logo:'cisco', slug:'python', skills:['Python','Programming fundamentals','Python Standard Library','Problem solving'] },
   { name:'SOLIDWORKS Design Associate (CSWA)', by:'Dassault Systèmes', date:'Nov 2026', id:'C-WJTZ2SLF5Y', art:'cad', logo:'dassault', slug:'cswa', skills:['SOLIDWORKS','3D modeling','Assemblies','Engineering drawings'] },
@@ -1552,6 +1553,14 @@ const CP = {
     listTitle:'What the exam covers', list:['Drafting competencies','Basic part creation and modification','Intermediate part creation and modification','Advanced part creation and modification','Assembly creation and modification'], listNote:'Covered',
     skills:['SOLIDWORKS','3D modeling','Sketching','Part modeling','Assemblies and mates','Engineering drawings']
   },
+  simscape: {
+    kick:'MathWorks', logo:'mathworks', title:'Simscape Onramp',
+    meta:[['Completed','28 November 2026'],['Progress','100% complete'],['Format','Self-paced training course'],['Chapters','9 of 9']],
+    doc:'certs/full/simscape.jpg', docs:[['certs/full/simscape.jpg','Course completion certificate'],['certs/full/simscape-progress.jpg','Progress report']],
+    about:'MathWorks’ introductory, self-paced Simscape course, about 1 hour long. I completed all 9 chapters: building physical models from components, exploring results, physical signals, initial values, and multidomain modeling across electrical, mechanical and fluid systems. I connected Simscape plants to Simulink controllers and finished with an electronic valve project, a DC motor driving a valve under PI feedback control.',
+    progress:['Course Overview','Building Simscape Models','Exploring Results','Understanding Physical Signals','Initial Values in Simscape','Multidomain Modeling','Simscape and Simulink','Project: Electronic Valve','Conclusion'],
+    skills:['Simscape','Physical modeling','Multidomain modeling','Simulink','Feedback control','Electromechanical systems']
+  },
   simulink: {
     kick:'MathWorks', logo:'mathworks', title:'Simulink Onramp',
     meta:[['Completed','28 November 2026'],['Progress','100% complete'],['Format','Self-paced training course'],['Chapters','14 of 14']],
@@ -1584,7 +1593,7 @@ const CP = {
     skills:['French','Written communication','Reading comprehension','Oral comprehension']
   }
 };
-const ORDER = ['simulink','python','cswa','matlab','rocket','sat','delf'];
+const ORDER = ['simscape','simulink','python','cswa','matlab','rocket','sat','delf'];
 const cpage = $('cpage'), cpBody = $('cpBody');
 let cpOpen = false, cpReturn = 0;
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>';
