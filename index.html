@@ -752,7 +752,7 @@ footer a{font-weight:600;color:var(--ink)}
         <p class="fade-up" style="--d:.8s">I started engineering at Beirut Arab University, in Electrical Power and Machines Engineering. My first year was all foundations: electric circuits, classical physics, electricity and magnetism, calculus, linear algebra and differential equations.</p>
         <p class="fade-up" style="--d:.88s">During that year I also worked as a private physics and maths tutor for the Lebanese Baccalaureate, teaching students in Lebanon and abroad, online and in person. Explaining hard ideas simply, week after week, changed how I learn them myself.</p>
         <p class="rv">In 2026 I was accepted to Sorbonne Université, Université Grenoble Alpes and Université de Bretagne Occidentale. I chose Grenoble for its Electrical Energy and Control Engineering program, where I now study power electronics, automatic control, embedded systems and robotics, in French.</p>
-        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan, MATLAB through MathWorks and Python through Cisco Networking Academy, and earned the CSWA certification from Dassault Systèmes.</p>
+        <p class="rv">Alongside my studies, I have completed additional training in rocket science through the University of Michigan, MATLAB and Simulink through MathWorks and Python through Cisco Networking Academy, and earned the CSWA certification from Dassault Systèmes.</p>
         <p class="rv">Over the years, I have built a collection of handwritten notes across several courses. I am now digitizing them to make these resources publicly available to students and anyone who may find them useful. I am also writing my first book, <i>Classical Physics</i>, aimed at students, scientists and engineers.</p>
         <div class="ab-actions rv">
           <div class="duo" role="group" aria-label="Contact">
@@ -825,7 +825,7 @@ footer a{font-weight:600;color:var(--ink)}
     <div class="stage" id="stage"><ul class="ring" id="ring"></ul></div>
     <div class="ring-bar">
       <button class="rbtn" id="prev" aria-label="Previous certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
-      <span><b id="count">1</b> of 6</span>
+      <span><b id="count">1</b> of <span id="countTotal">7</span></span>
       <button class="rbtn" id="next" aria-label="Next certification"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
     </div>
     <div class="wrap"><div class="detail" aria-live="polite">
@@ -1111,10 +1111,11 @@ const ARTS = {
   sat(){ return svgA(`<line x1="60" y1="190" x2="350" y2="190" stroke="${NAVY}" stroke-width="2"/><line x1="80" y1="210" x2="80" y2="40" stroke="${NAVY}" stroke-width="2"/><path d="M80 190 L320 190 L320 60 Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><path d="M300 190 V170 H320" fill="none" stroke="${NAVY}" stroke-width="1.6"/><path d="M122 190 A42 42 0 0 0 117 170" fill="none" stroke="${NAVY}" stroke-width="1.6"/><text x="130" y="181" font-family="IBM Plex Mono, monospace" font-size="16" fill="${NAVY}">θ</text>`); },
   delf(){ return svgA(`<path d="M70 50 H330 a14 14 0 0 1 14 14 V150 a14 14 0 0 1 -14 14 H150 L110 200 L114 164 H70 a14 14 0 0 1 -14 -14 V64 a14 14 0 0 1 14 -14Z" fill="${SIG}" stroke="${NAVY}" stroke-width="2" stroke-linejoin="round"/><text x="200" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-style="italic" font-weight="700" font-size="38" fill="${NAVY}">Bonjour</text>`); }
 };
-const CERTIMG = {cisco:'certs/python.jpg', umich:'certs/rocket.jpg', dassault:'certs/cswa.jpg', mathworks:'certs/matlab.jpg', collegeboard:'certs/sat.jpg'};
+const CERTIMG = {python:'certs/python.jpg', rocket:'certs/rocket.jpg', cswa:'certs/cswa.jpg', matlab:'certs/matlab.jpg', simulink:'certs/simulink.jpg', sat:'certs/sat.jpg'};
 const LOGOS = {cisco:'logos/cisco.png', umich:'logos/umich.png', dassault:'logos/dassault.png', mathworks:'logos/mathworks.png', collegeboard:'logos/collegeboard.png', ifl:'logos/ifl.png'};
 const lgx = (k, cls) => `<img class="lg ${cls === undefined ? 'xs' : cls}" src="${LOGOS[k]}" alt="" width="22" height="22">`;
 const CERTS = [
+  { name:'Simulink Onramp', by:'MathWorks', date:'Nov 2026', id:'', art:'matlab', logo:'mathworks', slug:'simulink', skills:['Simulink','MATLAB','Dynamic systems','Modeling and simulation'] },
   { name:'Python Essentials 1', by:'Cisco Networking Academy', date:'Nov 2026', id:'', art:'matlab', logo:'cisco', slug:'python', skills:['Python','Programming fundamentals','Python Standard Library','Problem solving'] },
   { name:'SOLIDWORKS Design Associate (CSWA)', by:'Dassault Systèmes', date:'Nov 2026', id:'C-WJTZ2SLF5Y', art:'cad', logo:'dassault', slug:'cswa', skills:['SOLIDWORKS','3D modeling','Assemblies','Engineering drawings'] },
   { name:'MATLAB Onramp', by:'MathWorks', date:'Jul 2026', id:'', art:'matlab', logo:'mathworks', slug:'matlab', skills:['MATLAB','Arrays and matrices','Data visualization','Data analysis'] },
@@ -1124,9 +1125,9 @@ const CERTS = [
 ];
 let uid = 0; const uniq = s => { const u = '_' + (++uid); return s.replace(/id="([\w-]+)"/g, 'id="$1' + u + '"').replace(/url\(#([\w-]+)\)/g, 'url(#$1' + u + ')'); };
 const ring = $('ring'), stage = $('stage'), cat = $('cat');
-const total = CERTS.length, copies = 3;
+const total = CERTS.length, copies = 3; $('countTotal').textContent = total;
 let html = '';
-for (let c = 0; c < copies; c++) CERTS.forEach(ct => { html += `<li class="slot"${c ? ' aria-hidden="true"' : ''}><button class="card"${c ? ' tabindex="-1"' : ''} aria-label="${ct.name}"><span class="art${CERTIMG[ct.logo] ? ' photo' : ''}">${CERTIMG[ct.logo] ? `<img src="${CERTIMG[ct.logo]}" alt="${ct.name} certificate" decoding="async" draggable="false">` : uniq(ARTS[ct.art]())}</span><span class="cb"><span class="by">${lgx(ct.logo)}${ct.by}</span><h3>${ct.name}</h3><span class="dt">Issued ${ct.date}</span></span></button></li>`; });
+for (let c = 0; c < copies; c++) CERTS.forEach(ct => { html += `<li class="slot"${c ? ' aria-hidden="true"' : ''}><button class="card"${c ? ' tabindex="-1"' : ''} aria-label="${ct.name}"><span class="art${CERTIMG[ct.slug] ? ' photo' : ''}">${CERTIMG[ct.slug] ? `<img src="${CERTIMG[ct.slug]}" alt="${ct.name} certificate" decoding="async" draggable="false">` : uniq(ARTS[ct.art]())}</span><span class="cb"><span class="by">${lgx(ct.logo)}${ct.by}</span><h3>${ct.name}</h3><span class="dt">Issued ${ct.date}</span></span></button></li>`; });
 ring.innerHTML = html;
 const slots = [...ring.children], N = slots.length, STEP = 360 / N;
 slots.forEach((s, i) => s.style.setProperty('--i', i)); ring.style.setProperty('--step', STEP + 'deg');
@@ -1150,7 +1151,7 @@ function showDetail(k){
     $('dBy').innerHTML = lgx(c.logo) + c.by; $('dName').textContent = c.name;
     $('dMeta').innerHTML = `<span>Issued <b>${c.date}</b></span>` + (c.id ? `<span>Credential ID <b>${c.id}</b></span>` : '');
     $('dTags').innerHTML = c.skills.map(s => `<span class="tag">${s}</span>`).join('');
-    lg.innerHTML = CERTIMG[c.logo] ? `<img src="${CERTIMG[c.logo]}" alt="">` : '<span>No image</span>'; lg.dataset.img = CERTIMG[c.logo] || ''; lg.dataset.name = c.name; $('dOpen').href = '#cert-' + c.slug;
+    lg.innerHTML = CERTIMG[c.slug] ? `<img src="${CERTIMG[c.slug]}" alt="">` : '<span>No image</span>'; lg.dataset.img = CERTIMG[c.slug] || ''; lg.dataset.name = c.name; $('dOpen').href = '#cert-' + c.slug;
     sw2.classList.remove('out'); lg.classList.remove('out'); }, reduce ? 0 : 180);
 }
 function stepTo(dir){ holdUntil = performance.now() + 6000; vel = 0; spin = 0; const base = target !== null ? target : angle; target = Math.round(base / STEP) * STEP - dir * STEP; }
@@ -1551,6 +1552,14 @@ const CP = {
     listTitle:'What the exam covers', list:['Drafting competencies','Basic part creation and modification','Intermediate part creation and modification','Advanced part creation and modification','Assembly creation and modification'], listNote:'Covered',
     skills:['SOLIDWORKS','3D modeling','Sketching','Part modeling','Assemblies and mates','Engineering drawings']
   },
+  simulink: {
+    kick:'MathWorks', logo:'mathworks', title:'Simulink Onramp',
+    meta:[['Completed','28 November 2026'],['Progress','100% complete'],['Format','Self-paced training course'],['Chapters','14 of 14']],
+    doc:'certs/full/simulink.jpg', docs:[['certs/full/simulink.jpg','Course completion certificate'],['certs/full/simulink-progress.jpg','Progress report']],
+    about:'MathWorks’ introductory, self-paced Simulink course, about 2 hours long. I completed all 14 chapters: building and simulating block diagrams, inspecting signals, basic algorithms, using Simulink with MATLAB, and modeling discrete and continuous dynamic systems. It included three projects: automotive performance modes, a thermostat model, and a peregrine falcon dive simulation.',
+    progress:['Course Overview','Simulink Graphical Environment','Inspecting Signals','Basic Algorithms','Obtaining Help','Project: Automotive Performance Modes','Simulink and MATLAB','Dynamic Systems in Simulink','Discrete Systems','Continuous Systems','Simulation Time','Project: Modeling a Thermostat','Project: Peregrine Falcon Dive','Conclusion'],
+    skills:['Simulink','MATLAB','Dynamic systems','Modeling and simulation','Discrete and continuous systems','Block diagrams']
+  },
   matlab: {
     kick:'MathWorks', logo:'mathworks', title:'MATLAB Onramp',
     meta:[['Completed','19 July 2026'],['Progress','100% complete'],['Format','Self-paced training course'],['Chapters','14 of 14']],
@@ -1575,7 +1584,7 @@ const CP = {
     skills:['French','Written communication','Reading comprehension','Oral comprehension']
   }
 };
-const ORDER = ['python','cswa','matlab','rocket','sat','delf'];
+const ORDER = ['simulink','python','cswa','matlab','rocket','sat','delf'];
 const cpage = $('cpage'), cpBody = $('cpBody');
 let cpOpen = false, cpReturn = 0;
 const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>';
@@ -1593,7 +1602,7 @@ function renderCP(slug){
   </div>`;
   h += `<section class="cp-sec cp-rv" style="--d:.24s"><h2>About</h2><p class="lead">${c.about}</p></section>`;
   if (c.list) h += `<section class="cp-sec"><h2>${c.listTitle}</h2><ol class="cp-list">${c.list.map((x, k) => `<li style="--i:${k}"><b>${x}</b><span>${c.listNote || 'Completed'}</span></li>`).join('')}</ol></section>`;
-  if (c.progress) h += `<section class="cp-sec"><h2>Progress: 14 of 14 chapters</h2><div class="cp-two">${c.progress.map((x, k) => `<div class="cp-list-item" style="--i:${k}"><b style="font-weight:600;font-size:15px">${pad2(k + 1)}. ${x}</b><div class="cp-bar-row"><div class="cp-pbar"><i style="--w:100%;--i:${k}"></i></div><span style="font-family:var(--mono);font-size:13px">100%</span></div></div>`).join('')}</div></section>`;
+  if (c.progress) h += `<section class="cp-sec"><h2>Progress: ${c.progress.length} of ${c.progress.length} chapters</h2><div class="cp-two">${c.progress.map((x, k) => `<div class="cp-list-item" style="--i:${k}"><b style="font-weight:600;font-size:15px">${pad2(k + 1)}. ${x}</b><div class="cp-bar-row"><div class="cp-pbar"><i style="--w:100%;--i:${k}"></i></div><span style="font-family:var(--mono);font-size:13px">100%</span></div></div>`).join('')}</div></section>`;
   if (c.scores) h += `<section class="cp-sec"><h2>Scores</h2><div class="cp-score">${c.scores.map(x => `<div><small>${x[0]}</small><b>${x[1]}</b><em>${x[2]}</em></div>`).join('')}</div></section>
     <section class="cp-sec"><h2>Performance by skill area</h2><p class="lead">The score band for each of the 8 content domains on the test.</p><div class="cp-two">${c.domains.map((d, k) => `<div><b style="font-weight:600;font-size:15px">${d[0]}</b><div class="cp-bar-row"><div class="cp-pbar"><i style="--w:${Math.round(d[2] * 100)}%;--i:${k}"></i></div><span style="font-family:var(--mono);font-size:12.5px;white-space:nowrap">${d[1]}</span></div></div>`).join('')}</div></section>`;
   h += `<section class="cp-sec"><h2>Skills</h2><div class="tags">${c.skills.map(x => `<span class="tag">${x}</span>`).join('')}</div></section>`;
